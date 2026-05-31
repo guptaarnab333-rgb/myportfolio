@@ -19,6 +19,12 @@ const config: Config = {
         faint: "#5e5e5e",
         accent: "#2429af",
         flame: "#f85050",
+        // light-mode (case study) tokens
+        paper: "#f1f0ed",
+        graphite: "#181717",
+        stone: "#606060",
+        mist: "#b3b3b3",
+        peri: "#d9d9f2",
       },
       fontFamily: {
         sans: ["var(--font-dm-sans)", "sans-serif"],

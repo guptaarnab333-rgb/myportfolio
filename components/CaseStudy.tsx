@@ -12,6 +12,7 @@ export default function CaseStudy({
   flip: boolean;
 }) {
   const [hover, setHover] = useState(false);
+  const target = data.href ?? "#work";
 
   return (
     <article className="border-b border-line">
@@ -22,7 +23,7 @@ export default function CaseStudy({
           y={36}
         >
           <a
-            href="#work"
+            href={target}
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
             className="group relative block aspect-[640/460] w-full overflow-hidden rounded-[2px] border border-edge bg-panel"
@@ -66,7 +67,7 @@ export default function CaseStudy({
             </p>
 
             <a
-              href="#work"
+              href={target}
               onMouseEnter={() => setHover(true)}
               onMouseLeave={() => setHover(false)}
               className="mt-8 inline-flex items-center gap-3 font-inter text-[15px] font-medium tracking-[-0.01em] text-white"

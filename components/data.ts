@@ -6,6 +6,8 @@ export type CaseStudy = {
   blurb: string;
   image: string;
   label: string;
+  /** detail-page route; falls back to #work when absent */
+  href?: string;
   /** object-position helper so each crop sits well */
   position?: string;
 };
@@ -20,6 +22,7 @@ export const cases: CaseStudy[] = [
       "When the people you design for aren’t in the room — a study on building empathy through observation.",
     image: "/cases/cs01-ignored-user.png",
     label: "THE IGNORED USER",
+    href: "/work/the-ignored-user",
   },
   {
     index: "02 / 08",
