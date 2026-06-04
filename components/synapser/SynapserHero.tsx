@@ -21,23 +21,14 @@ export default function SynapserHero() {
         <HeroParticles />
       )}
 
-      {/* Overlay */}
-      <div className="pointer-events-none absolute inset-0 flex flex-col justify-between px-6 py-9 md:px-16">
-        <div className="flex items-start justify-between font-mono text-[12px] tracking-[0.02em] text-[#6B6B68]">
-          <span>( PORTFOLIO — 2026 )</span>
-          <span className="hidden sm:block">
-            BASED IN DEHRADUN, IN · GMT+5:30
-          </span>
-        </div>
-
-        <div className="flex items-end justify-between gap-6">
-          <span className="font-mono text-[12px] tracking-[0.1em] text-[#141414]">
-            SCROLL TO EXPLORE&nbsp;&nbsp;↓
-          </span>
-          <span className="hidden font-mono text-[12px] tracking-[0.1em] text-[#6B6B68] md:block">
-            RESEARCH — MAKING — SUSTAINABILITY — ERGONOMICS — PROTOTYPING
-          </span>
-        </div>
+      {/* Overlay (bottom only, so nothing collides with the fixed header) */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between gap-6 px-6 pb-9 md:px-16">
+        <span className="font-sans text-[12px] font-medium uppercase tracking-[0.18em] text-[#141414]">
+          Scroll to explore&nbsp;&nbsp;↓
+        </span>
+        <span className="hidden font-sans text-[12px] font-medium uppercase tracking-[0.18em] text-[#6B6B68] md:block">
+          Research · Making · Sustainability · Ergonomics · Prototyping
+        </span>
       </div>
     </section>
   );

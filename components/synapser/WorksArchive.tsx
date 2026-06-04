@@ -8,7 +8,7 @@ import { cases } from "@/components/data";
 export default function WorksArchive() {
   return (
     <section id="work" className="mx-auto max-w-[1440px] px-6 py-[120px] md:px-16">
-      <div className="mb-10 flex items-center justify-between font-mono text-[13px] tracking-[0.1em] text-[#6B6B68]">
+      <div className="mb-10 flex items-center justify-between font-sans text-[13px] tracking-[0.1em] text-[#6B6B68]">
         <span>( SELECTED WORK )</span>
         <span>[ 008 ]</span>
       </div>
@@ -27,7 +27,7 @@ export default function WorksArchive() {
                 className="group flex w-full items-center justify-between gap-6 border-b border-[#cfcec9] py-7"
               >
                 <div className="flex items-center gap-5 md:gap-8">
-                  <span className="font-mono text-[13px] text-[#6B6B68]">
+                  <span className="font-sans text-[13px] text-[#6B6B68]">
                     {idx}
                   </span>
                   <div className="h-[84px] w-[126px] shrink-0 overflow-hidden rounded-[2px] border border-[#cfcec9] bg-[#e7e6e2] md:h-[120px] md:w-[180px]">
@@ -42,13 +42,13 @@ export default function WorksArchive() {
                     <h3 className="font-inter text-[clamp(22px,3.2vw,38px)] font-semibold leading-[1.05] tracking-[-0.02em] text-[#141414] transition-transform duration-300 group-hover:translate-x-1">
                       {c.title}
                     </h3>
-                    <p className="mt-2 font-mono text-[11px] tracking-[0.04em] text-[#6B6B68] md:text-[12px]">
+                    <p className="mt-2 font-sans text-[11px] tracking-[0.04em] text-[#6B6B68] md:text-[12px]">
                       // {c.category}
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-6 md:gap-12">
-                  <span className="hidden font-mono text-[13px] text-[#6B6B68] sm:block">
+                  <span className="hidden font-sans text-[13px] text-[#6B6B68] sm:block">
                     {c.year}
                   </span>
                   <span className="hidden whitespace-nowrap font-inter text-[15px] font-medium text-[#141414] transition-transform duration-300 group-hover:-translate-y-0.5 md:inline">

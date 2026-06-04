@@ -33,7 +33,6 @@ const config: Config = {
         oswald: ["var(--font-oswald)", "sans-serif"],
         serif: ["var(--font-instrument)", "serif"],
         inter: ["var(--font-inter)", "sans-serif"],
-        mono: ["var(--font-space-mono)", "monospace"],
       },
     },
   },

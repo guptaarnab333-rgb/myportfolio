@@ -9,7 +9,7 @@ export default function SynapserFooter() {
       className="mx-auto max-w-[1440px] border-t border-[#cfcec9] px-6 pb-12 pt-[100px] md:px-16"
     >
       <Reveal>
-        <p className="font-mono text-[13px] tracking-[0.1em] text-[#6B6B68]">
+        <p className="font-sans text-[13px] tracking-[0.1em] text-[#6B6B68]">
           ( LET&rsquo;S TALK )
         </p>
       </Reveal>
@@ -29,13 +29,13 @@ export default function SynapserFooter() {
           >
             arnab.peoplelab@doonuniversity.ac.in
           </a>
-          <span className="font-mono text-[12px] tracking-[0.1em] text-[#6B6B68]">
+          <span className="font-sans text-[12px] tracking-[0.1em] text-[#6B6B68]">
             ( DRAG TO THROW )
           </span>
         </div>
       </Reveal>
 
-      <div className="mt-8 flex flex-col gap-4 font-mono text-[13px] tracking-[0.04em] text-[#6B6B68] sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-8 flex flex-col gap-4 font-sans text-[13px] tracking-[0.04em] text-[#6B6B68] sm:flex-row sm:items-center sm:justify-between">
         <span>© 2026 ARNAB GUPTA</span>
         <div className="flex items-center gap-7 text-[#141414]">
           <a

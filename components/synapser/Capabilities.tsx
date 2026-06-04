@@ -12,7 +12,7 @@ const pillars: [string, string, string][] = [
 export default function Capabilities() {
   return (
     <section id="about" className="mx-auto max-w-[1440px] px-6 py-[120px] md:px-16">
-      <div className="mb-10 flex items-center justify-between font-mono text-[13px] tracking-[0.1em] text-[#6B6B68]">
+      <div className="mb-10 flex items-center justify-between font-sans text-[13px] tracking-[0.1em] text-[#6B6B68]">
         <span>( CAPABILITIES )</span>
         <span>[ 004 ]</span>
       </div>
@@ -25,7 +25,7 @@ export default function Capabilities() {
           <Reveal key={n} y={20} delay={i * 50}>
             <div className="flex w-full flex-col gap-3 border-b border-[#cfcec9] py-8 md:flex-row md:items-start md:justify-between md:gap-16">
               <div className="flex items-center gap-7">
-                <span className="font-mono text-[13px] text-[#6B6B68]">{n}</span>
+                <span className="font-sans text-[13px] text-[#6B6B68]">{n}</span>
                 <h3 className="font-inter text-[clamp(24px,3vw,34px)] font-semibold tracking-[-0.02em] text-[#141414]">
                   {title}
                 </h3>

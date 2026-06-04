@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Oswald, Inter, Space_Mono } from "next/font/google";
+import { DM_Sans, Oswald, Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import Preloader from "@/components/Preloader";
@@ -25,13 +25,6 @@ const inter = Inter({
   display: "swap",
 });
 
-const spaceMono = Space_Mono({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-space-mono",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
   title: "Arnab Gupta — Product Designer & Maker",
   description:
@@ -51,7 +44,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${dmSans.variable} ${oswald.variable} ${inter.variable} ${spaceMono.variable}`}
+      className={`${dmSans.variable} ${oswald.variable} ${inter.variable}`}
     >
       <body className="bg-[#f1f0ed] text-[#141414] antialiased">
         <SmoothScroll>
