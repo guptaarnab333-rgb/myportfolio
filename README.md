@@ -1,13 +1,20 @@
 # Arnab Gupta — Portfolio
 
-A dark, editorial single-page portfolio built from the [Portfolio V1 Figma design](https://www.figma.com/design/exho8Xz8k0yWsQWI1OgiZA/Portfolio-V1).
+A monochrome, motion-led editorial portfolio. Originally built from the
+[Portfolio V1 Figma design](https://www.figma.com/design/exho8Xz8k0yWsQWI1OgiZA/Portfolio-V1),
+then redesigned in the spirit of [podium.global](https://podium.global): strict
+monochrome with one rare indigo accent, a type-led hero, a documentary work grid,
+big editorial lists, a loading sequence, smooth scrolling, and a WebGL signature
+object.
 
 ## Stack
 
-- **Next.js 15** (App Router)
-- **Tailwind CSS 3**
-- **React Spring** (`@react-spring/web`) — cursor parallax in the hero + scroll-reveal animations
-- **next/font** — DM Sans, Oswald, Inter, Instrument Serif
+- **Next.js 15** (App Router), **React 18.3**
+- **Tailwind CSS 3** — neutral ramp + a single indigo accent (`#2429af`)
+- **Lenis** — smooth scrolling, driven by the GSAP ticker (one RAF loop)
+- **GSAP + ScrollTrigger** (`@gsap/react`) — hero parallax, scroll reveals, preloader
+- **three.js** — the hero "Object" (vanilla WebGL, lazy-loaded, desktop + motion only)
+- **next/font** — Oswald (display), Inter (body), DM Sans (labels)
 
 ## Getting started
 
@@ -24,23 +31,32 @@ npm run build && npm run start   # production
 
 ```
 app/
-  layout.tsx        # fonts + metadata
-  page.tsx          # page composition (About, Work, Toolkit, Contact, Footer)
-  globals.css       # tokens, keyframes, reduced-motion
+  layout.tsx        # fonts, SmoothScroll provider, Preloader mount
+  page.tsx          # home: Hero, About, Work, WorkGrid, EditorialList, CtaFooter
+  globals.css       # tokens, Lenis base styles, preloader safety net, reduced-motion
+  work/the-ignored-user/   # light-mode case study
 components/
-  Nav.tsx           # sticky nav, blurs in on scroll
-  Hero.tsx          # kinetic hero — floaters react to cursor (React Spring)
+  SmoothScroll.tsx  # Lenis provider wired to the GSAP ticker
+  Preloader.tsx     # 0 -> 100 loading sequence, locks scroll, hands off to the page
+  Hero.tsx          # type-led hero + GSAP cursor parallax
+  Scene3D.tsx       # vanilla three.js faceted object
+  Scene3DSection.tsx# dynamic (ssr:false) + in-view + reduced-motion / mobile gating
+  WorkGrid.tsx      # documentary image mosaic from existing renders
+  EditorialList.tsx # big Oswald type lists (software / practices)
+  CtaFooter.tsx     # attitude CTA + footer
   CaseStudy.tsx     # alternating image/text case-study row
-  Reveal.tsx        # IntersectionObserver + React Spring fade-up wrapper
-  data.ts           # the 8 case studies
-public/cases/       # case-study cover images exported from Figma
+  Reveal.tsx        # GSAP + ScrollTrigger fade-up (props preserved)
+  Nav.tsx           # sticky nav, Lenis-powered anchor scroll, light/dark variants
+lib/gsap.ts         # single gsap + ScrollTrigger registration
+hooks/useReducedMotion.ts
+public/cases/       # case covers + cs01/ detail renders
 ```
 
 ## Notes
 
-- The hero floaters are hidden below `md` for a clean mobile layout; case-study
-  rows stack vertically.
-- Motion respects `prefers-reduced-motion`.
-- Replace the `#` resume link in `app/page.tsx` and any copy in
-  `components/data.ts` as needed.
+- The WebGL object renders only on desktop with motion enabled; mobile and
+  `prefers-reduced-motion` fall back to the type-led hero (no canvas). three.js
+  is a lazy chunk, so it never touches the initial bundle.
+- Smooth scroll, reveals, and the preloader all have reduced-motion fallbacks.
+- Replace the `#` résumé link in `components/CtaFooter.tsx` as needed.
 ```

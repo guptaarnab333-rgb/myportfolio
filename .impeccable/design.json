@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-31T00:00:00.000Z",
+  "title": "Design System: Arnab Gupta Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "ink": { "role": "neutral", "displayName": "Darkroom Ink", "canonical": "#0a0a0a", "tonalRamp": ["#000000", "#0a0a0a", "#141414", "#1f1f1f", "#2a2a2a", "#3d3d3d", "#5e5e5e", "#9a9a9a"] },
+      "accent": { "role": "primary", "displayName": "Indigo Signal", "canonical": "#2429af", "tonalRamp": ["#0a0b2d", "#121445", "#1a1d6e", "#2429af", "#3a3fc7", "#6166d6", "#9a9ee6", "#d9d9f2"] },
+      "flame": { "role": "secondary", "displayName": "Flame", "canonical": "#f85050", "tonalRamp": ["#3d1010", "#5e1818", "#8a2424", "#c23636", "#f85050", "#fa7878", "#fca5a5", "#fdd0d0"] },
+      "white": { "role": "neutral", "displayName": "Chalk White", "canonical": "#f3f3f3", "tonalRamp": ["#5e5e5e", "#9a9a9a", "#b3b3b3", "#cccccc", "#e0e0e0", "#f2f2f2", "#f3f3f3", "#fafafa"] },
+      "paper": { "role": "neutral", "displayName": "Reading Paper", "canonical": "#f1f0ed", "tonalRamp": ["#181717", "#3a3937", "#606060", "#8a8985", "#b3b3b3", "#d6d4cf", "#f1f0ed", "#fafaf8"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headline only. Instrument Serif italic, solo." },
+      "headline": { "displayName": "Headline", "purpose": "Case-study titles. Oswald condensed, placard-like." },
+      "body": { "displayName": "Body", "purpose": "Reading copy and case blurbs. Inter, measure 65-75ch." },
+      "label": { "displayName": "Label", "purpose": "Tracked uppercase eyebrows, indices, captions. DM Sans, <=4 words." }
+    },
+    "shadows": [
+      { "name": "image-lift", "value": "0 30px 80px -40px rgba(0,0,0,0.9)", "purpose": "Deep soft shadow under hero floater prints. The only elevation in the system." }
+    ],
+    "motion": [
+      { "name": "ease-expo-out", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Exponential ease-out for hover scale, floatIn entrances. No bounce, no elastic." },
+      { "name": "spring-reveal", "value": "mass:1 tension:210 friction:28", "purpose": "React Spring config for IntersectionObserver fade-up reveals." },
+      { "name": "spring-parallax", "value": "mass:1.1 tension:120 friction:28", "purpose": "React Spring config for hero cursor-parallax floaters." }
+    ],
+    "breakpoints": [
+      { "name": "md", "value": "768px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Category Label",
+      "kind": "chip",
+      "refersTo": "category-label",
+      "description": "Tracked uppercase metadata label; indigo for category, faint for index/caption.",
+      "html": "<p class=\"ds-label\">Brand Identity &amp; Packaging</p>",
+      "css": ".ds-label { font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #2429af; margin: 0; }"
+    },
+    {
+      "name": "Read Case Study CTA",
+      "kind": "button",
+      "refersTo": "link-cta",
+      "description": "Text link with an arrow glyph that slides right on hover. The primary call to action.",
+      "html": "<a class=\"ds-cta\" href=\"#\">READ CASE STUDY <span class=\"ds-cta-arrow\">&rarr;</span></a>",
+      "css": ".ds-cta { display: inline-flex; align-items: center; gap: 12px; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 500; letter-spacing: -0.01em; color: #f3f3f3; text-decoration: none; } .ds-cta-arrow { display: inline-block; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); } .ds-cta:hover .ds-cta-arrow { transform: translateX(6px); } .ds-cta:focus-visible { outline: 2px solid #2429af; outline-offset: 4px; }"
+    },
+    {
+      "name": "Case Cover",
+      "kind": "card",
+      "refersTo": "case-cover",
+      "description": "Image frame for a case study: hairline border, panel backing, image scales on hover behind a lightening gradient.",
+      "html": "<a class=\"ds-cover\" href=\"#\"><span class=\"ds-cover-img\"></span><span class=\"ds-cover-grad\"></span><span class=\"ds-cover-label\">CS01</span></a>",
+      "css": ".ds-cover { position: relative; display: block; aspect-ratio: 640/460; width: 100%; overflow: hidden; border-radius: 2px; border: 1px solid #2e2e2e; background: #222222; } .ds-cover-img { position: absolute; inset: 0; background: linear-gradient(135deg,#2a2a2a,#3d3d3d); transition: transform 900ms cubic-bezier(0.22,1,0.36,1); } .ds-cover:hover .ds-cover-img { transform: scale(1.04); } .ds-cover-grad { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.35), transparent 50%); opacity: 0.7; transition: opacity 500ms; } .ds-cover:hover .ds-cover-grad { opacity: 0.4; } .ds-cover-label { position: absolute; left: 20px; bottom: 16px; font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: #9a9a9a; mix-blend-mode: screen; }"
+    },
+    {
+      "name": "Nav (scrolled)",
+      "kind": "nav",
+      "refersTo": "nav-scrolled",
+      "description": "Fixed nav: transparent at top, translucent ink backdrop with hairline border once scrolled. Links shift to indigo on hover.",
+      "html": "<header class=\"ds-nav\"><a class=\"ds-nav-brand\" href=\"#\">ARNAB<span class=\"ds-nav-sub\">Creates</span></a><nav class=\"ds-nav-links\"><a href=\"#\">Work</a><a href=\"#\">About</a><a href=\"#\">Contact</a></nav></header>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; background: rgba(10,10,10,0.7); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(42,42,42,0.6); } .ds-nav-brand { display: flex; flex-direction: column; line-height: 1.04; font-family: 'Oswald', sans-serif; font-size: 22px; font-weight: 500; letter-spacing: -0.02em; color: #f2f2f2; text-decoration: none; } .ds-nav-sub { font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.42em; text-transform: uppercase; color: #606060; } .ds-nav-links { display: flex; gap: 32px; } .ds-nav-links a { font-family: 'DM Sans', sans-serif; font-size: 17px; font-weight: 500; letter-spacing: -0.02em; color: rgba(243,243,243,0.9); text-decoration: none; transition: color 0.2s; } .ds-nav-links a:hover { color: #2429af; } .ds-nav-links a:focus-visible { outline: 2px solid #2429af; outline-offset: 4px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Kinetic Editorial",
+    "overview": "A magazine that moves. The system marries print-grade editorial typography to restrained, deliberate motion: cursor parallax in the hero, scroll-driven reveals, hover that responds. The near-black surface (#0a0a0a) is the page stock; case-study images are the plates; type sets the rhythm. Motion is the signature, the thing that makes editorial rigor feel alive on the web. The personality is thoughtful, grounded, and candid: a first-person voice explaining real decisions to a respected peer. Warmth comes from honest storytelling and unhurried pacing, never from warm-tinted color.",
+    "keyCharacteristics": [
+      "Near-black editorial surface; images are the brightest thing on screen.",
+      "Motion is the signature: parallax, scroll reveals, and confident hover, all eased and reduced-motion safe.",
+      "Three-voice type system: Instrument Serif italic display, Oswald condensed titles, Inter reading, DM Sans labels.",
+      "Saturated accents (indigo, flame) used rarely and deliberately, under 10% of any view.",
+      "Tactile, confident components: defined borders, pronounced hover motion, deliberate image lifts."
+    ],
+    "rules": [
+      { "name": "The Indigo-Leads Rule", "body": "Indigo is the only color allowed to signal interactivity and brand. If something is a link, a category, or the name, it may be indigo; nothing else competes for that job.", "section": "colors" },
+      { "name": "The One Flame Rule", "body": "Flame red appears at most once per viewport, on copy, never on chrome. The moment a second flame element appears, the first one stops meaning anything.", "section": "colors" },
+      { "name": "The No-Warm-Tint Rule", "body": "Warmth in this brand is carried by voice and pacing. Neutrals stay at or near zero chroma. No cream, sand, or paper-warm body backgrounds.", "section": "colors" },
+      { "name": "The Italic-Display Rule", "body": "The serif display voice is always italic and always solo. It carries the hero; it does not appear again as decoration elsewhere.", "section": "typography" },
+      { "name": "The Tracked-Label Rule", "body": "Uppercase is allowed only on DM Sans labels at <=4 words with wide tracking (>=0.16em). No uppercase sentences, no all-caps body.", "section": "typography" },
+      { "name": "The Ten-Percent Rule", "body": "Indigo and flame together occupy no more than ~10% of any viewport. The accents are rare and deliberate by doctrine; the dark neutral ramp carries everything else.", "section": "colors" },
+      { "name": "The Flat-Stock Rule", "body": "Surfaces are flat. Only imagery casts shadow, and only to separate a plate from the page. UI containers never get shadows.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep #0a0a0a as the room: let case images be the brightest thing on any screen.",
+      "Do use Indigo (#2429af) as the single signal for links, categories, and brand; keep it small and high-intent.",
+      "Do reserve Flame (#f85050) for one emphasis per viewport, on copy only.",
+      "Do keep borders to a single hairline (Line/Edge) and corners near-square (2-3px).",
+      "Do pair fonts on a contrast axis and keep labels uppercase only at <=4 words.",
+      "Do give every animation a prefers-reduced-motion fallback, and keep revealed content visible by default.",
+      "Do verify muted (#9a9a9a) body text stays >=4.5:1 on ink; bump toward white if context drops it."
+    ],
+    "donts": [
+      "Don't ship the generic-SaaS look: no purple-to-blue gradients, no identical icon-heading-text card grids, no hero-metric stat blocks, no Inter-for-everything.",
+      "Don't clutter: no competing focal points, no wall of sections, no decorative noise.",
+      "Don't go corporate/sterile: no stock photography, no faceless agency polish without a point of view.",
+      "Don't reach for trend gimmicks: no brutalism-for-its-own-sake, no scroll-jacking, no effect that fights readability.",
+      "Don't introduce a warm cream/sand/paper body background; warmth is carried by voice.",
+      "Don't use border-left/right greater than 1px as a colored stripe, gradient text, or decorative glassmorphism.",
+      "Don't let Flame become a system color or Indigo become a large fill.",
+      "Don't add uppercase sentences or all-caps body copy."
+    ]
+  }
+}

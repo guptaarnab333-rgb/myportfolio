@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLenis } from "lenis/react";
 
 const links = [
   { label: "Work", href: "/#work" },
@@ -14,6 +15,19 @@ export default function Nav({
   variant?: "dark" | "light";
 }) {
   const [scrolled, setScrolled] = useState(false);
+  const lenis = useLenis();
+
+  // Smooth-scroll in-page anchors through Lenis; let cross-page links navigate.
+  const onNavClick =
+    (href: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+      const hash = href.split("#")[1];
+      if (!hash || !lenis) return;
+      if (window.location.pathname !== "/") return; // navigate home first
+      const target = document.getElementById(hash);
+      if (!target) return;
+      e.preventDefault();
+      lenis.scrollTo(target, { offset: -80 });
+    };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -59,6 +73,7 @@ export default function Nav({
             <li key={l.href}>
               <a
                 href={l.href}
+                onClick={onNavClick(l.href)}
                 className={`font-sans text-[17px] font-medium tracking-[-0.02em] transition-colors md:text-[21px] ${linkColor}`}
               >
                 {l.label}
