@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { useLenis } from "lenis/react";
 
 const links: [string, string][] = [
-  ["001 / Work", "#work"],
-  ["002 / About", "#about"],
-  ["003 / Contact", "#contact"],
+  ["Work", "#work"],
+  ["About", "#about"],
+  ["Contact", "#contact"],
 ];
 
 export default function SynapserNav() {
@@ -37,28 +37,34 @@ export default function SynapserNav() {
           : "border-b border-transparent"
       }`}
     >
-      <nav className="mx-auto flex max-w-[1440px] items-center justify-between px-6 py-5 md:px-16">
+      <nav className="mx-auto flex h-[80px] max-w-[1440px] items-center justify-between px-6 md:px-16">
+        {/* Logo: ARNAB CREATES eye-mark */}
         <a
           href="#top"
           onClick={onClick("#top")}
-          className="font-inter text-[15px] font-semibold tracking-[-0.01em] text-[#141414]"
+          aria-label="Arnab Creates — home"
+          className="shrink-0"
         >
-          Arnab Gupta©
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/arnab-creates-logo.png"
+            alt="Arnab Creates"
+            className="h-[38px] w-auto"
+          />
         </a>
-        <div className="flex items-center gap-6 md:gap-10">
+
+        {/* Menu */}
+        <div className="flex items-center gap-6">
           {links.map(([label, href]) => (
             <a
               key={href}
               href={href}
               onClick={onClick(href)}
-              className="font-mono text-[13px] text-[#141414] transition-opacity hover:opacity-60"
+              className="font-sans text-[18px] font-medium tracking-[-0.03em] text-[#181717] transition-colors hover:text-[#2429af] md:text-[21px]"
             >
               {label}
             </a>
           ))}
-          <span className="hidden font-mono text-[13px] text-[#6B6B68] sm:block">
-            EN
-          </span>
         </div>
       </nav>
     </header>
