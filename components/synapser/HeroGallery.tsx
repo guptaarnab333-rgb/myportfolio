@@ -116,12 +116,19 @@ export default function HeroGallery() {
       });
       const tex = loader.load(src, (t) => {
         t.colorSpace = THREE.SRGBColorSpace;
+        // Size the plane to the image's real aspect ratio (longest side = BASE)
+        const img = t.image as { width: number; height: number };
+        const aspect = img.width && img.height ? img.width / img.height : 1.4;
+        const BASE = 2.5;
+        if (aspect >= 1) mesh.scale.set(BASE, BASE / aspect, 1);
+        else mesh.scale.set(BASE * aspect, BASE, 1);
         mat.uniforms.uTex.value = t;
         (mesh.userData as { ready?: boolean }).ready = true;
       });
       mat.uniforms.uTex.value = tex;
 
-      const geo = new THREE.PlaneGeometry(3, 3 / 1.4);
+      // Unit plane; real proportions are applied via mesh.scale on load.
+      const geo = new THREE.PlaneGeometry(1, 1);
       const mesh = new THREE.Mesh(geo, mat);
       // stagger initial depth so they're spread along the tunnel
       place(mesh, FAR + (i / IMAGES.length) * (RESET_Z - FAR));
