@@ -145,12 +145,6 @@ export default function HeroGallery() {
     window.addEventListener("pointermove", onMove);
 
     let targetIntensity = 0;
-    let progress = 0;
-    const onScroll = () => {
-      progress = Math.min(window.scrollY / (vh * 0.85), 1);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
 
     const FORWARD = 1.7; // units/sec — slow drift toward viewer
     let raf = 0;
@@ -172,7 +166,7 @@ export default function HeroGallery() {
         const env = smoothstep(FAR, FAR + 6, z) * (1 - smoothstep(NEAR_FADE, RESET_Z, z));
         const ready = (p.userData as { ready?: boolean }).ready ? 1 : 0;
         const mat = p.material as THREE.ShaderMaterial;
-        const targetOp = env * 0.9 * (1 - progress) * ready;
+        const targetOp = env * 0.9 * ready;
         mat.uniforms.uOpacity.value +=
           (targetOp - mat.uniforms.uOpacity.value) * 0.12;
       }
@@ -193,7 +187,6 @@ export default function HeroGallery() {
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("pointermove", onMove);
-      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
       for (const p of planes) {
         p.geometry.dispose();
