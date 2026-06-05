@@ -14,19 +14,10 @@ const IMAGES = [
   "/cases/cs08-scout.png",
 ];
 
-const FAR = -26;
-const NEAR_FADE = 0.5;
-const RESET_Z = 2.4;
-
-function smoothstep(a: number, b: number, x: number) {
-  const t = Math.min(1, Math.max(0, (x - a) / (b - a)));
-  return t * t * (3 - 2 * t);
-}
-
 /**
- * Podium-style gallery: project images drift slowly toward the viewer, fading
- * in far and out before they reach the camera. A slow cursor ripple distorts
- * the images in screen space. Fades out on scroll. Loaded via dynamic ssr:false.
+ * A full-bleed montage of project images (cover-fit grid) that slowly drifts and
+ * breathes, with a screen-space cursor ripple. It fills the screen so the logo
+ * cut-out always reveals rich imagery. Loaded via dynamic ssr:false.
  */
 export default function HeroGallery() {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -53,7 +44,6 @@ export default function HeroGallery() {
     const camera = new THREE.PerspectiveCamera(50, vw / vh, 0.1, 100);
     camera.position.z = 6;
 
-    // Shared uniforms (same refs across all plane materials).
     const uTime = { value: 0 };
     const uMouse = { value: new THREE.Vector2(0.5, 0.5) };
     const uRes = { value: new THREE.Vector2(vw * dpr, vh * dpr) };
@@ -61,10 +51,7 @@ export default function HeroGallery() {
 
     const vertexShader = `
       varying vec2 vUv;
-      void main() {
-        vUv = uv;
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-      }
+      void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }
     `;
     const fragmentShader = `
       precision highp float;
@@ -75,14 +62,21 @@ export default function HeroGallery() {
       uniform float uTime;
       uniform float uIntensity;
       uniform float uOpacity;
-      void main() {
+      uniform float uPlaneAspect;
+      uniform float uTexAspect;
+      void main(){
+        // cover-fit (no distortion, crop overflow)
+        vec2 uv = vUv;
+        if (uPlaneAspect > uTexAspect) uv.y = (uv.y - 0.5) * (uTexAspect / uPlaneAspect) + 0.5;
+        else uv.x = (uv.x - 0.5) * (uPlaneAspect / uTexAspect) + 0.5;
+        // screen-space cursor ripple
         vec2 screenUV = gl_FragCoord.xy / uRes;
         vec2 d = screenUV - uMouse;
         d.x *= uRes.x / uRes.y;
         float dist = length(d);
         float ripple = sin(dist * 22.0 - uTime * 1.4) * exp(-dist * 4.5) * uIntensity;
         vec2 dir = dist > 0.0001 ? d / dist : vec2(0.0);
-        vec2 uv = vUv + dir * ripple * 0.05;
+        uv += dir * ripple * 0.05;
         vec4 c = texture2D(uTex, uv);
         gl_FragColor = vec4(c.rgb, c.a * uOpacity);
       }
@@ -90,63 +84,71 @@ export default function HeroGallery() {
 
     const loader = new THREE.TextureLoader();
     const planes: THREE.Mesh[] = [];
-    const SPREAD_X = 6.5;
-    const SPREAD_Y = 3.4;
+    const COLS = 4;
+    const ROWS = 3;
+    const COVER_W = 13;
+    const COVER_H = 8;
+    const cellW = COVER_W / COLS;
+    const cellH = COVER_H / ROWS;
+    const planeAspect = cellW / cellH;
+    const group = new THREE.Group();
+    scene.add(group);
 
-    function place(p: THREE.Mesh, z: number) {
-      p.position.z = z;
-      p.position.x = (Math.random() * 2 - 1) * SPREAD_X;
-      p.position.y = (Math.random() * 2 - 1) * SPREAD_Y;
+    let k = 0;
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        const src = IMAGES[k % IMAGES.length];
+        k++;
+        const mat = new THREE.ShaderMaterial({
+          uniforms: {
+            uTex: { value: null },
+            uTime,
+            uMouse,
+            uRes,
+            uIntensity,
+            uOpacity: { value: 0 },
+            uPlaneAspect: { value: planeAspect },
+            uTexAspect: { value: 1.4 },
+          },
+          vertexShader,
+          fragmentShader,
+          transparent: true,
+          depthWrite: false,
+        });
+        const mesh = new THREE.Mesh(
+          new THREE.PlaneGeometry(cellW * 1.06, cellH * 1.06),
+          mat
+        );
+        loader.load(src, (t) => {
+          t.colorSpace = THREE.SRGBColorSpace;
+          const img = t.image as { width: number; height: number };
+          mat.uniforms.uTexAspect.value =
+            img.width && img.height ? img.width / img.height : 1.4;
+          mat.uniforms.uTex.value = t;
+          mesh.userData.ready = true;
+        });
+        mesh.position.set(
+          -COVER_W / 2 + cellW * (c + 0.5),
+          COVER_H / 2 - cellH * (r + 0.5),
+          0
+        );
+        mesh.userData = { ready: false };
+        group.add(mesh);
+        planes.push(mesh);
+      }
     }
 
-    IMAGES.forEach((src, i) => {
-      const mat = new THREE.ShaderMaterial({
-        uniforms: {
-          uTex: { value: null },
-          uTime,
-          uMouse,
-          uRes,
-          uIntensity,
-          uOpacity: { value: 0 },
-        },
-        vertexShader,
-        fragmentShader,
-        transparent: true,
-        depthWrite: false,
-      });
-      const tex = loader.load(src, (t) => {
-        t.colorSpace = THREE.SRGBColorSpace;
-        // Size the plane to the image's real aspect ratio (longest side = BASE)
-        const img = t.image as { width: number; height: number };
-        const aspect = img.width && img.height ? img.width / img.height : 1.4;
-        const BASE = 2.5;
-        if (aspect >= 1) mesh.scale.set(BASE, BASE / aspect, 1);
-        else mesh.scale.set(BASE * aspect, BASE, 1);
-        mat.uniforms.uTex.value = t;
-        (mesh.userData as { ready?: boolean }).ready = true;
-      });
-      mat.uniforms.uTex.value = tex;
-
-      // Unit plane; real proportions are applied via mesh.scale on load.
-      const geo = new THREE.PlaneGeometry(1, 1);
-      const mesh = new THREE.Mesh(geo, mat);
-      // stagger initial depth so they're spread along the tunnel
-      place(mesh, FAR + (i / IMAGES.length) * (RESET_Z - FAR));
-      mesh.userData.ready = false;
-      scene.add(mesh);
-      planes.push(mesh);
-    });
-
+    let targetIntensity = 0;
     const onMove = (e: PointerEvent) => {
-      const r = mount.getBoundingClientRect();
-      uMouse.value.set((e.clientX - r.left) / vw, 1 - (e.clientY - r.top) / vh);
+      const rect = mount.getBoundingClientRect();
+      uMouse.value.set(
+        (e.clientX - rect.left) / vw,
+        1 - (e.clientY - rect.top) / vh
+      );
       targetIntensity = 1;
     };
     window.addEventListener("pointermove", onMove);
 
-    let targetIntensity = 0;
-
-    const FORWARD = 1.7; // units/sec — slow drift toward viewer
     let raf = 0;
     let last = 0;
     const tick = (now: number) => {
@@ -154,21 +156,20 @@ export default function HeroGallery() {
       const dt = last ? Math.min((now - last) / 1000, 0.05) : 0.016;
       last = now;
       uTime.value += dt;
+      const t = uTime.value;
 
-      // slow cursor response
       uIntensity.value += (targetIntensity - uIntensity.value) * 0.05;
       targetIntensity *= 0.965;
 
+      // slow drift + breathe so it reads like a living backdrop
+      group.position.x = Math.sin(t * 0.08) * 0.5;
+      group.position.y = Math.cos(t * 0.06) * 0.32;
+      group.scale.setScalar(1.04 + Math.sin(t * 0.05) * 0.04);
+
       for (const p of planes) {
-        p.position.z += FORWARD * dt;
-        if (p.position.z > RESET_Z) place(p, FAR - Math.random() * 6);
-        const z = p.position.z;
-        const env = smoothstep(FAR, FAR + 6, z) * (1 - smoothstep(NEAR_FADE, RESET_Z, z));
-        const ready = (p.userData as { ready?: boolean }).ready ? 1 : 0;
         const mat = p.material as THREE.ShaderMaterial;
-        const targetOp = env * 0.9 * ready;
-        mat.uniforms.uOpacity.value +=
-          (targetOp - mat.uniforms.uOpacity.value) * 0.12;
+        const tgt = (p.userData as { ready?: boolean }).ready ? 0.95 : 0;
+        mat.uniforms.uOpacity.value += (tgt - mat.uniforms.uOpacity.value) * 0.06;
       }
       renderer.render(scene, camera);
     };

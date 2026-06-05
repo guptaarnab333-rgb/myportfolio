@@ -8,13 +8,6 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 // three.js loads only on the client, only when the hero mounts.
 const HeroGallery = dynamic(() => import("./HeroGallery"), { ssr: false });
 
-const LINE_STYLE: React.CSSProperties = {
-  fontFamily: "var(--font-instrument), Georgia, serif",
-  fontStyle: "italic",
-  fontWeight: 400,
-  fontSize: "150px",
-};
-
 export default function SynapserHero() {
   const heroRef = useRef<HTMLElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -49,18 +42,19 @@ export default function SynapserHero() {
     { dependencies: [reduced] }
   );
 
-  // Reduced motion: a calm static hero, no pin, no WebGL.
+  // Reduced motion: a calm static hero with the logo, no pin, no WebGL.
   if (reduced) {
     return (
       <section
         id="top"
         className="relative flex h-[100svh] w-full items-center justify-center px-6"
       >
-        <h1 className="text-center font-serif text-[clamp(44px,8.5vw,116px)] italic leading-[1.0] tracking-[-0.01em] text-[#141414]">
-          I make,
-          <br />
-          therefore I am.
-        </h1>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/arnab-creates-logo.png"
+          alt="Arnab Creates"
+          className="h-auto w-[min(420px,70vw)]"
+        />
       </section>
     );
   }
@@ -74,8 +68,8 @@ export default function SynapserHero() {
       {/* Project images drifting forward, rippling to the cursor */}
       <HeroGallery />
 
-      {/* Cut-out: the headline knocked out of a panel, so the gallery shows
-          through the letters. Fades on scroll to dissolve into the imagery. */}
+      {/* Cut-out: the eye-mark logo knocked out of a panel, so the gallery
+          shows through the mark. Fades on scroll to dissolve into the imagery. */}
       <div ref={overlayRef} className="absolute inset-0">
         <svg
           viewBox="0 0 1440 900"
@@ -83,17 +77,26 @@ export default function SynapserHero() {
           className="h-full w-full"
         >
           <defs>
-            <mask id="heroCut">
+            <mask id="heroLogoCut">
+              {/* white = panel shows; the dark logo pixels cut through to the
+                  gallery, the light eye stays as panel */}
               <rect width="1440" height="900" fill="#fff" />
-              <text x="720" y="408" textAnchor="middle" fill="#000" style={LINE_STYLE}>
-                I make,
-              </text>
-              <text x="720" y="566" textAnchor="middle" fill="#000" style={LINE_STYLE}>
-                therefore I am.
-              </text>
+              <image
+                href="/arnab-creates-logo.png"
+                x="320"
+                y="320"
+                width="800"
+                height="258"
+                preserveAspectRatio="xMidYMid meet"
+              />
             </mask>
           </defs>
-          <rect width="1440" height="900" fill="#f1f0ed" mask="url(#heroCut)" />
+          <rect
+            width="1440"
+            height="900"
+            fill="#f1f0ed"
+            mask="url(#heroLogoCut)"
+          />
         </svg>
       </div>
 

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Oswald, Inter, Instrument_Serif } from "next/font/google";
+import { DM_Sans, Oswald, Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import Preloader from "@/components/Preloader";
@@ -25,14 +25,6 @@ const inter = Inter({
   display: "swap",
 });
 
-const instrument = Instrument_Serif({
-  subsets: ["latin"],
-  weight: ["400"],
-  style: ["italic", "normal"],
-  variable: "--font-instrument",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
   title: "Arnab Gupta — Product Designer & Maker",
   description:
@@ -52,7 +44,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${dmSans.variable} ${oswald.variable} ${inter.variable} ${instrument.variable}`}
+      className={`${dmSans.variable} ${oswald.variable} ${inter.variable}`}
     >
       <body className="bg-[#f1f0ed] text-[#141414] antialiased">
         <SmoothScroll>
