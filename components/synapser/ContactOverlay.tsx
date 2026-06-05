@@ -5,7 +5,6 @@ import { useEffect } from "react";
 const SOCIALS: [string, string][] = [
   ["Behance", "https://www.behance.net/arnabgupta4"],
   ["LinkedIn", "https://www.linkedin.com/in/arnab-gupta-2b8256231/"],
-  ["Instagram", "https://www.instagram.com/"],
 ];
 
 /**
