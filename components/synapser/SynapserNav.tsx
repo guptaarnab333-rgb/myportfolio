@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useLenis } from "lenis/react";
+import ContactOverlay from "./ContactOverlay";
 
 const links: [string, string][] = [
   ["Work", "#work"],
@@ -11,6 +12,7 @@ const links: [string, string][] = [
 
 export default function SynapserNav() {
   const [scrolled, setScrolled] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
   const lenis = useLenis();
 
   useEffect(() => {
@@ -22,6 +24,12 @@ export default function SynapserNav() {
 
   const onClick =
     (href: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+      // Contact opens the overlay instead of scrolling.
+      if (href === "#contact") {
+        e.preventDefault();
+        setContactOpen(true);
+        return;
+      }
       const el = document.getElementById(href.slice(1));
       if (el && lenis) {
         e.preventDefault();
@@ -30,7 +38,8 @@ export default function SynapserNav() {
     };
 
   return (
-    <header
+    <>
+      <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
         scrolled
           ? "border-b border-black/10 bg-[#f1f0ed]/80 backdrop-blur-md"
@@ -67,6 +76,9 @@ export default function SynapserNav() {
           ))}
         </div>
       </nav>
-    </header>
+      </header>
+
+      <ContactOverlay open={contactOpen} onClose={() => setContactOpen(false)} />
+    </>
   );
 }
