@@ -47,9 +47,20 @@ export default function ContactOverlay({
       <div className="mx-auto flex h-full max-w-[1440px] flex-col px-6 py-6 md:px-16">
         {/* top bar */}
         <div className="flex items-center justify-between">
-          <span className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-white/45">
-            ( Contact )
-          </span>
+          {/* Logo (white, for the dark overlay) — clicking it returns to the site */}
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Arnab Creates — back to site"
+            className="shrink-0"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/arnab-creates-logo-dark.png"
+              alt="Arnab Creates"
+              className="h-[38px] w-auto"
+            />
+          </button>
           <button
             type="button"
             onClick={onClose}
