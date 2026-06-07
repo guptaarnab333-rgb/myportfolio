@@ -47,11 +47,29 @@ export default function Capabilities() {
   const reduced = useReducedMotion();
   const audioRef = useRef<AudioContext | null>(null);
 
-  // Browsers only allow audio after a user gesture — arm the context on the
-  // first click/tap/key, then hover clicks can play.
+  // Browsers block audio until the visitor's first interaction. We can't beat
+  // that, but we arm the context on the FIRST interaction of any kind anywhere
+  // on the page (pointer, tap, key, scroll/wheel/move) so it's ready well
+  // before they reach this section — no need to click the section itself.
   useEffect(() => {
     if (reduced) return;
-    const arm = () => {
+    const events = [
+      "pointerdown",
+      "mousedown",
+      "touchstart",
+      "keydown",
+      "click",
+      "wheel",
+      "scroll",
+      "pointermove",
+    ];
+    let done = false;
+    const cleanup = () => {
+      if (done) return;
+      done = true;
+      events.forEach((e) => window.removeEventListener(e, arm));
+    };
+    function arm() {
       if (!audioRef.current) {
         const Ctx =
           window.AudioContext ||
@@ -59,14 +77,20 @@ export default function Capabilities() {
             .webkitAudioContext;
         if (Ctx) audioRef.current = new Ctx();
       }
-      audioRef.current?.resume().catch(() => {});
-    };
-    window.addEventListener("pointerdown", arm);
-    window.addEventListener("keydown", arm);
-    return () => {
-      window.removeEventListener("pointerdown", arm);
-      window.removeEventListener("keydown", arm);
-    };
+      const ctx = audioRef.current;
+      if (!ctx) return cleanup();
+      if (ctx.state === "running") return cleanup();
+      ctx
+        .resume()
+        .then(() => {
+          if (ctx.state === "running") cleanup();
+        })
+        .catch(() => {});
+    }
+    events.forEach((e) =>
+      window.addEventListener(e, arm, { passive: true })
+    );
+    return cleanup;
   }, [reduced]);
 
   // A short synthesized "click/tick" played when a row opens on hover.
