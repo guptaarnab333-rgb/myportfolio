@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Reveal from "@/components/Reveal";
+import { ScrollTrigger } from "@/lib/gsap";
 import { cases } from "@/components/data";
 
 /* eslint-disable @next/next/no-img-element */
@@ -13,6 +14,15 @@ export default function WorksArchive() {
   const [showAll, setShowAll] = useState(false);
   const shown = showAll ? cases : cases.slice(0, VISIBLE);
   const total = String(cases.length).padStart(3, "0");
+
+  // Expanding/collapsing the grid changes the page height, which shifts the
+  // work→about boundary. Re-measure the scroll-fade trigger so the dark→light
+  // backdrop stays aligned — otherwise the fade completes early and the
+  // "Show less" button renders as white text on the light backdrop.
+  useEffect(() => {
+    const id = requestAnimationFrame(() => ScrollTrigger.refresh());
+    return () => cancelAnimationFrame(id);
+  }, [showAll]);
 
   return (
     <section id="work" className="mx-auto max-w-[1440px] px-6 pb-[72px] pt-[120px] md:px-16">
