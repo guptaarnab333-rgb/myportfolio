@@ -26,6 +26,8 @@ export default function Preloader() {
   const overlayRef = useRef<HTMLDivElement>(null);
   const numRef = useRef<HTMLSpanElement>(null);
   const barRef = useRef<HTMLSpanElement>(null);
+  const leftHandRef = useRef<HTMLImageElement>(null);
+  const rightHandRef = useRef<HTMLImageElement>(null);
   const lenis = useLenis();
   const reduced = useReducedMotion();
 
@@ -34,12 +36,20 @@ export default function Preloader() {
       const overlay = overlayRef.current;
       const num = numRef.current;
       const bar = barRef.current;
+      const lh = leftHandRef.current;
+      const rh = rightHandRef.current;
       if (!overlay || !num) return;
 
       const counter = { v: 0 };
+      // How far apart the two hands start (% of the image width). Closes to 0
+      // (fingertips touching) as the counter reaches 100.
+      const SPREAD = 16;
       const paint = () => {
         num.textContent = String(Math.round(counter.v));
         if (bar) bar.style.transform = `scaleX(${counter.v / 100})`;
+        const gap = (1 - counter.v / 100) * SPREAD;
+        if (lh) lh.style.transform = `translateX(${-gap}%)`;
+        if (rh) rh.style.transform = `translateX(${gap}%)`;
       };
 
       const finish = () => {
@@ -49,7 +59,7 @@ export default function Preloader() {
         window.dispatchEvent(new Event("preloader:done"));
       };
 
-      // Reduced motion: no count, no slide. Reveal as soon as ready.
+      // Reduced motion: no count, no slide. Hands already touching; reveal ASAP.
       if (reduced) {
         counter.v = 100;
         paint();
@@ -71,14 +81,16 @@ export default function Preloader() {
             finish();
           },
         });
-        tl.to(counter, { v: 100, duration: 0.35, ease: "power2.out", onUpdate: paint });
-        tl.to(overlay, { yPercent: -100, duration: 0.9, ease: "power4.inOut" }, "+=0.12");
+        // Final push to 100 — the hands meet here.
+        tl.to(counter, { v: 100, duration: 0.5, ease: "power2.out", onUpdate: paint });
+        // Brief beat on the touch, then lift the curtain.
+        tl.to(overlay, { yPercent: -100, duration: 0.9, ease: "power4.inOut" }, "+=0.25");
       };
 
-      // Count to 95 quickly, then wait for real readiness before the reveal.
+      // Count to 95 while the hands draw together, then wait for real readiness.
       gsap.to(counter, {
         v: 95,
-        duration: 1.5,
+        duration: 1.8,
         ease: "power2.out",
         onUpdate: paint,
         onComplete: () => whenReady().then(reveal),
@@ -91,15 +103,41 @@ export default function Preloader() {
     <div
       ref={overlayRef}
       aria-hidden
-      className="preloader fixed inset-0 z-[100] flex items-end justify-between bg-black px-6 pb-8 md:px-[64px]"
+      className="preloader fixed inset-0 z-[100] bg-black"
     >
-      <span className="font-oswald text-[clamp(72px,18vw,200px)] font-light leading-[0.8] tracking-[-0.04em] text-off">
-        <span ref={numRef}>0</span>
-        <span className="text-accent">%</span>
-      </span>
-      <span className="mb-4 hidden font-sans text-[11px] font-medium uppercase tracking-[0.3em] text-faint sm:block">
-        Arnab Gupta
-      </span>
+      {/* Reaching hands — the image is split into halves that slide together.
+          object-cover crops the tall portrait to its hands band; the image's
+          own black blends into the loader's black. */}
+      <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+        <div className="relative h-[min(66vh,470px)] w-[min(94vw,960px)]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            ref={leftHandRef}
+            src="/hands.png"
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover object-center [clip-path:inset(0_50%_0_0)] will-change-transform"
+          />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            ref={rightHandRef}
+            src="/hands.png"
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover object-center [clip-path:inset(0_0_0_50%)] will-change-transform"
+          />
+        </div>
+      </div>
+
+      {/* bottom row: small white percentage + name */}
+      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between px-6 pb-8 md:px-[64px]">
+        <span className="font-oswald text-[clamp(26px,4vw,46px)] font-light leading-[0.8] tracking-[-0.03em] text-off">
+          <span ref={numRef}>0</span>
+          <span className="text-off">%</span>
+        </span>
+        <span className="mb-2 hidden font-sans text-[11px] font-medium uppercase tracking-[0.3em] text-faint sm:block">
+          Arnab Gupta
+        </span>
+      </div>
+
       {/* progress bar */}
       <span className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-line">
         <span
