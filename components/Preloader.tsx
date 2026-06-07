@@ -117,24 +117,25 @@ export default function Preloader() {
       aria-hidden
       className="preloader fixed inset-0 z-[100] bg-black"
     >
-      {/* Reaching hands — the image is split into halves that slide together.
-          object-cover crops the tall portrait to its hands band; the image's
-          own black blends into the loader's black. */}
-      <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-        <div className="relative h-[min(66vh,470px)] w-[min(94vw,960px)]">
+      {/* Reaching hands — the transparent cut-out shown at natural size (no
+          crop, no overflow clip). Two copies, each masked to one hand at the
+          fingertip gap, slide together. Black comes only from the overlay. */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="relative">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             ref={leftHandRef}
             src="/hands.png"
             alt=""
-            className="absolute inset-0 h-full w-full object-cover object-center [clip-path:inset(0_46%_0_0)] will-change-transform"
+            className="block h-auto w-auto max-w-[90vw] bg-transparent [clip-path:inset(0_46%_0_0)] will-change-transform"
           />
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             ref={rightHandRef}
             src="/hands.png"
             alt=""
-            className="absolute inset-0 h-full w-full object-cover object-center [clip-path:inset(0_0_0_54%)] will-change-transform"
+            aria-hidden
+            className="absolute inset-0 h-full w-full bg-transparent [clip-path:inset(0_0_0_54%)] will-change-transform"
           />
         </div>
       </div>
