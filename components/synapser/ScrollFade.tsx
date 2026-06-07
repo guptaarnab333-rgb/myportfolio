@@ -50,8 +50,11 @@ export default function ScrollFade() {
         defaults: { ease: "none" },
         scrollTrigger: {
           trigger: seam,
-          start: "top 85%", // begin as the seam enters from the bottom
-          end: "bottom 15%", // finish as it leaves toward the top
+          // Morph across the small seam crossing the middle of the viewport.
+          // Wider than the seam itself so the fade stays smooth despite the
+          // tight work→about gap.
+          start: "top 70%",
+          end: "bottom 30%",
           scrub: true, // <- ties the colour 1:1 to scroll position
           invalidateOnRefresh: true, // recompute start/end on every refresh
         },

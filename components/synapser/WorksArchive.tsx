@@ -15,7 +15,7 @@ export default function WorksArchive() {
   const total = String(cases.length).padStart(3, "0");
 
   return (
-    <section id="work" className="mx-auto max-w-[1440px] px-6 py-[120px] md:px-16">
+    <section id="work" className="mx-auto max-w-[1440px] px-6 pb-[72px] pt-[120px] md:px-16">
       <div className="mb-10 flex items-center justify-between font-sans text-[13px] tracking-[0.1em] text-[#9a9a9a]">
         <span>( SELECTED WORK )</span>
         <span>[ {total} ]</span>

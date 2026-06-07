@@ -20,8 +20,9 @@ export default function Home() {
           <WorksArchive />
         </div>
 
-        {/* SEAM — empty spacer; its travel through the viewport drives the fade */}
-        <div id="seam" aria-hidden className="h-[80vh] w-full" />
+        {/* Boundary marker between the worlds — no empty gap; it just anchors
+            where the scroll-driven dark→light fade happens. */}
+        <div id="seam" aria-hidden className="h-0 w-full" />
 
         {/* LIGHT WORLD — about + contact */}
         <div className="world-light text-[#181717]">

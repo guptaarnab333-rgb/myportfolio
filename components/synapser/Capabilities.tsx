@@ -11,7 +11,7 @@ const pillars: [string, string, string][] = [
 
 export default function Capabilities() {
   return (
-    <section id="about" className="mx-auto max-w-[1440px] px-6 py-[120px] md:px-16">
+    <section id="about" className="mx-auto max-w-[1440px] px-6 py-[72px] md:px-16">
       <div className="mb-10 flex items-center justify-between font-sans text-[13px] tracking-[0.1em] text-[#6B6B68]">
         <span>( CAPABILITIES )</span>
         <span>[ 004 ]</span>

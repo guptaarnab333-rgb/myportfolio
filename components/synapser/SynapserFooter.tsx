@@ -6,7 +6,7 @@ export default function SynapserFooter() {
   return (
     <footer
       id="contact"
-      className="mx-auto max-w-[1440px] border-t border-[#cfcec9] px-6 pb-12 pt-[100px] md:px-16"
+      className="mx-auto max-w-[1440px] border-t border-[#cfcec9] px-6 pb-12 pt-[56px] md:px-16"
     >
       <Reveal>
         <p className="font-sans text-[13px] tracking-[0.1em] text-[#6B6B68]">
