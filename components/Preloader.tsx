@@ -75,16 +75,28 @@ export default function Preloader() {
       document.documentElement.style.overflow = "hidden";
 
       const reveal = () => {
+        // Circular collapse: the black contracts into a shrinking circle at the
+        // point where the fingertips meet, revealing the home page.
+        const clip = { r: 145 };
+        const setClip = () => {
+          overlay.style.clipPath = `circle(${clip.r}% at 50% 50%)`;
+        };
+        setClip();
+
         const tl = gsap.timeline({
           onComplete: () => {
             gsap.set(overlay, { display: "none" });
             finish();
           },
         });
-        // Final push to 100 — the hands meet here.
+        // Final push to 100 — the hands meet at the centre here.
         tl.to(counter, { v: 100, duration: 0.5, ease: "power2.out", onUpdate: paint });
-        // Brief beat on the touch, then lift the curtain.
-        tl.to(overlay, { yPercent: -100, duration: 0.9, ease: "power4.inOut" }, "+=0.25");
+        // Beat on the touch, then collapse the black into the centre circle.
+        tl.to(
+          clip,
+          { r: 0, duration: 1.0, ease: "power3.inOut", onUpdate: setClip },
+          "+=0.18"
+        );
       };
 
       // Count to 95 while the hands draw together, then wait for real readiness.
@@ -115,14 +127,14 @@ export default function Preloader() {
             ref={leftHandRef}
             src="/hands.png"
             alt=""
-            className="absolute inset-0 h-full w-full object-cover object-center [clip-path:inset(0_50%_0_0)] will-change-transform"
+            className="absolute inset-0 h-full w-full object-cover object-center [clip-path:inset(0_46%_0_0)] will-change-transform"
           />
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             ref={rightHandRef}
             src="/hands.png"
             alt=""
-            className="absolute inset-0 h-full w-full object-cover object-center [clip-path:inset(0_0_0_50%)] will-change-transform"
+            className="absolute inset-0 h-full w-full object-cover object-center [clip-path:inset(0_0_0_54%)] will-change-transform"
           />
         </div>
       </div>
