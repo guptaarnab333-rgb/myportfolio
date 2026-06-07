@@ -55,7 +55,10 @@ export default function ScrollFade() {
           // tight work→about gap.
           start: "top 70%",
           end: "bottom 30%",
-          scrub: true, // <- ties the colour 1:1 to scroll position
+          // Numeric scrub (vs `true`) adds an easing lag so the colour glides
+          // toward the scroll position instead of snapping 1:1. This keeps the
+          // fade smooth even when someone flicks the wheel and scrolls fast.
+          scrub: 1.2,
           invalidateOnRefresh: true, // recompute start/end on every refresh
         },
       });
