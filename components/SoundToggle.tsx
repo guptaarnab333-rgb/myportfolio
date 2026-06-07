@@ -51,7 +51,7 @@ export default function SoundToggle({ className = "" }: { className?: string }) 
             }`}
             style={{
               height: "18px",
-              animationDelay: playing ? `${i * 0.18}s` : undefined,
+              animationDelay: playing ? `${i * 0.34}s` : undefined,
             }}
           />
         ))}
