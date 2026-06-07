@@ -97,6 +97,13 @@ export default function HeroGallery() {
       p.position.z = z;
       p.position.x = (Math.random() * 2 - 1) * SPREAD_X;
       p.position.y = (Math.random() * 2 - 1) * SPREAD_Y;
+      // Per-plane motion so they don't travel in lockstep: each gets its own
+      // forward speed and a sideways/vertical drift, so they come from and head
+      // in different directions instead of all the same way at once.
+      const d = p.userData as { speed?: number; vx?: number; vy?: number };
+      d.speed = 0.8 + Math.random() * 0.85;
+      d.vx = (Math.random() * 2 - 1) * 0.5;
+      d.vy = (Math.random() * 2 - 1) * 0.35;
     }
 
     IMAGES.forEach((src, i) => {
@@ -130,8 +137,8 @@ export default function HeroGallery() {
       // Unit plane; real proportions are applied via mesh.scale on load.
       const geo = new THREE.PlaneGeometry(1, 1);
       const mesh = new THREE.Mesh(geo, mat);
-      // stagger initial depth so they're spread along the tunnel
-      place(mesh, FAR + (i / IMAGES.length) * (RESET_Z - FAR));
+      // random initial depth so they're scattered, not a synced wave
+      place(mesh, FAR + Math.random() * (RESET_Z - FAR));
       mesh.userData.ready = false;
       scene.add(mesh);
       planes.push(mesh);
@@ -152,7 +159,7 @@ export default function HeroGallery() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    const FORWARD = 1.7; // units/sec — slow drift toward viewer
+    const FORWARD = 2.7; // units/sec — quicker drift toward viewer
     let raf = 0;
     let last = 0;
     const tick = (now: number) => {
@@ -166,8 +173,11 @@ export default function HeroGallery() {
       targetIntensity *= 0.965;
 
       for (const p of planes) {
-        p.position.z += FORWARD * dt;
-        if (p.position.z > RESET_Z) place(p, FAR - Math.random() * 6);
+        const d = p.userData as { speed?: number; vx?: number; vy?: number };
+        p.position.z += FORWARD * (d.speed ?? 1) * dt;
+        p.position.x += (d.vx ?? 0) * dt;
+        p.position.y += (d.vy ?? 0) * dt;
+        if (p.position.z > RESET_Z) place(p, FAR - Math.random() * 8);
         const z = p.position.z;
         const env = smoothstep(FAR, FAR + 6, z) * (1 - smoothstep(NEAR_FADE, RESET_Z, z));
         const ready = (p.userData as { ready?: boolean }).ready ? 1 : 0;
