@@ -24,6 +24,7 @@ function whenReady(): Promise<void> {
 
 export default function Preloader() {
   const overlayRef = useRef<HTMLDivElement>(null);
+  const blackRef = useRef<HTMLDivElement>(null);
   const numRef = useRef<HTMLSpanElement>(null);
   const barRef = useRef<HTMLSpanElement>(null);
   const leftHandRef = useRef<HTMLImageElement>(null);
@@ -34,23 +35,28 @@ export default function Preloader() {
   useGSAP(
     () => {
       const overlay = overlayRef.current;
+      const black = blackRef.current;
       const num = numRef.current;
       const bar = barRef.current;
       const lh = leftHandRef.current;
       const rh = rightHandRef.current;
       if (!overlay || !num) return;
 
+      // How far apart the hands start (vw). 0 = touching (full-bleed meeting).
+      const APART = 14;
+      const hands = { off: APART };
+      const paintHands = () => {
+        if (lh) lh.style.transform = `translateX(${-hands.off}vw)`;
+        if (rh) rh.style.transform = `translateX(${hands.off}vw)`;
+      };
       const counter = { v: 0 };
-      // How far apart the two hands start (% of the image width). Closes to 0
-      // (fingertips touching) as the counter reaches 100.
-      const SPREAD = 16;
       const paint = () => {
         num.textContent = String(Math.round(counter.v));
         if (bar) bar.style.transform = `scaleX(${counter.v / 100})`;
-        const gap = (1 - counter.v / 100) * SPREAD;
-        if (lh) lh.style.transform = `translateX(${-gap}%)`;
-        if (rh) rh.style.transform = `translateX(${gap}%)`;
+        hands.off = (1 - counter.v / 100) * APART;
+        paintHands();
       };
+      paint();
 
       const finish = () => {
         lenis?.start();
@@ -59,7 +65,7 @@ export default function Preloader() {
         window.dispatchEvent(new Event("preloader:done"));
       };
 
-      // Reduced motion: no count, no slide. Hands already touching; reveal ASAP.
+      // Reduced motion: hands meeting, no animation; reveal as soon as ready.
       if (reduced) {
         counter.v = 100;
         paint();
@@ -75,27 +81,27 @@ export default function Preloader() {
       document.documentElement.style.overflow = "hidden";
 
       const reveal = () => {
-        // Circular collapse: the black contracts into a shrinking circle at the
-        // point where the fingertips meet, revealing the home page.
-        const clip = { r: 145 };
-        const setClip = () => {
-          overlay.style.clipPath = `circle(${clip.r}% at 50% 50%)`;
-        };
-        setClip();
-
         const tl = gsap.timeline({
           onComplete: () => {
             gsap.set(overlay, { display: "none" });
             finish();
           },
         });
-        // Final push to 100 — the hands meet at the centre here.
+        // 1) Hands meet at the centre.
         tl.to(counter, { v: 100, duration: 0.5, ease: "power2.out", onUpdate: paint });
-        // Beat on the touch, then collapse the black into the centre circle.
+        tl.addLabel("touch", "+=0.18");
+        // 2) The black background slides up and away on its own layer — this is
+        //    independent of the hands and vanishes first.
         tl.to(
-          clip,
-          { r: 0, duration: 1.0, ease: "power3.inOut", onUpdate: setClip },
-          "+=0.18"
+          black,
+          { yPercent: -100, duration: 0.85, ease: "power4.inOut" },
+          "touch"
+        );
+        // 3) Once the black is mostly gone, the hands pull each other apart.
+        tl.to(
+          hands,
+          { off: 60, duration: 0.85, ease: "power3.inOut", onUpdate: paintHands },
+          "touch+=0.5"
         );
       };
 
@@ -115,49 +121,48 @@ export default function Preloader() {
     <div
       ref={overlayRef}
       aria-hidden
-      className="preloader fixed inset-0 z-[100] bg-black"
+      className="preloader pointer-events-none fixed inset-0 z-[100]"
     >
-      {/* Reaching hands — the transparent cut-out shown at natural size (no
-          crop, no overflow clip). Two copies, each masked to one hand at the
-          fingertip gap, slide together. Black comes only from the overlay. */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="relative">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            ref={leftHandRef}
-            src="/hands.png"
-            alt=""
-            className="block h-auto w-auto max-w-[90vw] bg-transparent [clip-path:inset(0_46%_0_0)] will-change-transform"
-          />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            ref={rightHandRef}
-            src="/hands.png"
-            alt=""
-            aria-hidden
-            className="absolute inset-0 h-full w-full bg-transparent [clip-path:inset(0_0_0_54%)] will-change-transform"
-          />
+      {/* Black background — its own layer, slides up to reveal the page. */}
+      <div ref={blackRef} className="absolute inset-0 bg-black">
+        {/* small white percentage + name */}
+        <div className="absolute inset-x-0 bottom-0 flex items-end justify-between px-6 pb-8 md:px-[64px]">
+          <span className="font-oswald text-[clamp(26px,4vw,46px)] font-light leading-[0.8] tracking-[-0.03em] text-off">
+            <span ref={numRef}>0</span>
+            <span className="text-off">%</span>
+          </span>
+          <span className="mb-2 hidden font-sans text-[11px] font-medium uppercase tracking-[0.3em] text-faint sm:block">
+            Arnab Gupta
+          </span>
         </div>
-      </div>
-
-      {/* bottom row: small white percentage + name */}
-      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between px-6 pb-8 md:px-[64px]">
-        <span className="font-oswald text-[clamp(26px,4vw,46px)] font-light leading-[0.8] tracking-[-0.03em] text-off">
-          <span ref={numRef}>0</span>
-          <span className="text-off">%</span>
-        </span>
-        <span className="mb-2 hidden font-sans text-[11px] font-medium uppercase tracking-[0.3em] text-faint sm:block">
-          Arnab Gupta
+        {/* progress bar */}
+        <span className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-line">
+          <span
+            ref={barRef}
+            className="block h-full origin-left scale-x-0 bg-off"
+          />
         </span>
       </div>
 
-      {/* progress bar */}
-      <span className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-line">
-        <span
-          ref={barRef}
-          className="block h-full origin-left scale-x-0 bg-off"
+      {/* Hands — independent layer above the black, edge to edge (no gutters). */}
+      <div className="absolute inset-y-0 left-0 flex items-center">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          ref={leftHandRef}
+          src="/hand-left.png"
+          alt=""
+          className="block h-auto w-[53vw] bg-transparent will-change-transform"
         />
-      </span>
+      </div>
+      <div className="absolute inset-y-0 right-0 flex items-center justify-end">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          ref={rightHandRef}
+          src="/hand-right.png"
+          alt=""
+          className="block h-auto w-[47vw] bg-transparent will-change-transform"
+        />
+      </div>
     </div>
   );
 }
