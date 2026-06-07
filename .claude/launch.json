@@ -4,7 +4,8 @@
     {
       "name": "portfolio",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--", "-p", "3000"],
+      "runtimeArgs": ["run", "dev"],
+      "autoPort": true,
       "port": 3000
     }
   ]
