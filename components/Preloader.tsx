@@ -1,26 +1,9 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLenis } from "lenis/react";
 import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-
-function whenReady(): Promise<void> {
-  const fonts =
-    typeof document !== "undefined" && document.fonts
-      ? document.fonts.ready
-      : Promise.resolve();
-  const loaded = new Promise<void>((res) => {
-    if (typeof document === "undefined" || document.readyState === "complete") {
-      res();
-    } else {
-      window.addEventListener("load", () => res(), { once: true });
-    }
-  });
-  const timeout = new Promise<void>((res) => setTimeout(res, 3000));
-  // Resolve when fonts + load are done, but never hang past the timeout.
-  return Promise.race([Promise.all([fonts, loaded]).then(() => undefined), timeout]);
-}
 
 export default function Preloader() {
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -29,8 +12,34 @@ export default function Preloader() {
   const barRef = useRef<HTMLSpanElement>(null);
   const leftHandRef = useRef<HTMLImageElement>(null);
   const rightHandRef = useRef<HTMLImageElement>(null);
+  const musicRef = useRef<HTMLAudioElement | null>(null);
+  const [entered, setEntered] = useState(false);
   const lenis = useLenis();
   const reduced = useReducedMotion();
+
+  // Lock scroll while the intro is up; preload the music.
+  useEffect(() => {
+    document.documentElement.style.overflow = "hidden";
+    const audio = new Audio("/music.mp3");
+    audio.loop = true;
+    audio.volume = 0.45;
+    audio.preload = "auto";
+    musicRef.current = audio;
+    return () => {
+      document.documentElement.style.removeProperty("overflow");
+      audio.pause();
+    };
+  }, []);
+  useEffect(() => {
+    lenis?.stop();
+  }, [lenis]);
+
+  const onEnter = () => {
+    if (entered) return;
+    // Start music inside the click gesture (browser autoplay requirement).
+    musicRef.current?.play().catch(() => {});
+    setEntered(true);
+  };
 
   useGSAP(
     () => {
@@ -40,9 +49,8 @@ export default function Preloader() {
       const bar = barRef.current;
       const lh = leftHandRef.current;
       const rh = rightHandRef.current;
-      if (!overlay || !num) return;
+      if (!overlay) return;
 
-      // How far apart the hands start (vw). 0 = touching (full-bleed meeting).
       const APART = 14;
       const hands = { off: APART };
       const paintHands = () => {
@@ -51,12 +59,12 @@ export default function Preloader() {
       };
       const counter = { v: 0 };
       const paint = () => {
-        num.textContent = String(Math.round(counter.v));
+        if (num) num.textContent = String(Math.round(counter.v));
         if (bar) bar.style.transform = `scaleX(${counter.v / 100})`;
         hands.off = (1 - counter.v / 100) * APART;
         paintHands();
       };
-      paint();
+      paint(); // idle: hands apart, behind the ENTER gate
 
       const finish = () => {
         lenis?.start();
@@ -65,56 +73,35 @@ export default function Preloader() {
         window.dispatchEvent(new Event("preloader:done"));
       };
 
-      // Reduced motion: hands meeting, no animation; reveal as soon as ready.
+      if (!entered) return; // hold on the ENTER screen until clicked
+
+      // Reduced motion: skip the animation, reveal immediately.
       if (reduced) {
-        counter.v = 100;
-        paint();
-        whenReady().then(() => {
-          gsap.set(overlay, { autoAlpha: 0, display: "none" });
-          finish();
-        });
+        gsap.set(overlay, { autoAlpha: 0, display: "none" });
+        finish();
         return;
       }
 
-      // Lock scroll during load.
-      lenis?.stop();
-      document.documentElement.style.overflow = "hidden";
-
-      const reveal = () => {
-        const tl = gsap.timeline({
-          onComplete: () => {
-            gsap.set(overlay, { display: "none" });
-            finish();
-          },
-        });
-        // 1) Hands meet at the centre.
-        tl.to(counter, { v: 100, duration: 0.5, ease: "power2.out", onUpdate: paint });
-        tl.addLabel("touch", "+=0.18");
-        // 2) The black background slides up and away on its own layer — this is
-        //    independent of the hands and vanishes first.
-        tl.to(
-          black,
-          { yPercent: -100, duration: 0.85, ease: "power4.inOut" },
-          "touch"
-        );
-        // 3) Once the black is mostly gone, the hands pull each other apart.
-        tl.to(
-          hands,
-          { off: 60, duration: 0.85, ease: "power3.inOut", onUpdate: paintHands },
-          "touch+=0.5"
-        );
-      };
-
-      // Count to 95 while the hands draw together, then wait for real readiness.
-      gsap.to(counter, {
-        v: 95,
-        duration: 1.8,
-        ease: "power2.out",
-        onUpdate: paint,
-        onComplete: () => whenReady().then(reveal),
+      const tl = gsap.timeline({
+        delay: 0.45, // let the ENTER gate fade out first
+        onComplete: () => {
+          gsap.set(overlay, { display: "none" });
+          finish();
+        },
       });
+      // Hands draw together as the counter climbs to 100.
+      tl.to(counter, { v: 100, duration: 1.6, ease: "power2.out", onUpdate: paint });
+      tl.addLabel("touch", "+=0.2");
+      // Black slides up to reveal the page (independent of the hands).
+      tl.to(black, { yPercent: -100, duration: 0.85, ease: "power4.inOut" }, "touch");
+      // Then the hands pull apart.
+      tl.to(
+        hands,
+        { off: 60, duration: 0.85, ease: "power3.inOut", onUpdate: paintHands },
+        "touch+=0.5"
+      );
     },
-    { dependencies: [reduced] }
+    { dependencies: [entered, reduced] }
   );
 
   return (
@@ -125,7 +112,6 @@ export default function Preloader() {
     >
       {/* Black background — its own layer, slides up to reveal the page. */}
       <div ref={blackRef} className="absolute inset-0 bg-black">
-        {/* small white percentage + name */}
         <div className="absolute inset-x-0 bottom-0 flex items-end justify-between px-6 pb-8 md:px-[64px]">
           <span className="font-oswald text-[clamp(26px,4vw,46px)] font-light leading-[0.8] tracking-[-0.03em] text-off">
             <span ref={numRef}>0</span>
@@ -135,7 +121,6 @@ export default function Preloader() {
             Arnab Gupta
           </span>
         </div>
-        {/* progress bar */}
         <span className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-line">
           <span
             ref={barRef}
@@ -144,7 +129,7 @@ export default function Preloader() {
         </span>
       </div>
 
-      {/* Hands — independent layer above the black, edge to edge (no gutters). */}
+      {/* Hands — independent layer above the black, edge to edge. */}
       <div className="absolute inset-y-0 left-0 flex items-center">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -162,6 +147,24 @@ export default function Preloader() {
           alt=""
           className="block h-auto w-[47vw] bg-transparent will-change-transform"
         />
+      </div>
+
+      {/* ENTER gate — the first screen; fades out on click. */}
+      <div
+        className={`absolute inset-0 z-10 flex flex-col items-center justify-center gap-7 bg-black transition-opacity duration-[800ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          entered ? "pointer-events-none opacity-0" : "pointer-events-auto opacity-100"
+        }`}
+      >
+        <button
+          type="button"
+          onClick={onEnter}
+          className="enter-glow group rounded-full border border-[#f3f3f3]/40 px-12 py-4 font-oswald text-[clamp(18px,3vw,26px)] font-light uppercase tracking-[0.45em] text-[#f3f3f3] transition-[letter-spacing,border-color] duration-500 hover:border-[#f3f3f3] hover:tracking-[0.6em]"
+        >
+          Enter
+        </button>
+        <span className="font-sans text-[11px] uppercase tracking-[0.3em] text-faint">
+          ♪ sound on
+        </span>
       </div>
     </div>
   );

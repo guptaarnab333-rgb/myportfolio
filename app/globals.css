@@ -60,17 +60,24 @@ html.lenis body {
   border-radius: 999px;
 }
 
-/* Preloader safety net: if the JS timeline never runs (no-JS / headless),
-   the overlay still clears so content is reachable. JS removes it earlier. */
-.preloader {
-  animation: preloaderSafety 0.01s linear 5s forwards;
-}
-@keyframes preloaderSafety {
-  to {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+/* The intro now waits for the visitor to click ENTER (which also unlocks the
+   intro music), so there is no timed auto-hide — the gate holds until clicked.
+   Page content is still in the SSR DOM beneath the overlay for crawlers. */
+
+/* Intro "ENTER" button — soft breathing glow. */
+@keyframes enterGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 18px rgba(243, 243, 243, 0.05);
+    text-shadow: 0 0 10px rgba(243, 243, 243, 0.22);
   }
+  50% {
+    box-shadow: 0 0 38px rgba(243, 243, 243, 0.16);
+    text-shadow: 0 0 22px rgba(243, 243, 243, 0.5);
+  }
+}
+.enter-glow {
+  animation: enterGlow 2.6s ease-in-out infinite;
 }
 
 /* eyebrow / kicker label (used sparingly, never as per-section grammar) */
