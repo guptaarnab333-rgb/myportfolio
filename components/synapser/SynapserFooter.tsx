@@ -9,6 +9,14 @@ export default function SynapserFooter() {
       className="mx-auto max-w-[1440px] border-t border-[#cfcec9] px-6 pb-12 pt-[56px] md:px-16"
     >
       <Reveal>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/arnab-creates-logo.png"
+          alt="Arnab Creates"
+          className="mb-10 h-[40px] w-auto"
+        />
+      </Reveal>
+      <Reveal delay={80}>
         <p className="font-sans text-[13px] tracking-[0.1em] text-[#6B6B68]">
           ( LET&rsquo;S TALK )
         </p>
