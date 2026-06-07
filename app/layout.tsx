@@ -37,6 +37,10 @@ export const metadata: Metadata = {
   title: "Arnab Gupta — Product Designer & Maker",
   description:
     "I make to think; I think to make. Portfolio of Arnab Gupta — product design student at Doon University, Research Fellow at PEOPLE Lab.",
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    shortcut: "/icon.svg",
+  },
   openGraph: {
     title: "Arnab Gupta — Product Designer & Maker",
     description: "I make to think; I think to make.",
