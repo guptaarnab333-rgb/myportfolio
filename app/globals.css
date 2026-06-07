@@ -13,6 +13,26 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* Two-tone "worlds". By default (reduced motion / before JS) each world paints
+   its own solid background and the seam is a static gradient, so the page is
+   always correct. Once ScrollFade mounts it adds `.fade-active`, which makes
+   these transparent so the scroll-scrubbed backdrop shows through and the whole
+   page tint morphs in real time. */
+.world-dark {
+  background-color: #0a0a0a;
+}
+.world-light {
+  background-color: #f1f0ed;
+}
+#seam {
+  background: linear-gradient(to bottom, #0a0a0a, #f1f0ed);
+}
+.fade-active .world-dark,
+.fade-active .world-light,
+.fade-active #seam {
+  background: transparent;
+}
+
 /* Lenis smooth-scroll base styles (scroll is driven by JS, not CSS). */
 html.lenis,
 html.lenis body {

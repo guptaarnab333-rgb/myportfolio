@@ -1,58 +1,63 @@
 "use client";
 
+import { useState } from "react";
 import Reveal from "@/components/Reveal";
 import { cases } from "@/components/data";
 
 /* eslint-disable @next/next/no-img-element */
 
+/** How many projects to surface before "View more projects" reveals the rest. */
+const VISIBLE = 4;
+
 export default function WorksArchive() {
+  const [showAll, setShowAll] = useState(false);
+  const shown = showAll ? cases : cases.slice(0, VISIBLE);
+  const total = String(cases.length).padStart(3, "0");
+
   return (
     <section id="work" className="mx-auto max-w-[1440px] px-6 py-[120px] md:px-16">
-      <div className="mb-10 flex items-center justify-between font-sans text-[13px] tracking-[0.1em] text-[#6B6B68]">
+      <div className="mb-10 flex items-center justify-between font-sans text-[13px] tracking-[0.1em] text-[#9a9a9a]">
         <span>( SELECTED WORK )</span>
-        <span>[ 008 ]</span>
+        <span>[ {total} ]</span>
       </div>
-      <h2 className="mb-12 font-inter text-[clamp(32px,5vw,56px)] font-semibold leading-[1.0] tracking-[-0.03em] text-[#141414]">
+      <h2 className="mb-12 font-inter text-[clamp(32px,5vw,56px)] font-semibold leading-[1.0] tracking-[-0.03em] text-[#f3f3f3]">
         An archive of selected work.
       </h2>
 
-      <div className="border-t border-[#cfcec9]">
-        {cases.map((c, i) => {
+      {/* Horizontal grid — 4 cards side by side on desktop. */}
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {shown.map((c, i) => {
           const idx = c.index.split("/")[0].trim();
           const target = c.href ?? "#work";
           return (
-            <Reveal key={c.index} y={20} delay={i * 40}>
-              <a
-                href={target}
-                className="group flex w-full items-center justify-between gap-6 border-b border-[#cfcec9] py-7"
-              >
-                <div className="flex items-center gap-5 md:gap-8">
-                  <span className="font-sans text-[13px] text-[#6B6B68]">
-                    {idx}
+            <Reveal key={c.index} y={24} delay={(i % VISIBLE) * 60}>
+              <a href={target} className="group block">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-[2px] border border-[#2e2e2e] bg-[#222222]">
+                  <img
+                    src={c.image}
+                    alt={c.title}
+                    loading="lazy"
+                    style={c.position ? { objectPosition: c.position } : undefined}
+                    className="h-full w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110"
+                  />
+                  {/* Hover veil + jump-off cue */}
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/0 to-black/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <span className="pointer-events-none absolute right-3 top-3 translate-y-1 font-inter text-[12px] font-medium text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                    View ↗
                   </span>
-                  <div className="h-[84px] w-[126px] shrink-0 overflow-hidden rounded-[2px] border border-[#cfcec9] bg-[#e7e6e2] md:h-[120px] md:w-[180px]">
-                    <img
-                      src={c.image}
-                      alt={c.title}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.05]"
-                    />
-                  </div>
+                </div>
+
+                <div className="mt-4 flex items-start justify-between gap-3">
                   <div>
-                    <h3 className="font-inter text-[clamp(22px,3.2vw,38px)] font-semibold leading-[1.05] tracking-[-0.02em] text-[#141414] transition-transform duration-300 group-hover:translate-x-1">
+                    <h3 className="font-inter text-[18px] font-semibold leading-[1.15] tracking-[-0.02em] text-[#f3f3f3] transition-transform duration-300 group-hover:translate-x-1">
                       {c.title}
                     </h3>
-                    <p className="mt-2 font-sans text-[11px] tracking-[0.04em] text-[#6B6B68] md:text-[12px]">
+                    <p className="mt-1.5 font-sans text-[11px] tracking-[0.04em] text-[#9a9a9a]">
                       // {c.category}
                     </p>
                   </div>
-                </div>
-                <div className="flex items-center gap-6 md:gap-12">
-                  <span className="hidden font-sans text-[13px] text-[#6B6B68] sm:block">
-                    {c.year}
-                  </span>
-                  <span className="hidden whitespace-nowrap font-inter text-[15px] font-medium text-[#141414] transition-transform duration-300 group-hover:-translate-y-0.5 md:inline">
-                    View Project ↗
+                  <span className="shrink-0 font-sans text-[12px] text-[#9a9a9a]">
+                    {idx}
                   </span>
                 </div>
               </a>
@@ -60,6 +65,21 @@ export default function WorksArchive() {
           );
         })}
       </div>
+
+      {cases.length > VISIBLE && (
+        <div className="mt-14 flex justify-center">
+          <button
+            type="button"
+            onClick={() => setShowAll((v) => !v)}
+            className="group inline-flex items-center gap-3 rounded-full border border-[#f3f3f3]/30 px-7 py-3 font-inter text-[14px] font-medium text-[#f3f3f3] transition-colors duration-300 hover:border-[#f3f3f3] hover:bg-[#f3f3f3] hover:text-[#0a0a0a]"
+          >
+            {showAll ? "Show less" : "View more projects"}
+            <span className="transition-transform duration-300 group-hover:translate-x-0.5">
+              {showAll ? "↑" : "↗"}
+            </span>
+          </button>
+        </div>
+      )}
     </section>
   );
 }

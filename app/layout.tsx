@@ -54,7 +54,7 @@ export default function RootLayout({
       lang="en"
       className={`${dmSans.variable} ${oswald.variable} ${inter.variable} ${instrument.variable}`}
     >
-      <body className="bg-[#f1f0ed] text-[#141414] antialiased">
+      <body className="bg-[#0a0a0a] text-[#f3f3f3] antialiased">
         <SmoothScroll>
           <Preloader />
           {children}

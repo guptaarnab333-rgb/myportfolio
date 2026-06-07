@@ -19,13 +19,13 @@ export default function SynapserHero() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(58% 50% at 50% 46%, rgba(241,240,237,0.82), rgba(241,240,237,0) 78%)",
+            "radial-gradient(58% 50% at 50% 46%, rgba(10,10,10,0.82), rgba(10,10,10,0) 78%)",
         }}
       />
 
       {/* Headline */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center px-6">
-        <h1 className="text-center font-serif text-[clamp(44px,8.5vw,116px)] italic leading-[1.0] tracking-[-0.01em] text-[#141414]">
+        <h1 className="text-center font-serif text-[clamp(44px,8.5vw,116px)] italic leading-[1.0] tracking-[-0.01em] text-[#f3f3f3]">
           I make,
           <br />
           therefore I am.
@@ -34,10 +34,10 @@ export default function SynapserHero() {
 
       {/* Bottom overlay */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between gap-6 px-6 pb-9 md:px-16">
-        <span className="font-sans text-[12px] font-medium uppercase tracking-[0.18em] text-[#141414]">
+        <span className="font-sans text-[12px] font-medium uppercase tracking-[0.18em] text-[#f3f3f3]">
           Scroll to explore&nbsp;&nbsp;↓
         </span>
-        <span className="hidden font-sans text-[12px] font-medium uppercase tracking-[0.18em] text-[#6B6B68] md:block">
+        <span className="hidden font-sans text-[12px] font-medium uppercase tracking-[0.18em] text-[#9a9a9a] md:block">
           Research · Making · Sustainability · Ergonomics · Prototyping
         </span>
       </div>
