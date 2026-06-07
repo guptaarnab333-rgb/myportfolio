@@ -48,7 +48,7 @@ export default function WorksArchive() {
                     alt={c.title}
                     loading="lazy"
                     style={c.position ? { objectPosition: c.position } : undefined}
-                    className="h-full w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110"
+                    className="h-full w-full object-cover grayscale transition-[transform,filter] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110 group-hover:grayscale-0"
                   />
                   {/* Hover veil + jump-off cue */}
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/0 to-black/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
