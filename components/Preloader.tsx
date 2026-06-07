@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useLenis } from "lenis/react";
 import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { getMusic } from "@/lib/music";
 
 export default function Preloader() {
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -12,7 +13,6 @@ export default function Preloader() {
   const barRef = useRef<HTMLSpanElement>(null);
   const leftHandRef = useRef<HTMLImageElement>(null);
   const rightHandRef = useRef<HTMLImageElement>(null);
-  const musicRef = useRef<HTMLAudioElement | null>(null);
   const [entered, setEntered] = useState(false);
   const lenis = useLenis();
   const reduced = useReducedMotion();
@@ -20,14 +20,9 @@ export default function Preloader() {
   // Lock scroll while the intro is up; preload the music.
   useEffect(() => {
     document.documentElement.style.overflow = "hidden";
-    const audio = new Audio("/music.mp3");
-    audio.loop = true;
-    audio.volume = 0.45;
-    audio.preload = "auto";
-    musicRef.current = audio;
+    getMusic(); // instantiate + preload the shared track
     return () => {
       document.documentElement.style.removeProperty("overflow");
-      audio.pause();
     };
   }, []);
   useEffect(() => {
@@ -37,7 +32,7 @@ export default function Preloader() {
   const onEnter = () => {
     if (entered) return;
     // Start music inside the click gesture (browser autoplay requirement).
-    musicRef.current?.play().catch(() => {});
+    getMusic()?.play().catch(() => {});
     setEntered(true);
   };
 

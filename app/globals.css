@@ -80,6 +80,21 @@ html.lenis body {
   animation: enterGlow 2.6s ease-in-out infinite;
 }
 
+/* Sound-toggle equalizer bars. */
+@keyframes eq {
+  0%,
+  100% {
+    transform: scaleY(0.18);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+.eq-bar {
+  transform-origin: bottom;
+  animation: eq 0.9s ease-in-out infinite;
+}
+
 /* eyebrow / kicker label (used sparingly, never as per-section grammar) */
 .kicker {
   font-family: var(--font-dm-sans), sans-serif;

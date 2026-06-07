@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import SoundToggle from "@/components/SoundToggle";
 
 // three.js loads only on the client, only when the hero mounts.
 const HeroGallery = dynamic(() => import("./HeroGallery"), { ssr: false });
@@ -40,6 +41,7 @@ export default function SynapserHero() {
         <span className="hidden font-sans text-[12px] font-medium uppercase tracking-[0.18em] text-[#9a9a9a] md:block">
           Research · Making · Sustainability · Ergonomics · Prototyping
         </span>
+        <SoundToggle className="pointer-events-auto" />
       </div>
     </section>
   );
