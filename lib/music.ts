@@ -7,9 +7,9 @@ let audio: HTMLAudioElement | null = null;
 export function getMusic(): HTMLAudioElement | null {
   if (typeof window === "undefined") return null;
   if (!audio) {
-    audio = new Audio("/music.mp3");
-    audio.loop = true;
-    audio.volume = 0.45;
+    audio = new Audio("/music2.mp3");
+    audio.loop = false; // intro only — plays once and stops
+    audio.volume = 0.5;
     audio.preload = "auto";
   }
   return audio;
