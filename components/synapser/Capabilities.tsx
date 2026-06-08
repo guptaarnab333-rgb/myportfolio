@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import Reveal from "@/components/Reveal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { isSoundEnabled } from "@/lib/sound";
 
 type Pillar = {
   n: string;
@@ -95,6 +96,7 @@ export default function Capabilities() {
 
   // A short synthesized "click/tick" played when a row opens on hover.
   const playClick = () => {
+    if (!isSoundEnabled()) return; // respect the hero speaker toggle
     const ctx = audioRef.current;
     if (!ctx || ctx.state !== "running") return;
     const t = ctx.currentTime;

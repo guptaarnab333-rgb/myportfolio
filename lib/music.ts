@@ -9,7 +9,7 @@ export function getMusic(): HTMLAudioElement | null {
   if (!audio) {
     audio = new Audio("/music2.mp3");
     audio.loop = false; // intro only — plays once and stops
-    audio.volume = 0.5;
+    audio.volume = 0.3;
     audio.preload = "auto";
   }
   return audio;
