@@ -19,6 +19,10 @@ export default function Preloader() {
 
   // Lock scroll while the intro is up; preload the music.
   useEffect(() => {
+    // Always reopen at the hero: stop the browser from restoring the previous
+    // scroll position on reload, and force the page to the top right away.
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
     document.documentElement.style.overflow = "hidden";
     getMusic(); // instantiate + preload the shared track
     return () => {
@@ -62,8 +66,12 @@ export default function Preloader() {
       paint(); // idle: hands apart, behind the ENTER gate
 
       const finish = () => {
-        lenis?.start();
         document.documentElement.style.removeProperty("overflow");
+        lenis?.start();
+        // Snap to the hero before handing control back, so the page never
+        // reveals at a remembered scroll position.
+        lenis?.scrollTo(0, { immediate: true, force: true });
+        window.scrollTo(0, 0);
         ScrollTrigger.refresh();
         window.dispatchEvent(new Event("preloader:done"));
       };
