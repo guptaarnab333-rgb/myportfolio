@@ -10,9 +10,20 @@ const links: [string, string][] = [
   ["Contact", "#contact"],
 ];
 
-export default function SynapserNav() {
+export default function SynapserNav({
+  /**
+   * On the homepage the nav rides the dark→light seam and flips theme on
+   * scroll. On sub-pages (e.g. a light case study) there's no seam, so pass a
+   * fixed theme and the nav stays that colour. In-page anchors then resolve to
+   * the homepage instead of scrolling the current page.
+   */
+  theme,
+}: {
+  theme?: "light" | "dark";
+} = {}) {
+  const fixed = theme !== undefined;
   const [scrolled, setScrolled] = useState(false);
-  const [overDark, setOverDark] = useState(true);
+  const [overDark, setOverDark] = useState(theme ? theme === "dark" : true);
   const [contactOpen, setContactOpen] = useState(false);
   const lenis = useLenis();
 
@@ -20,6 +31,8 @@ export default function SynapserNav() {
     const onScroll = () => {
       const y = window.scrollY;
       setScrolled(y > 24);
+      // On a fixed-theme sub-page there's no seam to track; keep the theme.
+      if (fixed) return;
       // The nav rides the dark world until it passes the midpoint of the
       // dark→light seam, then flips to the light theme.
       const seam = document.getElementById("seam");
@@ -35,7 +48,7 @@ export default function SynapserNav() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, []);
+  }, [fixed]);
 
   const onClick =
     (href: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -45,7 +58,9 @@ export default function SynapserNav() {
         setContactOpen(true);
         return;
       }
-      const el = document.getElementById(href.slice(1));
+      // On a sub-page, let in-page anchors fall through to a real navigation
+      // back to the homepage section (the href is rewritten to /#… below).
+      const el = document.getElementById(href.replace(/^\/?#/, ""));
       if (el && lenis) {
         e.preventDefault();
         lenis.scrollTo(el, { offset: -60 });
@@ -68,8 +83,8 @@ export default function SynapserNav() {
               background morphs (dark mark over hero + work, dark over the
               light about + contact). */}
           <a
-            href="#top"
-            onClick={onClick("#top")}
+            href={fixed ? "/" : "#top"}
+            onClick={onClick(fixed ? "/" : "#top")}
             aria-label="Arnab Creates — home"
             className="relative shrink-0"
           >
@@ -97,7 +112,7 @@ export default function SynapserNav() {
             {links.map(([label, href]) => (
               <a
                 key={href}
-                href={href}
+                href={fixed && href !== "#contact" ? `/${href}` : href}
                 onClick={onClick(href)}
                 className={`font-sans text-[18px] font-medium tracking-[-0.03em] transition-colors duration-300 hover:text-[#2429af] md:text-[21px] ${
                   overDark ? "text-[#f3f3f3]" : "text-[#181717]"

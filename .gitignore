@@ -9,3 +9,6 @@ npm-debug.log*
 next-env.d.ts
 /figma-full.png
 /figma-hero.png
+
+# local cover-image backups (kept out of the repo)
+public/cases/_backup_covers_*/

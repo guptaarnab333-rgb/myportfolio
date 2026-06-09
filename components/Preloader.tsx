@@ -1,10 +1,35 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useLenis } from "lenis/react";
 import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { getMusic } from "@/lib/music";
+
+/** Session flag: set once the visitor has clicked Enter. */
+const ENTERED_KEY = "intro-entered";
+
+/**
+ * The intro should play on the very first arrival and on a manual refresh, but
+ * NOT on in-site navigation. Because the site is a static export, every
+ * internal link is a full document load that remounts this component, so we
+ * can't rely on React state alone — we read the Navigation Timing API:
+ *  - "reload"  → the visitor refreshed: always replay the intro.
+ *  - otherwise → replay only if they haven't entered yet this session.
+ */
+function shouldSkipIntro(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    const nav = performance.getEntriesByType(
+      "navigation"
+    )[0] as PerformanceNavigationTiming | undefined;
+    const isReload = nav?.type === "reload";
+    if (isReload) return false; // refresh always replays
+    return sessionStorage.getItem(ENTERED_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
 
 export default function Preloader() {
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -14,11 +39,23 @@ export default function Preloader() {
   const leftHandRef = useRef<HTMLImageElement>(null);
   const rightHandRef = useRef<HTMLImageElement>(null);
   const [entered, setEntered] = useState(false);
+  // When true, the intro is bypassed entirely (already entered this session).
+  const [skip, setSkip] = useState(false);
   const lenis = useLenis();
   const reduced = useReducedMotion();
 
+  // Decide before first paint whether to skip, so the ENTER gate never flashes
+  // on internal navigation.
+  useLayoutEffect(() => {
+    if (shouldSkipIntro()) {
+      setSkip(true);
+      if (overlayRef.current) overlayRef.current.style.display = "none";
+    }
+  }, []);
+
   // Lock scroll while the intro is up; preload the music.
   useEffect(() => {
+    if (skip) return; // intro bypassed: leave scroll alone
     // Always reopen at the hero: stop the browser from restoring the previous
     // scroll position on reload, and force the page to the top right away.
     if ("scrollRestoration" in history) history.scrollRestoration = "manual";
@@ -28,13 +65,21 @@ export default function Preloader() {
     return () => {
       document.documentElement.style.removeProperty("overflow");
     };
-  }, []);
+  }, [skip]);
   useEffect(() => {
+    if (skip) return;
     lenis?.stop();
-  }, [lenis]);
+  }, [lenis, skip]);
 
   const onEnter = () => {
     if (entered) return;
+    // Remember for the rest of this browser session so internal navigation
+    // doesn't replay the intro. Cleared automatically when the tab closes.
+    try {
+      sessionStorage.setItem(ENTERED_KEY, "1");
+    } catch {
+      /* ignore */
+    }
     // Start music inside the click gesture (browser autoplay requirement).
     getMusic()?.play().catch(() => {});
     setEntered(true);
@@ -49,6 +94,7 @@ export default function Preloader() {
       const lh = leftHandRef.current;
       const rh = rightHandRef.current;
       if (!overlay) return;
+      if (skip) return; // intro bypassed this session
 
       const APART = 14;
       const hands = { off: APART };
@@ -104,7 +150,7 @@ export default function Preloader() {
         "touch+=0.5"
       );
     },
-    { dependencies: [entered, reduced] }
+    { dependencies: [entered, reduced, skip] }
   );
 
   return (
@@ -112,6 +158,7 @@ export default function Preloader() {
       ref={overlayRef}
       aria-hidden
       className="preloader pointer-events-none fixed inset-0 z-[100]"
+      style={skip ? { display: "none" } : undefined}
     >
       {/* Black background — its own layer, slides up to reveal the page. */}
       <div ref={blackRef} className="absolute inset-0 bg-black">

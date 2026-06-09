@@ -23,6 +23,7 @@ const config: Config = {
         // Monochrome ramp + one rare indigo accent (flame retired).
         // light-mode (case study) tokens
         paper: "#f1f0ed",
+        mistblue: "#f6f9fd",
         graphite: "#181717",
         stone: "#606060",
         mist: "#b3b3b3",

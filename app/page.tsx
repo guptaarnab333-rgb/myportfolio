@@ -4,12 +4,16 @@ import WorksArchive from "@/components/synapser/WorksArchive";
 import Capabilities from "@/components/synapser/Capabilities";
 import SynapserFooter from "@/components/synapser/SynapserFooter";
 import ScrollFade from "@/components/synapser/ScrollFade";
+import HashScroll from "@/components/synapser/HashScroll";
 
 export default function Home() {
   return (
     <>
       {/* Fixed, scroll-scrubbed backdrop: morphs ink → paper in real time */}
       <ScrollFade />
+
+      {/* Honor #work / #about when arriving from a case study page */}
+      <HashScroll />
 
       <main className="relative z-10">
         <SynapserNav />

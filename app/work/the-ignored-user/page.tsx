@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import Nav from "@/components/Nav";
+import SynapserNav from "@/components/synapser/SynapserNav";
 import Reveal from "@/components/Reveal";
+import { Highlight } from "@/components/Highlight";
 
 export const metadata: Metadata = {
   title: "The Ignored User — Arnab Gupta",
@@ -9,6 +10,28 @@ export const metadata: Metadata = {
 };
 
 /* ---------- shared bits ---------- */
+
+/**
+ * Breaks a child out of the 1120px content column to span the full viewport
+ * width, matching the auto-layout full-bleed sections in the Figma V2
+ * (Problem band, Ideation image, Final Form). The centering trick keeps it
+ * responsive: 100vw wide, pulled back to the viewport's left edge.
+ */
+function FullBleed({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`relative left-1/2 right-1/2 -mx-[50vw] w-screen ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
@@ -30,7 +53,7 @@ function SectionHead({
   return (
     <Reveal className={className}>
       <Eyebrow>{kicker}</Eyebrow>
-      <h2 className="mt-5 max-w-[1000px] font-oswald text-[clamp(34px,5.2vw,60px)] font-normal leading-[1.05] tracking-[-0.03em] text-graphite">
+      <h2 className="mt-4 max-w-[1000px] font-sans text-[clamp(34px,5.4vw,64px)] font-normal leading-[1.17] tracking-[-0.03em] text-graphite">
         {title}
       </h2>
     </Reveal>
@@ -46,46 +69,65 @@ const meta = [
   { label: "Tools", value: "Blender · Fusion 360" },
 ];
 
-const questions = [
+/* Research cards — body uses blue keyword highlights, matched to Figma V2 */
+type Seg = { t: string; hi?: boolean };
+const research: { q: Seg[]; b: Seg[] }[] = [
   {
-    k: "WHO",
-    t: "Who is actually thirsty?",
-    b: "Daily-wage construction workers, 20–55, men and women, spending 8–12 hours building cities. They don’t own the site. They don’t own the water. They have no voice to demand better.",
-    span: "md:col-span-4",
+    q: [{ t: "Who ", hi: true }, { t: "are we designing for " }, { t: "?", hi: true }],
+    b: [
+      { t: "Construction workers", hi: true },
+      { t: " spending long hours on active sites, often with " },
+      { t: "limited access ", hi: true },
+      { t: "to safe and reliable drinking water." },
+    ],
   },
   {
-    k: "WHAT",
-    t: "What is really happening?",
-    b: "Tanker water poured into open drums. No purification. Everyone’s hands go into the same water. Workers cup hands or drink mouth-to-tap.",
-    span: "md:col-span-5",
+    q: [{ t: "What ", hi: true }, { t: "did we discover " }, { t: "?", hi: true }],
+    b: [
+      { t: "Water was commonly stored in open drums, making it " },
+      { t: "difficult to maintain hygiene", hi: true },
+      { t: " and " },
+      { t: "easy access.", hi: true },
+    ],
   },
   {
-    k: "WHERE",
-    t: "Where does the problem live?",
-    b: "Active construction sites. Dusty, loud, brutal. No rest zones, no hydration points, no shade. The drum sits wherever the tanker last parked.",
-    span: "md:col-span-3",
+    q: [{ t: "Where", hi: true }, { t: " was the gap " }, { t: "?", hi: true }],
+    b: [
+      { t: "The issue was not just the container, but the lack of a" },
+      { t: " dedicated hydration system ", hi: true },
+      { t: "within " },
+      { t: "construction sites.", hi: true },
+    ],
   },
   {
-    k: "WHEN",
-    t: "When do they need it most?",
-    b: "Every hour. Short desperate bursts between tasks. Peak demand mid-morning and post-lunch — the heat is at its worst and the body is already running on empty.",
-    span: "md:col-span-6",
+    q: [{ t: "When ", hi: true }, { t: "did it matter most " }, { t: "?", hi: true }],
+    b: [
+      { t: "During " },
+      { t: "peak heat hours", hi: true },
+      { t: " and " },
+      { t: "between tasks,", hi: true },
+      { t: " when workers needed quick and frequent access to water." },
+    ],
   },
   {
-    k: "WHY",
-    t: "Why has nobody fixed this?",
-    b: "Because the user has no power. A daily-wage worker cannot demand better. The contractor faces no market pressure. The problem persists because the user was never considered worth designing for.",
-    span: "md:col-span-6",
+    q: [{ t: "Why ", hi: true }, { t: "was it worth solving " }, { t: "?", hi: true }],
+    b: [
+      { t: "Construction workers build our cities, yet few products are designed specifically for their everyday needs. Hydration is a basic need, yet existing solutions" },
+      { t: " overlook t", hi: true },
+      { t: "he realities of " },
+      { t: "construction workers'", hi: true },
+      { t: " daily lives." },
+    ],
   },
 ];
 
 const pains = [
-  ["01", "Contamination at source", "Open, unfiltered tanker water shared by everyone, protected by nothing."],
-  ["02", "No hands-free interaction", "Every tap or drum handle requires hands that are never clean."],
-  ["03", "One height fits nobody", "Existing dispensers ignore the spread of worker heights and roles."],
-  ["04", "Direct mouth-to-tap", "Workers without bottles put hands or mouth on shared surfaces."],
-  ["05", "Maintenance nobody owns", "Filters clog. Tanks empty. No indicator, no assigned responsibility."],
-  ["06", "The product doesn’t belong here", "Office and home products break within weeks under site conditions."],
+  ["01", "Contamination at source", "Open, unfiltered tanker water shared by everyone, protected by nothing.", "/cases/cs01/pain-01.png"],
+  ["02", "No hands-free interaction", "Every tap or drum handle requires hands that are never clean.", "/cases/cs01/pain-02.png"],
+  ["03", "One height fits nobody", "Existing dispensers ignore the spread of worker heights and roles.", "/cases/cs01/pain-03.png"],
+  ["04", "Direct mouth-to-tap", "Workers without bottles put hands or mouth on shared surfaces.", "/cases/cs01/pain-04.png"],
+  ["05", "Maintenance nobody owns", "Filters clog. Tanks empty. No indicator, no assigned responsibility.", "/cases/cs01/pain-05.png"],
+  ["06", "The product doesn’t belong here", "Office and home products break within weeks under site conditions.", "/cases/cs01/pain-06.png"],
 ];
 
 const components = [
@@ -98,48 +140,34 @@ const components = [
 ];
 
 const stages = [
-  ["STAGE 01", "Sediment", "Strips dust, mud, and construction particulate from incoming tanker water. First contact, takes the most abuse."],
-  ["STAGE 02", "Carbon", "Removes chlorine, organic compounds, and odour. Water becomes chemically clean."],
-  ["STAGE 03", "Ceramic", "Microscopic physical barrier — removes bacteria and biological contamination without power or chemicals."],
-  ["STAGE 04", "UV Lamp", "Final sterilisation before water enters storage. Nothing reaches the tank unclean."],
-];
-
-const materials = [
-  ["Outer body", "Galvanised steel + thermally reflective powder coat. Single flat panels per face. Reflective coat deflects solar IR."],
-  ["Water-contact", "Food-grade stainless steel — spouts, taps, internal tank lining. No compromise."],
-  ["Construction", "Minimal seams. Minimal dirt traps. Industrial where it needs to be tough. Clinical where it needs to be clean."],
-];
-
-const dimensions = [
-  ["Spout heights", "120 cm and 152 cm — two ranges, two users."],
-  ["Storage tank", "1.7 ft × 1.7 ft × 2.5 ft — 150+ litres per fill, serving 30–50 workers per shift."],
-  ["Solar panel", "1.5 ft diameter octagonal, removable, 5 m wire."],
-  ["Power balance", "Generates ~150 Wh/day. Consumes ~22–30 Wh/day. ≈5× surplus."],
+  ["Sediment", "Removes dust & mud"],
+  ["Carbon", "Removes odour & chlorine"],
+  ["Ceramic", "Blocks bacteria"],
+  ["UV Lamp", "Final sterilisation"],
 ];
 
 const mechanisms = [
-  ["/cases/cs01/mech-pumps.png", "Two DC Pumps", "One pump per spout — dedicated flow paths, no cross-contamination between dispensing points."],
-  ["/cases/cs01/mech-paddle.png", "Foot Paddle Switch", "Flat paddle activates an electrical switch. Press flows water; release stops it. Zero hand contact at the point of use."],
-  ["/cases/cs01/mech-casters.png", "Retractable Casters", "Lever-deploy wheels for repositioning, retract for stability when stationary."],
+  ["/cases/cs01/mech-pumps.png", "Two DC Pumps, one per sprout"],
+  ["/cases/cs01/mech-paddle.png", "Foot Paddle for hands free water release"],
+  ["/cases/cs01/mech-casters.png", "Retractable Casters for stability"],
 ];
 
 /* eslint-disable @next/next/no-img-element */
 
 export default function TheIgnoredUser() {
   return (
-    <main className="min-h-screen bg-paper text-graphite">
-      <Nav variant="light" />
+    <main className="min-h-screen overflow-x-clip bg-mistblue text-graphite">
+      <SynapserNav theme="light" />
 
       <div className="mx-auto max-w-[1120px] px-6">
         {/* ---------- Header ---------- */}
-        <header className="pt-[160px] md:pt-[200px]">
+        <header className="pt-[112px] md:pt-[128px]">
           <div className="grid grid-cols-1 gap-12 md:grid-cols-[1fr_240px] md:items-end md:gap-20">
             <Reveal>
-              <Eyebrow>CASE STUDY 01 / PRODUCT DESIGN</Eyebrow>
-              <h1 className="mt-8 font-oswald text-[clamp(52px,10vw,120px)] font-normal leading-[0.95] tracking-[-0.03em] text-graphite">
+              <h1 className="font-sans text-[clamp(52px,9vw,96px)] font-normal leading-[1.0] tracking-[-0.03em] text-graphite">
                 The Ignored User.
               </h1>
-              <p className="mt-8 max-w-[600px] font-inter text-[18px] leading-[1.4] tracking-[-0.03em] text-graphite">
+              <p className="mt-8 max-w-[600px] font-inter text-[18px] leading-[1.4] tracking-[-0.03em] text-accent">
                 A solar-powered, foot-operated water purifier designed for the
                 hands that build India’s cities.
               </p>
@@ -164,147 +192,173 @@ export default function TheIgnoredUser() {
 
         {/* ---------- Hero render ---------- */}
         <Reveal className="mt-16" y={36}>
-          <figure>
-            <img
-              src="/cases/cs01/hero-context.png"
-              alt="The final unit in site — a faceted steel column at a construction site."
-              className="w-full rounded-[3px]"
-            />
-            <figcaption className="mt-4 font-inter text-[12px] tracking-[-0.03em] text-stone">
-              The final unit in site — a faceted steel column at a construction
-              site.
-            </figcaption>
-          </figure>
+          <img
+            src="/cases/cs01/hero-context.png"
+            alt="The final unit in site — a faceted steel column at a construction site."
+            className="w-full rounded-[3px]"
+          />
         </Reveal>
 
-        {/* ---------- 01 Context ---------- */}
-        <section className="mt-28 grid grid-cols-1 gap-10 md:grid-cols-[440px_1fr] md:gap-20">
+        {/* ---------- Context ---------- */}
+        <section className="mt-28 grid grid-cols-1 gap-10 lg:grid-cols-[2fr_3fr] lg:gap-20">
           <Reveal>
-            <Eyebrow>01 — CONTEXT</Eyebrow>
-            <h2 className="mt-6 font-oswald text-[clamp(40px,5.4vw,60px)] font-normal leading-[1.0] tracking-[-0.03em] text-graphite">
-              Where it begins.
+            <Eyebrow>CONTEXT</Eyebrow>
+            <h2 className="mt-4 font-sans text-[clamp(34px,4.6vw,52px)] font-normal leading-[1.17] tracking-[-0.03em] text-graphite">
+              Understanding the Environment
             </h2>
           </Reveal>
           <Reveal delay={120}>
-            <div className="flex max-w-[600px] flex-col gap-8 font-inter text-[18px] leading-[1.4] tracking-[-0.03em] text-graphite">
+            <div className="flex max-w-[600px] flex-col gap-6 font-inter text-[18px] leading-[1.4] tracking-[-0.03em] text-graphite">
               <p>
-                Daily-wage construction workers in urban and semi-urban India
-                spend 8–12 hour shifts in extreme heat with no access to clean
-                drinking water. Water arrives in tanker trucks and sits in open,
-                unfiltered, shared containers — or they drink tap water,
-                unhygienic and without basic consideration for the user.
+                <Highlight
+                  segments={[
+                    ["Daily-wage construction workers ", true],
+                    "in urban and semi-urban India spend 8–12 hour shifts in extreme heat with ",
+                    ["no access to clean drinking water. ", true],
+                    "Water arrives in tanker trucks and sits in ",
+                    ["open, unfiltered, shared containers", true],
+                    " — or they drink tap water, unhygienic and without basic consideration for the user.",
+                  ]}
+                />
               </p>
               <p>
-                Workers, both men and women, access water with dirty or wet
-                hands between physically demanding tasks. No purpose-designed
-                water infrastructure exists for this context.
+                <Highlight
+                  segments={[
+                    "Workers access water with dirty or wet hands between physically demanding tasks. ",
+                    ["No", true],
+                    " ",
+                    ["purpose-designed water infrastructure ", true],
+                    "exists for this context.",
+                  ]}
+                />
               </p>
             </div>
           </Reveal>
         </section>
 
-        {/* context images */}
+        {/* context images — three across */}
         <Reveal className="mt-12" y={32}>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-            <img src="/cases/cs01/context-18.png" alt="Site context" className="h-full w-full rounded-[3px] object-cover" />
-            <img src="/cases/cs01/context-19.png" alt="Workers accessing shared water" className="h-full w-full rounded-[3px] object-cover" />
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <img src="/cases/cs01/context-18.png" alt="Site context" className="aspect-[374/249] w-full rounded-[3px] object-cover" />
+            <img src="/cases/cs01/context-19.png" alt="Workers accessing shared water" className="aspect-[374/249] w-full rounded-[3px] object-cover" />
+            <img src="/cases/cs01/context-33.png" alt="Open drum water storage on site" className="aspect-[374/249] w-full rounded-[3px] object-cover" />
           </div>
         </Reveal>
 
-        {/* ---------- 02 Research ---------- */}
+        {/* ---------- Research ---------- */}
         <SectionHead
           className="mt-28"
-          kicker="02 — RESEARCH"
-          title="Five questions before a single sketch."
+          kicker="RESEARCH"
+          title="Understanding the User and Context"
         />
-        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-12">
-          {questions.map((q, i) => (
-            <Reveal key={q.k} delay={i * 60} className={`${q.span}`}>
-              <div className="flex h-full flex-col gap-4 rounded-[3px] bg-white p-8 shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
-                <p className="font-inter text-[12px] font-medium uppercase tracking-[0.02em] text-accent">
-                  {q.k}
-                </p>
-                <h3 className="font-oswald text-[28px] font-normal leading-[1.05] tracking-[-0.03em] text-graphite">
-                  {q.t}
+        <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {research.map((r, i) => (
+            <Reveal key={i} delay={(i % 3) * 60}>
+              <div className="flex h-full flex-col gap-5 bg-[#ffffff] px-8 py-9">
+                <h3 className="font-inter text-[28px] font-normal leading-[1.1] tracking-[-0.03em]">
+                  {r.q.map((s, j) => (
+                    <span key={j} className={s.hi ? "text-accent" : "text-graphite"}>
+                      {s.t}
+                    </span>
+                  ))}
                 </h3>
-                <p className="font-inter text-[14px] leading-[1.4] tracking-[-0.03em] text-stone">
-                  {q.b}
+                <p className="font-inter text-[14px] leading-[1.4] tracking-[-0.03em]">
+                  {r.b.map((s, j) => (
+                    <span key={j} className={s.hi ? "text-accent" : "text-stone"}>
+                      {s.t}
+                    </span>
+                  ))}
                 </p>
               </div>
             </Reveal>
           ))}
         </div>
 
-        {/* ---------- Problem band ---------- */}
-        <Reveal className="mt-28" y={32}>
-          <div className="flex flex-col gap-8 rounded-[3px] bg-graphite px-8 py-20 md:px-20 md:py-24">
-            <p className="font-inter text-[14px] font-medium tracking-[-0.01em] text-white">
-              THE PROBLEM
-            </p>
-            <h2 className="max-w-[960px] font-oswald text-[clamp(30px,4.4vw,48px)] font-normal leading-[1.1] tracking-[-0.03em] text-white">
-              Construction workers on Indian sites are forced to drink from open,
-              unfiltered, shared containers — with no hygiene, no dignity, and no
-              infrastructure designed for them.
-            </h2>
-            <p className="max-w-[800px] font-inter text-[18px] leading-[1.4] tracking-[-0.03em] text-mist">
-              Design a durable, low-energy water purifier and dispenser that
-              survives harsh site conditions, requires no hand contact to
-              operate, and serves clean water to the most ignored user.
-            </p>
-          </div>
-        </Reveal>
+        {/* ---------- Problem + Brief band (full-bleed) ---------- */}
+        <FullBleed className="mt-28">
+          <Reveal y={32}>
+            <div className="flex flex-col items-center gap-8 bg-accent px-6 py-24 text-center md:px-20 md:py-24">
+              <p className="font-inter text-[14px] font-medium tracking-[-0.01em] text-mistblue">
+                THE PROBLEM
+              </p>
+              <h2 className="max-w-[960px] font-inter text-[clamp(26px,3.4vw,36px)] font-normal leading-[1.25] tracking-[-0.03em] text-white">
+                Construction workers on Indian sites are forced to drink from
+                open, unfiltered, shared containers — with no hygiene, no
+                dignity, and no infrastructure designed for them.
+              </h2>
+              <p className="mt-2 font-inter text-[14px] font-medium tracking-[-0.01em] text-mistblue">
+                DESIGN BRIEF
+              </p>
+              <p className="max-w-[800px] font-inter text-[clamp(20px,2.2vw,32px)] font-normal leading-[1.4] tracking-[-0.03em] text-white">
+                Design a durable, low-energy water purifier and dispenser that
+                survives harsh site conditions, requires no hand contact to
+                operate, and serves clean water to the most ignored user.
+              </p>
+            </div>
+          </Reveal>
+        </FullBleed>
 
-        {/* ---------- 03 Pain points ---------- */}
+        {/* ---------- User Pain Points ---------- */}
         <SectionHead
           className="mt-28"
-          kicker="03 — USER PAIN POINTS"
-          title="What is hurting them."
+          kicker="USER PAIN POINTS"
+          title="Key Challenges Identified"
         />
-        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-          {pains.map(([n, t, b], i) => (
-            <Reveal key={n} delay={(i % 3) * 60}>
-              <div className="flex h-full flex-col gap-4 rounded-[3px] bg-white px-7 py-8 shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
-                <p className="font-oswald text-[32px] font-normal tracking-[-0.03em] text-accent">
+        <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {pains.map(([n, t, b, icon]) => (
+            <div key={n} className="flex h-full flex-col gap-4 bg-[#ffffff] px-7 py-8">
+              <div className="flex items-start justify-between gap-4">
+                <p className="font-sans text-[32px] font-normal leading-none tracking-[-0.03em] text-accent">
                   {n}
                 </p>
-                <h3 className="font-sans text-[21px] font-medium tracking-[-0.03em] text-graphite">
-                  {t}
-                </h3>
-                <p className="font-inter text-[14px] leading-[1.4] tracking-[-0.03em] text-stone">
-                  {b}
-                </p>
+                <img src={icon} alt="" aria-hidden className="h-[44px] w-[44px] object-contain" />
               </div>
-            </Reveal>
+              <h3 className="font-sans text-[21px] font-medium tracking-[-0.03em] text-graphite">
+                {t}
+              </h3>
+              <p className="font-inter text-[14px] leading-[1.4] tracking-[-0.03em] text-stone">
+                {b}
+              </p>
+            </div>
           ))}
         </div>
 
-        {/* ---------- Explorations ---------- */}
+        {/* ---------- Ideation (full-bleed image) ---------- */}
         <SectionHead
           className="mt-28"
-          kicker="05 — THE EXPLORATIONS"
-          title="Exploring best-suited forms for the user context"
+          kicker="Ideation"
+          title="Quick brainstorming sketches"
         />
-        <Reveal className="mt-10" y={32}>
-          <img src="/cases/cs01/explorations.png" alt="Form exploration sketches" className="w-full rounded-[3px]" />
-        </Reveal>
+        <FullBleed className="mt-10">
+          <Reveal y={32}>
+            <img src="/cases/cs01/ideation.png" alt="Brainstorming sketches" className="w-full" />
+          </Reveal>
+        </FullBleed>
 
-        {/* ---------- 04 Response ---------- */}
-        <section className="mt-28 grid grid-cols-1 items-start gap-12 md:grid-cols-[480px_1fr] md:gap-20">
+        {/* ---------- The Response ---------- */}
+        <section className="mt-28 grid grid-cols-1 items-start gap-12 lg:grid-cols-[2fr_3fr] lg:gap-20">
           <Reveal>
-            <Eyebrow>04 — THE RESPONSE</Eyebrow>
-            <h2 className="mt-6 font-oswald text-[clamp(40px,5.4vw,60px)] font-normal leading-[1.0] tracking-[-0.03em] text-graphite">
-              Built specifically for here.
+            <Eyebrow>THE RESPONSE</Eyebrow>
+            <h2 className="mt-4 font-sans text-[clamp(34px,4.6vw,52px)] font-normal leading-[1.12] tracking-[-0.03em] text-graphite">
+              Designed for Construction Sites
             </h2>
-            <div className="mt-8 flex flex-col gap-6 font-inter text-[15px] leading-[1.45] tracking-[-0.02em] text-stone">
+            <div className="mt-8 flex flex-col gap-6 font-inter text-[18px] leading-[1.4] tracking-[-0.03em] text-graphite">
               <p>
-                Not adapted. Not borrowed. A water purifier and dispenser
-                designed from the ground up for the construction site — built for
-                this environment, this user, and this problem.
+                <Highlight
+                  segments={[
+                    "A purpose-built water purification and dispensing system developed specifically for",
+                    [" construction-site environments.", true],
+                  ]}
+                />
               </p>
               <p>
-                A self-sufficient, faceted steel unit — solar-powered, four-stage
-                filtered, foot-operated, and mobile. Clean water on demand. No
-                hands. No expertise. No excuses.
+                <Highlight
+                  segments={[
+                    "Combining solar-powered operation, multi-stage filtration, hands-free dispensing, and mobility, the design provides ",
+                    ["safe and reliable access to drinking water ", true],
+                    "while addressing the environmental and operational challenges identified during research.",
+                  ]}
+                />
               </p>
             </div>
           </Reveal>
@@ -313,13 +367,13 @@ export default function TheIgnoredUser() {
           </Reveal>
         </section>
 
-        {/* ---------- 05 Anatomy ---------- */}
+        {/* ---------- Anatomy ---------- */}
         <SectionHead
           className="mt-28"
-          kicker="05 — ANATOMY"
-          title="Six components. Every one earning its place."
+          kicker="ANATOMY"
+          title="Key Components and Functions"
         />
-        <section className="mt-10 grid grid-cols-1 gap-12 md:grid-cols-[520px_1fr] md:gap-16">
+        <section className="mt-10 grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">
           <Reveal y={32}>
             <img src="/cases/cs01/exploded.png" alt="Exploded view — components" className="w-full rounded-[3px]" />
           </Reveal>
@@ -327,7 +381,7 @@ export default function TheIgnoredUser() {
             <ul className="flex flex-col">
               {components.map(([n, t, b]) => (
                 <li key={n} className="flex gap-4 border-t border-black/10 py-4 first:border-t-0">
-                  <span className="font-oswald text-[24px] font-normal leading-none tracking-[-0.03em] text-accent">
+                  <span className="font-sans text-[24px] font-medium leading-none tracking-[-0.03em] text-accent">
                     {n}
                   </span>
                   <div>
@@ -344,21 +398,18 @@ export default function TheIgnoredUser() {
           </Reveal>
         </section>
 
-        {/* ---------- 06 Purification ---------- */}
+        {/* ---------- Process ---------- */}
         <SectionHead
           className="mt-28"
-          kicker="06 — PURIFICATION"
-          title="Four stages. Each earning its place."
+          kicker="Process"
+          title="Water Treatment Process"
         />
-        <section className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-[1fr_522px]">
+        <section className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-[minmax(240px,300px)_1fr] lg:gap-12">
           <Reveal>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {stages.map(([k, t, b]) => (
-                <div key={k} className="flex flex-col gap-5 rounded-[3px] bg-white px-6 py-8 shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
-                  <p className="font-inter text-[12px] font-medium tracking-[-0.01em] text-accent">
-                    {k}
-                  </p>
-                  <p className="font-oswald text-[36px] font-normal leading-none tracking-[-0.03em] text-graphite">
+            <div className="flex h-full flex-col justify-between gap-4">
+              {stages.map(([t, b]) => (
+                <div key={t} className="flex flex-col gap-1 bg-[#ffffff] px-6 py-7">
+                  <p className="font-oswald text-[clamp(28px,3.4vw,36px)] font-normal leading-none tracking-[-0.03em] text-graphite">
                     {t}
                   </p>
                   <p className="font-inter text-[14px] leading-[1.4] tracking-[-0.03em] text-stone">
@@ -369,124 +420,118 @@ export default function TheIgnoredUser() {
             </div>
           </Reveal>
           <Reveal delay={120} y={32}>
-            <img src="/cases/cs01/filtration.png" alt="Filtration flow diagram" className="h-full w-full rounded-[3px] object-cover" />
+            <img src="/cases/cs01/filtration.png" alt="Water treatment process render" className="h-full w-full rounded-[3px] object-cover" />
           </Reveal>
         </section>
 
-        {/* ---------- 07 Specifications ---------- */}
-        <SectionHead
-          className="mt-28"
-          kicker="07 — SPECIFICATIONS"
-          title="Every dimension derived from the user."
-        />
-        <section className="mt-10 grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-20">
-          {[
-            ["MATERIALS", materials],
-            ["DIMENSIONS", dimensions],
-          ].map(([heading, rows], idx) => (
-            <Reveal key={heading as string} delay={idx * 100}>
-              <p className="font-sans text-[21px] font-medium tracking-[-0.03em] text-graphite">
-                {heading as string}
-              </p>
-              <div className="mt-6 flex flex-col gap-6">
-                {(rows as string[][]).map(([label, body]) => (
-                  <div key={label}>
-                    <p className="font-inter text-[14px] font-medium tracking-[-0.03em] text-accent">
-                      {label}
-                    </p>
-                    <p className="mt-1.5 font-inter text-[16px] leading-[1.4] tracking-[-0.03em] text-graphite">
-                      {body}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </Reveal>
-          ))}
+        {/* ---------- Specifications & Interaction (full-width infographic) ---------- */}
+        <Reveal className="mt-28" y={32}>
+          <img
+            src="/cases/cs01/process-render.png"
+            alt="Specifications and interaction — materials, dimensions, performance, and how the unit operates."
+            className="w-full rounded-[3px]"
+          />
+        </Reveal>
+
+        {/* ---------- Mechanism ---------- */}
+        <section className="mt-28 grid grid-cols-1 gap-x-4 gap-y-12 md:grid-cols-2">
+          {/* image 1 */}
+          <Reveal y={32}>
+            <figure className="flex flex-col gap-5">
+              <img src={mechanisms[0][0]} alt={mechanisms[0][1]} className="aspect-[519/349] w-full rounded-[3px] object-cover" />
+              <figcaption className="font-sans text-[clamp(22px,2.6vw,30px)] font-medium leading-[1.1] tracking-[-0.03em] text-graphite">
+                {mechanisms[0][1]}
+              </figcaption>
+            </figure>
+          </Reveal>
+          {/* heading */}
+          <Reveal delay={80} className="flex flex-col justify-start md:pl-4">
+            <Eyebrow>MECHANISM</Eyebrow>
+            <h2 className="mt-4 font-sans text-[clamp(34px,4.6vw,52px)] font-normal leading-[1.12] tracking-[-0.03em] text-graphite">
+              No handles No hand contact
+            </h2>
+          </Reveal>
+          {/* image 2 */}
+          <Reveal y={32}>
+            <figure className="flex flex-col gap-5">
+              <img src={mechanisms[1][0]} alt={mechanisms[1][1]} className="aspect-[519/349] w-full rounded-[3px] object-cover" />
+              <figcaption className="font-sans text-[clamp(22px,2.6vw,30px)] font-medium leading-[1.1] tracking-[-0.03em] text-graphite">
+                {mechanisms[1][1]}
+              </figcaption>
+            </figure>
+          </Reveal>
+          {/* image 3 */}
+          <Reveal delay={80} y={32}>
+            <figure className="flex flex-col gap-5">
+              <img src={mechanisms[2][0]} alt={mechanisms[2][1]} className="aspect-[518/416] w-full rounded-[3px] object-cover" />
+              <figcaption className="font-sans text-[clamp(22px,2.6vw,30px)] font-medium leading-[1.1] tracking-[-0.03em] text-graphite">
+                {mechanisms[2][1]}
+              </figcaption>
+            </figure>
+          </Reveal>
         </section>
 
-        {/* ---------- 08 Mechanism ---------- */}
+        {/* ---------- Final Form ---------- */}
         <SectionHead
           className="mt-28"
-          kicker="08 — MECHANISM"
-          title="No handles. No hand contact."
-        />
-        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
-          {mechanisms.map(([img, t, b], i) => (
-            <Reveal key={t} delay={i * 80} y={32}>
-              <figure className="flex flex-col gap-4">
-                <img src={img} alt={t} className="aspect-[357/240] w-full rounded-[3px] object-cover" />
-                <figcaption>
-                  <p className="font-sans text-[21px] font-medium tracking-[-0.03em] text-graphite">
-                    {t}
-                  </p>
-                  <p className="mt-2 font-inter text-[14px] leading-[1.4] tracking-[-0.03em] text-stone">
-                    {b}
-                  </p>
-                </figcaption>
-              </figure>
-            </Reveal>
-          ))}
-        </div>
-
-        {/* ---------- 09 Final form ---------- */}
-        <SectionHead
-          className="mt-28"
-          kicker="09 — FINAL FORM"
+          kicker="FINAL FORM"
           title="The unit, from every angle."
         />
+        {/* Images shown at their natural aspect ratio so nothing crops and the
+            gallery scales cleanly at every width. */}
         <div className="mt-10 flex flex-col gap-4">
           {["final-hero", "elev1", "elev2", "elev3"].map((name, i) => (
             <Reveal key={name} delay={i * 60} y={32}>
-              <img src={`/cases/cs01/${name}.png`} alt="Final form render" className="w-full rounded-[3px]" />
+              <img
+                src={`/cases/cs01/${name}.png`}
+                alt="Final form render"
+                className="h-auto w-full rounded-[3px]"
+              />
             </Reveal>
           ))}
+          <Reveal delay={240} y={32}>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <img src="/cases/cs01/elev-left.png" alt="Side elevation" className="h-auto w-full rounded-[3px]" />
+              <img src="/cases/cs01/elev-right.png" alt="Side elevation" className="h-auto w-full rounded-[3px]" />
+            </div>
+          </Reveal>
         </div>
 
-        {/* ---------- Final statement ---------- */}
-        <Reveal className="mt-28" y={32}>
-          <div className="flex flex-col items-center gap-8 rounded-[3px] bg-accent px-8 py-24 text-center md:px-20 md:py-28">
-            <p className="font-inter text-[14px] font-medium tracking-[-0.01em] text-white">
-              THE FINAL STATEMENT
-            </p>
-            <h2 className="max-w-[960px] font-oswald text-[clamp(30px,4.4vw,48px)] font-normal leading-[1.1] tracking-[-0.03em] text-white">
-              “This is not a water purifier. It is a statement, that the person
-              doing the most physically demanding work deserves the same basic
-              dignity as anyone else.”
-            </h2>
-            <p className="max-w-[720px] font-inter text-[18px] leading-[1.4] tracking-[-0.03em] text-peri">
-              The technology exists. The need is documented. The user has been
-              waiting. This is what design is for.
-            </p>
-          </div>
-        </Reveal>
-
-        {/* ---------- 10 Reflection ---------- */}
-        <section className="mt-28 grid grid-cols-1 gap-10 md:grid-cols-[280px_1fr] md:gap-20">
+        {/* ---------- Reflection ---------- */}
+        <section className="mt-28 grid grid-cols-1 gap-10 lg:grid-cols-[1fr_2fr] lg:gap-20">
           <Reveal>
-            <Eyebrow>10 — REFLECTION</Eyebrow>
-            <h2 className="mt-6 font-oswald text-[clamp(30px,3.6vw,40px)] font-normal leading-[1.1] tracking-[-0.03em] text-graphite">
-              What I took away.
+            <Eyebrow>REFLECTION</Eyebrow>
+            <h2 className="mt-4 font-sans text-[clamp(30px,3.6vw,40px)] font-normal leading-[1.17] tracking-[-0.03em] text-graphite">
+              Key Takeaways
             </h2>
           </Reveal>
           <Reveal delay={120}>
             <p className="max-w-[760px] font-inter text-[18px] leading-[1.5] tracking-[-0.02em] text-graphite">
-              Designing for users who have no voice changes the brief. Every
-              decision had to clear one bar: would this survive a shift on a real
-              site? The answer kept pointing back to subtraction — fewer parts,
-              fewer interactions, fewer assumptions. The unit’s strongest feature
-              is what it asks of the user: nothing.
+              <Highlight
+                segments={[
+                  "Designing for an ",
+                  ["underserved user group ", true],
+                  "reshaped the entire project. Every decision was guided by a simple question:",
+                  [" could it withstand the realities of a construction site? ", true],
+                  "This led to a focus on simplicity, durability, and ease of use. Rather than adding features, the process involved ",
+                  ["removing complexity,", true],
+                  " resulting in a system that ",
+                  ["provides clean drinking water ", true],
+                  "with minimal effort or maintenance.",
+                ]}
+              />
             </p>
           </Reveal>
         </section>
 
         {/* ---------- Next / Back ---------- */}
         <nav className="mt-28 flex flex-col gap-8 border-t border-black/10 py-12 sm:flex-row sm:items-center sm:justify-between">
-          <a href="/#work" className="group">
+          <a href="/work/headway" className="group">
             <p className="font-inter text-[12px] font-medium uppercase tracking-[0.04em] text-stone">
               Next Project
             </p>
             <p className="mt-2 font-sans text-[21px] font-medium tracking-[-0.03em] text-graphite transition-colors group-hover:text-accent">
-              From Clutter to Comfort — Desk Organizer →
+              Redesigning Headway →
             </p>
           </a>
           <a

@@ -6,11 +6,54 @@
   --bg: #0a0a0a;
 }
 
+/* When the visitor has already entered this session, hide the intro overlay
+   before first paint (the inline script in <head> adds `.intro-skip` to <html>).
+   This prevents the ENTER gate from flashing on internal navigation. */
+html.intro-skip .preloader {
+  display: none !important;
+}
+
 body {
   background: var(--bg);
   color: #f3f3f3;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+/* Page-transition curtain. Masks the full-document-load flash and the
+   hash-scroll landing snap on in-session navigation. The Preloader owns the
+   first-visit reveal, so the curtain only animates once `.intro-skip` is set
+   (i.e. the visitor has already entered and is moving between pages). */
+.page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: #0a0a0a;
+  pointer-events: none;
+  opacity: 0;
+  display: none;
+}
+html.intro-skip .page-transition {
+  display: block;
+  animation: pt-reveal 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+/* Hold full cover through ~280ms (longer than HashScroll's 250ms settle), then
+   fade away to reveal the page already scrolled to its target. */
+@keyframes pt-reveal {
+  0%,
+  40% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/* Exit: drawn by PageTransition on an internal link click. */
+.page-transition.pt-leaving {
+  display: block;
+  animation: none;
+  opacity: 1;
+  transition: opacity 320ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Two-tone "worlds". By default (reduced motion / before JS) each world paints
