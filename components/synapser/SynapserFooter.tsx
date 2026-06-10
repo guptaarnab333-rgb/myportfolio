@@ -37,9 +37,6 @@ export default function SynapserFooter() {
           >
             arnab.peoplelab@doonuniversity.ac.in
           </a>
-          <span className="font-sans text-[12px] tracking-[0.1em] text-[#6B6B68]">
-            ( DRAG TO THROW )
-          </span>
         </div>
       </Reveal>
 
