@@ -4,14 +4,14 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 const IMAGES = [
-  "/cases/cs01-ignored-user.webp",
-  "/cases/cs05-uphaar-tea.webp",
-  "/cases/cs03-headway.webp",
-  "/cases/cs07-biroti-cafe.webp",
-  "/cases/cs02-clutter-comfort.webp",
-  "/cases/cs06-gargi.webp",
-  "/cases/cs04-isbt-flyover.webp",
-  "/cases/cs08-scout.webp",
+  "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01-ignored-user.png?tr=orig-true",
+  "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs05-uphaar-tea.png?tr=orig-true",
+  "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs03-headway.png?tr=orig-true",
+  "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs07-biroti-cafe.png?tr=orig-true",
+  "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs02-clutter-comfort.png?tr=orig-true",
+  "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs06-gargi.png?tr=orig-true",
+  "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs04-isbt-flyover.png?tr=orig-true",
+  "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs08-scout.png?tr=orig-true",
 ];
 
 const FAR = -26;

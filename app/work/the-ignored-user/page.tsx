@@ -122,12 +122,12 @@ const research: { q: Seg[]; b: Seg[] }[] = [
 ];
 
 const pains = [
-  ["01", "Contamination at source", "Open, unfiltered tanker water shared by everyone, protected by nothing.", "/cases/cs01/pain-01.webp"],
-  ["02", "No hands-free interaction", "Every tap or drum handle requires hands that are never clean.", "/cases/cs01/pain-02.webp"],
-  ["03", "One height fits nobody", "Existing dispensers ignore the spread of worker heights and roles.", "/cases/cs01/pain-03.webp"],
-  ["04", "Direct mouth-to-tap", "Workers without bottles put hands or mouth on shared surfaces.", "/cases/cs01/pain-04.webp"],
-  ["05", "Maintenance nobody owns", "Filters clog. Tanks empty. No indicator, no assigned responsibility.", "/cases/cs01/pain-05.webp"],
-  ["06", "The product doesn’t belong here", "Office and home products break within weeks under site conditions.", "/cases/cs01/pain-06.webp"],
+  ["01", "Contamination at source", "Open, unfiltered tanker water shared by everyone, protected by nothing.", "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/pain-01.png?tr=orig-true"],
+  ["02", "No hands-free interaction", "Every tap or drum handle requires hands that are never clean.", "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/pain-02.png?tr=orig-true"],
+  ["03", "One height fits nobody", "Existing dispensers ignore the spread of worker heights and roles.", "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/pain-03.png?tr=orig-true"],
+  ["04", "Direct mouth-to-tap", "Workers without bottles put hands or mouth on shared surfaces.", "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/pain-04.png?tr=orig-true"],
+  ["05", "Maintenance nobody owns", "Filters clog. Tanks empty. No indicator, no assigned responsibility.", "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/pain-05.png?tr=orig-true"],
+  ["06", "The product doesn’t belong here", "Office and home products break within weeks under site conditions.", "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/pain-06.png?tr=orig-true"],
 ];
 
 const components = [
@@ -147,9 +147,9 @@ const stages = [
 ];
 
 const mechanisms = [
-  ["/cases/cs01/mech-pumps.webp", "Two DC Pumps, one per sprout"],
-  ["/cases/cs01/mech-paddle.webp", "Foot Paddle for hands free water release"],
-  ["/cases/cs01/mech-casters.webp", "Retractable Casters for stability"],
+  ["https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/mech-pumps.png?tr=orig-true", "Two DC Pumps, one per sprout"],
+  ["https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/mech-paddle.png?tr=orig-true", "Foot Paddle for hands free water release"],
+  ["https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/mech-casters.png?tr=orig-true", "Retractable Casters for stability"],
 ];
 
 /* eslint-disable @next/next/no-img-element */
@@ -193,7 +193,7 @@ export default function TheIgnoredUser() {
         {/* ---------- Hero render ---------- */}
         <Reveal className="mt-16" y={36}>
           <img
-            src="/cases/cs01/hero-context.webp"
+            src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/hero-context.png?tr=orig-true"
             alt="The final unit in site — a faceted steel column at a construction site."
             className="w-full rounded-[3px]"
           />
@@ -239,9 +239,9 @@ export default function TheIgnoredUser() {
         {/* context images — three across */}
         <Reveal className="mt-12" y={32}>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <img src="/cases/cs01/context-18.webp" alt="Site context" className="aspect-[374/249] w-full rounded-[3px] object-cover" />
-            <img src="/cases/cs01/context-19.webp" alt="Workers accessing shared water" className="aspect-[374/249] w-full rounded-[3px] object-cover" />
-            <img src="/cases/cs01/context-33.webp" alt="Open drum water storage on site" className="aspect-[374/249] w-full rounded-[3px] object-cover" />
+            <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/context-18.png?tr=orig-true" alt="Site context" className="aspect-[374/249] w-full rounded-[3px] object-cover" />
+            <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/context-19.png?tr=orig-true" alt="Workers accessing shared water" className="aspect-[374/249] w-full rounded-[3px] object-cover" />
+            <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/context-33.png?tr=orig-true" alt="Open drum water storage on site" className="aspect-[374/249] w-full rounded-[3px] object-cover" />
           </div>
         </Reveal>
 
@@ -331,7 +331,7 @@ export default function TheIgnoredUser() {
         />
         <FullBleed className="mt-10">
           <Reveal y={32}>
-            <img src="/cases/cs01/ideation.webp" alt="Brainstorming sketches" className="w-full" />
+            <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/ideation.png?tr=orig-true" alt="Brainstorming sketches" className="w-full" />
           </Reveal>
         </FullBleed>
 
@@ -363,7 +363,7 @@ export default function TheIgnoredUser() {
             </div>
           </Reveal>
           <Reveal delay={120} y={32}>
-            <img src="/cases/cs01/sketch.webp" alt="Sketch progression" className="w-full rounded-[3px]" />
+            <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/sketch.png?tr=orig-true" alt="Sketch progression" className="w-full rounded-[3px]" />
           </Reveal>
         </section>
 
@@ -375,7 +375,7 @@ export default function TheIgnoredUser() {
         />
         <section className="mt-10 grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">
           <Reveal y={32}>
-            <img src="/cases/cs01/exploded.webp" alt="Exploded view — components" className="w-full rounded-[3px]" />
+            <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/exploded.png?tr=orig-true" alt="Exploded view — components" className="w-full rounded-[3px]" />
           </Reveal>
           <Reveal delay={120}>
             <ul className="flex flex-col">
@@ -420,14 +420,14 @@ export default function TheIgnoredUser() {
             </div>
           </Reveal>
           <Reveal delay={120} y={32}>
-            <img src="/cases/cs01/filtration.webp" alt="Water treatment process render" className="h-full w-full rounded-[3px] object-cover" />
+            <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/filtration.png?tr=orig-true" alt="Water treatment process render" className="h-full w-full rounded-[3px] object-cover" />
           </Reveal>
         </section>
 
         {/* ---------- Specifications & Interaction (full-width infographic) ---------- */}
         <Reveal className="mt-28" y={32}>
           <img
-            src="/cases/cs01/process-render.webp"
+            src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/process-render.png?tr=orig-true"
             alt="Specifications and interaction — materials, dimensions, performance, and how the unit operates."
             className="w-full rounded-[3px]"
           />
@@ -480,21 +480,34 @@ export default function TheIgnoredUser() {
         {/* Images shown at their natural aspect ratio so nothing crops and the
             gallery scales cleanly at every width. */}
         <div className="mt-10 flex flex-col gap-4">
-          {["final-hero", "elev1", "elev2", "elev3"].map((name, i) => (
-            <Reveal key={name} delay={i * 60} y={32}>
-              <img
-                src={`/cases/cs01/${name}.webp`}
-                alt="Final form render"
-                className="h-auto w-full rounded-[3px]"
-              />
+          <Reveal y={32}>
+            <img
+              src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/final-unit.png?tr=orig-true"
+              alt="The full unit with its solar kite deployed"
+              className="h-auto w-full rounded-[3px]"
+            />
+          </Reveal>
+          {[
+            [
+              ["final-alcove", "Bottle-filling alcove"],
+              ["final-shell", "Shell opened around the filtration core"],
+            ],
+            [
+              ["final-top", "Top grille detail"],
+              ["final-door", "Service door open — cartridges and tank"],
+            ],
+            [
+              ["final-angle", "Three-quarter view, panel open"],
+              ["final-internals", "Internal assembly without the shell"],
+            ],
+          ].map(([left, right], i) => (
+            <Reveal key={left[0]} delay={(i + 1) * 60} y={32}>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <img src={`https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/${left[0]}.png?tr=orig-true`} alt={left[1]} className="h-auto w-full rounded-[3px]" />
+                <img src={`https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/${right[0]}.png?tr=orig-true`} alt={right[1]} className="h-auto w-full rounded-[3px]" />
+              </div>
             </Reveal>
           ))}
-          <Reveal delay={240} y={32}>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <img src="/cases/cs01/elev-left.webp" alt="Side elevation" className="h-auto w-full rounded-[3px]" />
-              <img src="/cases/cs01/elev-right.webp" alt="Side elevation" className="h-auto w-full rounded-[3px]" />
-            </div>
-          </Reveal>
         </div>
 
         {/* ---------- Reflection ---------- */}

@@ -8,18 +8,18 @@ type Shot = { src: string; alt: string };
 
 // A documentary mix of real renders + process shots across the work.
 const shots: Shot[] = [
-  { src: "/cases/cs01/hero-context.webp", alt: "Solar water purifier standing on a construction site" },
-  { src: "/cases/cs06-gargi.webp", alt: "Gargi Nari Shakti identity collage" },
-  { src: "/cases/cs01/sketch.webp", alt: "Sketch progression for the water purifier form" },
-  { src: "/cases/cs05-uphaar-tea.webp", alt: "Uphaar festive tea packaging" },
-  { src: "/cases/cs01/exploded.webp", alt: "Exploded view of the purifier components" },
-  { src: "/cases/cs07-biroti-cafe.webp", alt: "Biroti Café brand mockups" },
-  { src: "/cases/cs01/explorations.webp", alt: "Early form-exploration sketches" },
-  { src: "/cases/cs02-clutter-comfort.webp", alt: "Shared studio desk organizer in use" },
-  { src: "/cases/cs01/mech-paddle.webp", alt: "Foot-paddle dispensing mechanism detail" },
-  { src: "/cases/cs04-isbt-flyover.webp", alt: "Reclaimed public space under the ISBT flyover" },
-  { src: "/cases/cs01/final-hero.webp", alt: "Final purifier render, front three-quarter" },
-  { src: "/cases/cs08-scout.webp", alt: "Scout research-agent interface" },
+  { src: "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/hero-context.png?tr=orig-true", alt: "Solar water purifier standing on a construction site" },
+  { src: "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs06-gargi.png?tr=orig-true", alt: "Gargi Nari Shakti identity collage" },
+  { src: "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/sketch.png?tr=orig-true", alt: "Sketch progression for the water purifier form" },
+  { src: "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs05-uphaar-tea.png?tr=orig-true", alt: "Uphaar festive tea packaging" },
+  { src: "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/exploded.png?tr=orig-true", alt: "Exploded view of the purifier components" },
+  { src: "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs07-biroti-cafe.png?tr=orig-true", alt: "Biroti Café brand mockups" },
+  { src: "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/explorations.png?tr=orig-true", alt: "Early form-exploration sketches" },
+  { src: "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs02-clutter-comfort.png?tr=orig-true", alt: "Shared studio desk organizer in use" },
+  { src: "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/mech-paddle.png?tr=orig-true", alt: "Foot-paddle dispensing mechanism detail" },
+  { src: "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs04-isbt-flyover.png?tr=orig-true", alt: "Reclaimed public space under the ISBT flyover" },
+  { src: "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/final-hero.png?tr=orig-true", alt: "Final purifier render, front three-quarter" },
+  { src: "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs08-scout.png?tr=orig-true", alt: "Scout research-agent interface" },
 ];
 
 export default function WorkGrid() {

@@ -109,12 +109,12 @@ const palette = [
 ];
 
 const keyScreens = [
-  ["01 · DASHBOARD", "Upload + paste", "Two-input entry surface with the Start Analysis button bridging both panels.", "/cases/cs08/screen-01-dashboard.webp"],
-  ["02 · REVIEW", "Verify extracted data", "A 17-section accordion where the user corrects whatever the AI mis-parsed.", "/cases/cs08/screen-02-review.webp"],
-  ["03 · LOADING", "Nine agents working", "The team becomes visible — each card pulses with a live micro-status.", "/cases/cs08/screen-03-loading.webp"],
-  ["04 · RESULTS", "The verdict", "Score, top strengths, top gaps, agent breakdown, and a draft outreach message.", "/cases/cs08/screen-04-results.webp"],
-  ["05 · AGENT MODAL", "Drill into one lens", "Positive signals, gaps, risk flags, evidence coverage, agent’s note.", "/cases/cs08/screen-05-modal.webp"],
-  ["06 · HISTORY", "A track record", "Past analyses with stat cards and a sortable table.", "/cases/cs08/screen-06-history.webp"],
+  ["01 · DASHBOARD", "Upload + paste", "Two-input entry surface with the Start Analysis button bridging both panels.", "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs08/screen-01-dashboard.png?tr=orig-true&v=2"],
+  ["02 · REVIEW", "Verify extracted data", "A 17-section accordion where the user corrects whatever the AI mis-parsed.", "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs08/screen-02-review.png?tr=orig-true&v=2"],
+  ["03 · LOADING", "Nine agents working", "The team becomes visible — each card pulses with a live micro-status.", "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs08/screen-03-loading.png?tr=orig-true&v=2"],
+  ["04 · RESULTS", "The verdict", "Score, top strengths, top gaps, agent breakdown, and a draft outreach message.", "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs08/screen-04-results.png?tr=orig-true&v=2"],
+  ["05 · AGENT MODAL", "Drill into one lens", "Positive signals, gaps, risk flags, evidence coverage, agent’s note.", "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs08/screen-05-modal.png?tr=orig-true&v=2"],
+  ["06 · HISTORY", "A track record", "Past analyses with stat cards and a sortable table.", "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs08/screen-06-history.png?tr=orig-true&v=2"],
 ];
 
 const drillBlocks = [
@@ -176,7 +176,7 @@ export default function Scout() {
         <FullBleed className="mt-16">
           <Reveal y={36}>
             <img
-              src="/cases/cs08/thumbnail.webp"
+              src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs08/thumbnail.png?tr=orig-true"
               alt="Scout — AI Tool · Resume Checker"
               className="h-auto w-full"
             />
@@ -480,7 +480,7 @@ export default function Scout() {
         <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-[440px_1fr] lg:items-start lg:gap-16">
           <Reveal y={28}>
             <img
-              src="/cases/cs08/agent-drill.webp"
+              src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs08/agent-drill.png?tr=orig-true"
               alt="Agent detail modal"
               className="h-auto w-full rounded-[6px] border border-black/10 shadow-[0_18px_50px_-24px_rgba(17,24,39,0.35)]"
             />
