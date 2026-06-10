@@ -184,7 +184,7 @@ export default function Preloader() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           ref={leftHandRef}
-          src="/hand-left.png"
+          src="/hand-left.webp"
           alt=""
           className="block h-auto w-[53vw] bg-transparent will-change-transform"
         />
@@ -193,7 +193,7 @@ export default function Preloader() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           ref={rightHandRef}
-          src="/hand-right.png"
+          src="/hand-right.webp"
           alt=""
           className="block h-auto w-[47vw] bg-transparent will-change-transform"
         />

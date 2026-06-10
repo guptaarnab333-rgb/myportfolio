@@ -122,12 +122,12 @@ const research: { q: Seg[]; b: Seg[] }[] = [
 ];
 
 const pains = [
-  ["01", "Contamination at source", "Open, unfiltered tanker water shared by everyone, protected by nothing.", "/cases/cs01/pain-01.png"],
-  ["02", "No hands-free interaction", "Every tap or drum handle requires hands that are never clean.", "/cases/cs01/pain-02.png"],
-  ["03", "One height fits nobody", "Existing dispensers ignore the spread of worker heights and roles.", "/cases/cs01/pain-03.png"],
-  ["04", "Direct mouth-to-tap", "Workers without bottles put hands or mouth on shared surfaces.", "/cases/cs01/pain-04.png"],
-  ["05", "Maintenance nobody owns", "Filters clog. Tanks empty. No indicator, no assigned responsibility.", "/cases/cs01/pain-05.png"],
-  ["06", "The product doesn’t belong here", "Office and home products break within weeks under site conditions.", "/cases/cs01/pain-06.png"],
+  ["01", "Contamination at source", "Open, unfiltered tanker water shared by everyone, protected by nothing.", "/cases/cs01/pain-01.webp"],
+  ["02", "No hands-free interaction", "Every tap or drum handle requires hands that are never clean.", "/cases/cs01/pain-02.webp"],
+  ["03", "One height fits nobody", "Existing dispensers ignore the spread of worker heights and roles.", "/cases/cs01/pain-03.webp"],
+  ["04", "Direct mouth-to-tap", "Workers without bottles put hands or mouth on shared surfaces.", "/cases/cs01/pain-04.webp"],
+  ["05", "Maintenance nobody owns", "Filters clog. Tanks empty. No indicator, no assigned responsibility.", "/cases/cs01/pain-05.webp"],
+  ["06", "The product doesn’t belong here", "Office and home products break within weeks under site conditions.", "/cases/cs01/pain-06.webp"],
 ];
 
 const components = [
@@ -147,9 +147,9 @@ const stages = [
 ];
 
 const mechanisms = [
-  ["/cases/cs01/mech-pumps.png", "Two DC Pumps, one per sprout"],
-  ["/cases/cs01/mech-paddle.png", "Foot Paddle for hands free water release"],
-  ["/cases/cs01/mech-casters.png", "Retractable Casters for stability"],
+  ["/cases/cs01/mech-pumps.webp", "Two DC Pumps, one per sprout"],
+  ["/cases/cs01/mech-paddle.webp", "Foot Paddle for hands free water release"],
+  ["/cases/cs01/mech-casters.webp", "Retractable Casters for stability"],
 ];
 
 /* eslint-disable @next/next/no-img-element */
@@ -193,7 +193,7 @@ export default function TheIgnoredUser() {
         {/* ---------- Hero render ---------- */}
         <Reveal className="mt-16" y={36}>
           <img
-            src="/cases/cs01/hero-context.png"
+            src="/cases/cs01/hero-context.webp"
             alt="The final unit in site — a faceted steel column at a construction site."
             className="w-full rounded-[3px]"
           />
@@ -239,9 +239,9 @@ export default function TheIgnoredUser() {
         {/* context images — three across */}
         <Reveal className="mt-12" y={32}>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <img src="/cases/cs01/context-18.png" alt="Site context" className="aspect-[374/249] w-full rounded-[3px] object-cover" />
-            <img src="/cases/cs01/context-19.png" alt="Workers accessing shared water" className="aspect-[374/249] w-full rounded-[3px] object-cover" />
-            <img src="/cases/cs01/context-33.png" alt="Open drum water storage on site" className="aspect-[374/249] w-full rounded-[3px] object-cover" />
+            <img src="/cases/cs01/context-18.webp" alt="Site context" className="aspect-[374/249] w-full rounded-[3px] object-cover" />
+            <img src="/cases/cs01/context-19.webp" alt="Workers accessing shared water" className="aspect-[374/249] w-full rounded-[3px] object-cover" />
+            <img src="/cases/cs01/context-33.webp" alt="Open drum water storage on site" className="aspect-[374/249] w-full rounded-[3px] object-cover" />
           </div>
         </Reveal>
 
@@ -331,7 +331,7 @@ export default function TheIgnoredUser() {
         />
         <FullBleed className="mt-10">
           <Reveal y={32}>
-            <img src="/cases/cs01/ideation.png" alt="Brainstorming sketches" className="w-full" />
+            <img src="/cases/cs01/ideation.webp" alt="Brainstorming sketches" className="w-full" />
           </Reveal>
         </FullBleed>
 
@@ -363,7 +363,7 @@ export default function TheIgnoredUser() {
             </div>
           </Reveal>
           <Reveal delay={120} y={32}>
-            <img src="/cases/cs01/sketch.png" alt="Sketch progression" className="w-full rounded-[3px]" />
+            <img src="/cases/cs01/sketch.webp" alt="Sketch progression" className="w-full rounded-[3px]" />
           </Reveal>
         </section>
 
@@ -375,7 +375,7 @@ export default function TheIgnoredUser() {
         />
         <section className="mt-10 grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">
           <Reveal y={32}>
-            <img src="/cases/cs01/exploded.png" alt="Exploded view — components" className="w-full rounded-[3px]" />
+            <img src="/cases/cs01/exploded.webp" alt="Exploded view — components" className="w-full rounded-[3px]" />
           </Reveal>
           <Reveal delay={120}>
             <ul className="flex flex-col">
@@ -420,14 +420,14 @@ export default function TheIgnoredUser() {
             </div>
           </Reveal>
           <Reveal delay={120} y={32}>
-            <img src="/cases/cs01/filtration.png" alt="Water treatment process render" className="h-full w-full rounded-[3px] object-cover" />
+            <img src="/cases/cs01/filtration.webp" alt="Water treatment process render" className="h-full w-full rounded-[3px] object-cover" />
           </Reveal>
         </section>
 
         {/* ---------- Specifications & Interaction (full-width infographic) ---------- */}
         <Reveal className="mt-28" y={32}>
           <img
-            src="/cases/cs01/process-render.png"
+            src="/cases/cs01/process-render.webp"
             alt="Specifications and interaction — materials, dimensions, performance, and how the unit operates."
             className="w-full rounded-[3px]"
           />
@@ -483,7 +483,7 @@ export default function TheIgnoredUser() {
           {["final-hero", "elev1", "elev2", "elev3"].map((name, i) => (
             <Reveal key={name} delay={i * 60} y={32}>
               <img
-                src={`/cases/cs01/${name}.png`}
+                src={`/cases/cs01/${name}.webp`}
                 alt="Final form render"
                 className="h-auto w-full rounded-[3px]"
               />
@@ -491,8 +491,8 @@ export default function TheIgnoredUser() {
           ))}
           <Reveal delay={240} y={32}>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <img src="/cases/cs01/elev-left.png" alt="Side elevation" className="h-auto w-full rounded-[3px]" />
-              <img src="/cases/cs01/elev-right.png" alt="Side elevation" className="h-auto w-full rounded-[3px]" />
+              <img src="/cases/cs01/elev-left.webp" alt="Side elevation" className="h-auto w-full rounded-[3px]" />
+              <img src="/cases/cs01/elev-right.webp" alt="Side elevation" className="h-auto w-full rounded-[3px]" />
             </div>
           </Reveal>
         </div>

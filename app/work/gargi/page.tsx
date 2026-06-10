@@ -175,7 +175,7 @@ export default function Gargi() {
         {/* ---------- Hero collage ---------- */}
         <Reveal className="mt-16" y={36}>
           <img
-            src="/cases/cs06/hero-collage.png"
+            src="/cases/cs06/hero-collage.webp"
             alt="Gargi app screens collage"
             className="h-auto w-full rounded-[3px]"
           />
@@ -286,7 +286,7 @@ export default function Gargi() {
           title="Categorizing the Information"
         />
         <Reveal className="mt-10" y={32}>
-          <img src="/cases/cs06/sitemap.png" alt="Gargi sitemap" className="h-auto w-full rounded-[3px]" />
+          <img src="/cases/cs06/sitemap.webp" alt="Gargi sitemap" className="h-auto w-full rounded-[3px]" />
         </Reveal>
         <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
           {sitemap.map(([title, sub]) => (
@@ -308,10 +308,10 @@ export default function Gargi() {
           title="Designed for clarity & accessibility"
         />
         <Reveal className="mt-10" y={32}>
-          <img src="/cases/cs06/design-system.png" alt="Color palette and grid system" className="h-auto w-full rounded-[3px]" />
+          <img src="/cases/cs06/design-system.webp" alt="Color palette and grid system" className="h-auto w-full rounded-[3px]" />
         </Reveal>
         <Reveal className="mt-6" y={32}>
-          <img src="/cases/cs06/thumb-zone.png" alt="Thumb-zone ergonomics and screens" className="h-auto w-full rounded-[3px]" />
+          <img src="/cases/cs06/thumb-zone.webp" alt="Thumb-zone ergonomics and screens" className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Prototype flows ---------- */}
@@ -329,7 +329,7 @@ export default function Gargi() {
                 }`}
               >
                 <figure className="flex justify-center">
-                  <img src={`/cases/cs06/${img}.png`} alt={title} className="h-auto w-full max-w-[430px]" />
+                  <img src={`/cases/cs06/${img}.webp`} alt={title} className="h-auto w-full max-w-[430px]" />
                 </figure>
                 <div className="flex flex-col gap-4">
                   <p className="font-inter text-[14px] font-medium tracking-[-0.01em] text-accent">

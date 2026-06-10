@@ -20,7 +20,7 @@ export const cases: CaseStudy[] = [
     category: "UX RESEARCH",
     blurb:
       "When the people you design for aren’t in the room — a study on building empathy through observation.",
-    image: "/cases/cs01-ignored-user.png",
+    image: "/cases/cs01-ignored-user.webp",
     label: "THE IGNORED USER",
     href: "/work/the-ignored-user",
   },
@@ -31,7 +31,7 @@ export const cases: CaseStudy[] = [
     category: "EDUCATION · APP",
     blurb:
       "A learning app that respects the time of someone juggling six other things.",
-    image: "/cases/cs03-headway.png",
+    image: "/cases/cs03-headway.webp",
     label: "REDESIGNING HEADWAY",
     href: "/work/headway",
   },
@@ -42,7 +42,7 @@ export const cases: CaseStudy[] = [
     category: "WORKSPACE DESIGN",
     blurb:
       "Redesigning a shared studio so material chaos stops getting in the way of focus.",
-    image: "/cases/cs02-clutter-comfort.png",
+    image: "/cases/cs02-clutter-comfort.webp",
     label: "FROM CLUTTER TO COMFORT",
     href: "/work/clutter-to-comfort",
   },
@@ -53,7 +53,7 @@ export const cases: CaseStudy[] = [
     category: "BRANDING · SOCIAL",
     blurb:
       "An identity system for a women-led collective — strong, soft, unmistakably theirs.",
-    image: "/cases/cs06-gargi.png",
+    image: "/cases/cs06-gargi.webp",
     label: "GARGI — NARI SHAKTI",
     href: "/work/gargi",
   },
@@ -64,7 +64,7 @@ export const cases: CaseStudy[] = [
     category: "PUBLIC SPACE",
     blurb:
       "Reclaiming the dead air under a flyover into something a city actually uses.",
-    image: "/cases/cs04-isbt-flyover.png",
+    image: "/cases/cs04-isbt-flyover.webp",
     label: "ISBT FLYOVER SPACE DESIGN",
     href: "/work/flyover",
   },
@@ -75,7 +75,7 @@ export const cases: CaseStudy[] = [
     category: "PACKAGING DESIGN",
     blurb:
       "A festive tea brand that carries the warmth of a 77-year heritage onto the shelf.",
-    image: "/cases/cs05-uphaar-tea.png",
+    image: "/cases/cs05-uphaar-tea.webp",
     label: "UPHAAR TEA PACKAGING",
     href: "/work/uphaar-tea",
   },
@@ -86,7 +86,7 @@ export const cases: CaseStudy[] = [
     category: "PRODUCT · AI",
     blurb:
       "A research agent that helps designers walk into a meeting already knowing the room.",
-    image: "/cases/cs08-scout.png",
+    image: "/cases/cs08-scout.webp",
     label: "SCOUT",
     href: "/work/scout",
   },
@@ -97,7 +97,7 @@ export const cases: CaseStudy[] = [
     category: "HOSPITALITY · BRAND",
     blurb:
       "A neighbourhood café branded around the small ritual of a good unhurried morning.",
-    image: "/cases/cs07-biroti-cafe.png",
+    image: "/cases/cs07-biroti-cafe.webp",
     label: "BIROTI CAFÉ",
     href: "/work/biroti",
   },

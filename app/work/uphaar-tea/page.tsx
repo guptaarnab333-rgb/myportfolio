@@ -151,7 +151,7 @@ export default function UphaarTea() {
 
         {/* ---------- Hero image pair ---------- */}
         <Reveal className="mt-16" y={36}>
-          <img src="/cases/cs05/hero-pair.png" alt="" className="h-auto w-full rounded-[3px]" />
+          <img src="/cases/cs05/hero-pair.webp" alt="" className="h-auto w-full rounded-[3px]" />
           <div className="mt-4 flex justify-between font-inter text-[12px] tracking-[-0.03em] text-stone">
             <span>From standard pouch</span>
             <span>To sustainable bamboo</span>
@@ -161,7 +161,7 @@ export default function UphaarTea() {
         {/* ---------- Context (full-bleed) ---------- */}
         <FullBleed className="mt-28">
           <Reveal y={32}>
-            <img src="/cases/cs05/context.png" alt="" className="h-auto w-full" />
+            <img src="/cases/cs05/context.webp" alt="" className="h-auto w-full" />
           </Reveal>
         </FullBleed>
 
@@ -224,7 +224,7 @@ export default function UphaarTea() {
 
         {/* ---------- Research (image: market research + competitor) ---------- */}
         <Reveal className="mt-28" y={32}>
-          <img src="/cases/cs05/research.png" alt="" className="mx-auto h-auto w-full max-w-[1212px] rounded-[3px]" />
+          <img src="/cases/cs05/research.webp" alt="" className="mx-auto h-auto w-full max-w-[1212px] rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Market Research: Competitor Analysis ---------- */}
@@ -277,7 +277,7 @@ export default function UphaarTea() {
         {/* ---------- Material quote (full-bleed, 'bamboo' highlight baked in) ---------- */}
         <FullBleed className="mt-28">
           <Reveal y={32}>
-            <img src="/cases/cs05/material-quote.png" alt="" className="h-auto w-full" />
+            <img src="/cases/cs05/material-quote.webp" alt="" className="h-auto w-full" />
           </Reveal>
         </FullBleed>
 
@@ -306,20 +306,20 @@ export default function UphaarTea() {
 
         {/* ---------- Design Strategy (image: palette + materials, heading baked in) ---------- */}
         <Reveal className="mt-28" y={32}>
-          <img src="/cases/cs05/design-strategy.png" alt="Design Strategy — colour palette and materials" className="h-auto w-full rounded-[3px]" />
+          <img src="/cases/cs05/design-strategy.webp" alt="Design Strategy — colour palette and materials" className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Form Exploration (full-bleed) ---------- */}
         <FullBleed className="mt-28">
           <Reveal y={32}>
-            <img src="/cases/cs05/form.png" alt="" className="h-auto w-full" />
+            <img src="/cases/cs05/form.webp" alt="" className="h-auto w-full" />
           </Reveal>
         </FullBleed>
 
         {/* ---------- Anatomy (image composite: render + 6 callouts) ---------- */}
         <SectionHead className="mt-28" kicker="ANATOMY" title="Anatomy of the packaging" />
         <Reveal className="mt-10" y={32}>
-          <img src="/cases/cs05/anatomy.png" alt="" className="h-auto w-full rounded-[3px]" />
+          <img src="/cases/cs05/anatomy.webp" alt="" className="h-auto w-full rounded-[3px]" />
         </Reveal>
         {/* readable text list of the anatomy callouts */}
         <div className="mt-10 grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -344,14 +344,14 @@ export default function UphaarTea() {
         <SectionHead className="mt-28" kicker="IMPACT" title="What it changes." />
         <FullBleed className="mt-10">
           <Reveal y={32}>
-            <img src="/cases/cs05/product-render.png" alt="" className="mx-auto h-auto w-full" />
+            <img src="/cases/cs05/product-render.webp" alt="" className="mx-auto h-auto w-full" />
           </Reveal>
         </FullBleed>
 
         {/* ---------- Final Design (full-bleed) ---------- */}
         <FullBleed className="mt-28">
           <Reveal y={32}>
-            <img src="/cases/cs05/final-design.png" alt="" className="h-auto w-full" />
+            <img src="/cases/cs05/final-design.webp" alt="" className="h-auto w-full" />
           </Reveal>
         </FullBleed>
 
@@ -360,7 +360,7 @@ export default function UphaarTea() {
           {lifecycle.map(([img, t, b]) => (
             <Reveal key={img} y={32}>
               <figure className="flex flex-col gap-4">
-                <img src={`/cases/cs05/${img}.png`} alt="" className="aspect-[357/280] w-full rounded-[3px] object-cover" />
+                <img src={`/cases/cs05/${img}.webp`} alt="" className="aspect-[357/280] w-full rounded-[3px] object-cover" />
                 <figcaption>
                   <p className="font-sans text-[18px] font-medium tracking-[-0.03em] text-graphite">
                     {t}

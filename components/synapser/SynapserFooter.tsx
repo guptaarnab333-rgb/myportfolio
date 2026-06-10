@@ -11,7 +11,7 @@ export default function SynapserFooter() {
       <Reveal>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/arnab-creates-logo.png"
+          src="/arnab-creates-logo.webp"
           alt="Arnab Creates"
           className="mb-10 h-[40px] w-auto"
         />

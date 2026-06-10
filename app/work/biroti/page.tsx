@@ -132,7 +132,7 @@ export default function Biroti() {
         {/* ---------- Hero mockup (full-bleed) ---------- */}
         <FullBleed className="mt-16">
           <Reveal y={36}>
-            <img src="/cases/cs07/hero.png" alt="" className="h-auto w-full" />
+            <img src="/cases/cs07/hero.webp" alt="" className="h-auto w-full" />
           </Reveal>
         </FullBleed>
 
@@ -213,13 +213,13 @@ export default function Biroti() {
 
         {/* ---------- Mood board (heading baked into image) ---------- */}
         <Reveal className="mt-28" y={32}>
-          <img src="/cases/cs07/moodboard.png" alt="Mood Board — brand direction" className="mx-auto h-auto w-full max-w-[1271px] rounded-[3px]" />
+          <img src="/cases/cs07/moodboard.webp" alt="Mood Board — brand direction" className="mx-auto h-auto w-full max-w-[1271px] rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Visual Vocabulary (palette image with swatch photos) ---------- */}
         <SectionHead className="mt-28" kicker="PALETTE" title="Visual Vocabulary" />
         <Reveal className="mt-10" y={32}>
-          <img src="/cases/cs07/vocab.png" alt="Colour palette — Ink, Parchment, Cream, Terracotta, Muted Stone" className="h-auto w-full rounded-[3px]" />
+          <img src="/cases/cs07/vocab.webp" alt="Colour palette — Ink, Parchment, Cream, Terracotta, Muted Stone" className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Type ---------- */}
@@ -260,12 +260,12 @@ export default function Biroti() {
         {/* ---------- Logo system ---------- */}
         <SectionHead className="mt-28" kicker="LOGO SYSTEM" title="One word-mark, three backgrounds." />
         <Reveal className="mt-10" y={32}>
-          <img src="/cases/cs07/logos.png" alt="The Biroti word-mark on cream, parchment, and dark backgrounds." className="h-auto w-full rounded-[3px]" />
+          <img src="/cases/cs07/logos.webp" alt="The Biroti word-mark on cream, parchment, and dark backgrounds." className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Touch points (heading baked into image) ---------- */}
         <Reveal className="mt-28" y={32}>
-          <img src="/cases/cs07/touchpoints.png" alt="Touch points — the brand, in your hands." className="h-auto w-full rounded-[3px]" />
+          <img src="/cases/cs07/touchpoints.webp" alt="Touch points — the brand, in your hands." className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Conversation prompts ---------- */}
@@ -287,12 +287,12 @@ export default function Biroti() {
 
         {/* ---------- Mockups (heading baked into image) ---------- */}
         <Reveal className="mt-28" y={32}>
-          <img src="/cases/cs07/mockups.png" alt="Mockups — logo applications" className="h-auto w-full rounded-[3px]" />
+          <img src="/cases/cs07/mockups.webp" alt="Mockups — logo applications" className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Website (heading baked into image) ---------- */}
         <Reveal className="mt-28" y={32}>
-          <img src="/cases/cs07/website.png" alt="Website — digital design" className="h-auto w-full rounded-[3px]" />
+          <img src="/cases/cs07/website.webp" alt="Website — digital design" className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Reflection ---------- */}

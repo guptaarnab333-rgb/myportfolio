@@ -56,7 +56,7 @@ export default function ContactOverlay({
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/arnab-creates-logo-dark.png"
+              src="/arnab-creates-logo-dark.webp"
               alt="Arnab Creates"
               className="h-[38px] w-auto"
             />

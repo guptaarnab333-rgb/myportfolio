@@ -8,18 +8,18 @@ type Shot = { src: string; alt: string };
 
 // A documentary mix of real renders + process shots across the work.
 const shots: Shot[] = [
-  { src: "/cases/cs01/hero-context.png", alt: "Solar water purifier standing on a construction site" },
-  { src: "/cases/cs06-gargi.png", alt: "Gargi Nari Shakti identity collage" },
-  { src: "/cases/cs01/sketch.png", alt: "Sketch progression for the water purifier form" },
-  { src: "/cases/cs05-uphaar-tea.png", alt: "Uphaar festive tea packaging" },
-  { src: "/cases/cs01/exploded.png", alt: "Exploded view of the purifier components" },
-  { src: "/cases/cs07-biroti-cafe.png", alt: "Biroti Café brand mockups" },
-  { src: "/cases/cs01/explorations.png", alt: "Early form-exploration sketches" },
-  { src: "/cases/cs02-clutter-comfort.png", alt: "Shared studio desk organizer in use" },
-  { src: "/cases/cs01/mech-paddle.png", alt: "Foot-paddle dispensing mechanism detail" },
-  { src: "/cases/cs04-isbt-flyover.png", alt: "Reclaimed public space under the ISBT flyover" },
-  { src: "/cases/cs01/final-hero.png", alt: "Final purifier render, front three-quarter" },
-  { src: "/cases/cs08-scout.png", alt: "Scout research-agent interface" },
+  { src: "/cases/cs01/hero-context.webp", alt: "Solar water purifier standing on a construction site" },
+  { src: "/cases/cs06-gargi.webp", alt: "Gargi Nari Shakti identity collage" },
+  { src: "/cases/cs01/sketch.webp", alt: "Sketch progression for the water purifier form" },
+  { src: "/cases/cs05-uphaar-tea.webp", alt: "Uphaar festive tea packaging" },
+  { src: "/cases/cs01/exploded.webp", alt: "Exploded view of the purifier components" },
+  { src: "/cases/cs07-biroti-cafe.webp", alt: "Biroti Café brand mockups" },
+  { src: "/cases/cs01/explorations.webp", alt: "Early form-exploration sketches" },
+  { src: "/cases/cs02-clutter-comfort.webp", alt: "Shared studio desk organizer in use" },
+  { src: "/cases/cs01/mech-paddle.webp", alt: "Foot-paddle dispensing mechanism detail" },
+  { src: "/cases/cs04-isbt-flyover.webp", alt: "Reclaimed public space under the ISBT flyover" },
+  { src: "/cases/cs01/final-hero.webp", alt: "Final purifier render, front three-quarter" },
+  { src: "/cases/cs08-scout.webp", alt: "Scout research-agent interface" },
 ];
 
 export default function WorkGrid() {

@@ -178,13 +178,13 @@ export default function Flyover() {
 
         {/* ---------- Hero render ---------- */}
         <Reveal className="mt-16" y={36}>
-          <img src="/cases/cs04/hero.png" alt="" className="h-auto w-full rounded-[3px]" />
+          <img src="/cases/cs04/hero.webp" alt="" className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- The Site (image left, text right) ---------- */}
         <section className="mt-28 grid grid-cols-1 items-center gap-10 lg:grid-cols-[519fr_520fr] lg:gap-20">
           <Reveal y={32}>
-            <img src="/cases/cs04/site.png" alt="" className="h-auto w-full rounded-[3px]" />
+            <img src="/cases/cs04/site.webp" alt="" className="h-auto w-full rounded-[3px]" />
           </Reveal>
           <Reveal delay={120}>
             <Eyebrow>THE SITE</Eyebrow>
@@ -226,7 +226,7 @@ export default function Flyover() {
             </dl>
           </Reveal>
           <Reveal delay={120} y={32}>
-            <img src="/cases/cs04/site-photos.png" alt="" className="h-auto w-full rounded-[3px]" />
+            <img src="/cases/cs04/site-photos.webp" alt="" className="h-auto w-full rounded-[3px]" />
           </Reveal>
         </div>
 
@@ -275,7 +275,7 @@ export default function Flyover() {
           {research.map(([img, k, b]) => (
             <Reveal key={k} y={32}>
               <figure className="flex flex-col gap-4">
-                <img src={`/cases/cs04/${img}.png`} alt="" className="aspect-[362/241] w-full rounded-[3px] object-cover" />
+                <img src={`/cases/cs04/${img}.webp`} alt="" className="aspect-[362/241] w-full rounded-[3px] object-cover" />
                 <figcaption>
                   <p className="font-inter text-[14px] font-semibold tracking-[-0.01em] text-accent">
                     {k}
@@ -291,7 +291,7 @@ export default function Flyover() {
 
         {/* ---------- Stakeholder Mapping (diagram) + full-bleed quote band ---------- */}
         <Reveal className="mt-28" y={32}>
-          <img src="/cases/cs04/stakeholder.png" alt="Stakeholder Mapping" className="mx-auto h-auto w-full max-w-[1120px]" />
+          <img src="/cases/cs04/stakeholder.webp" alt="Stakeholder Mapping" className="mx-auto h-auto w-full max-w-[1120px]" />
         </Reveal>
         <FullBleed className="mt-12">
           <Reveal y={32}>
@@ -314,7 +314,7 @@ export default function Flyover() {
           {problems.map(([img, title, body]) => (
             <Reveal key={title} y={32}>
               <figure className="flex flex-col gap-4">
-                <img src={`/cases/cs04/${img}.png`} alt="" className="aspect-[357/201] w-full rounded-[3px] object-cover" />
+                <img src={`/cases/cs04/${img}.webp`} alt="" className="aspect-[357/201] w-full rounded-[3px] object-cover" />
                 <figcaption>
                   <p className="font-inter text-[14px] font-semibold tracking-[-0.01em] text-graphite">
                     {title}
@@ -381,13 +381,13 @@ export default function Flyover() {
           title="Exploring the forms"
         />
         <Reveal className="mt-10" y={32}>
-          <img src="/cases/cs04/iterations.png" alt="" className="h-auto w-full rounded-[3px]" />
+          <img src="/cases/cs04/iterations.webp" alt="" className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Final Form (centered heading + full-width image) ---------- */}
         <CenteredHead className="mt-28" title="Final Form" />
         <Reveal className="mt-10" y={32}>
-          <img src="/cases/cs04/final-form.png" alt="" className="h-auto w-full rounded-[3px]" />
+          <img src="/cases/cs04/final-form.webp" alt="" className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Zoning & Plans ---------- */}
@@ -397,7 +397,7 @@ export default function Flyover() {
           title="Activity and movement"
         />
         <Reveal className="mt-10" y={32}>
-          <img src="/cases/cs04/zoning.png" alt="" className="h-auto w-full rounded-[3px]" />
+          <img src="/cases/cs04/zoning.webp" alt="" className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Sensory Design (4-col: image top, label, text) ---------- */}
@@ -410,7 +410,7 @@ export default function Flyover() {
           {sensory.map(([img, label, body]) => (
             <Reveal key={img} y={32}>
               <div className="flex flex-col gap-3">
-                <img src={`/cases/cs04/${img}.png`} alt="" className="aspect-[268/140] w-full rounded-[3px] object-cover" />
+                <img src={`/cases/cs04/${img}.webp`} alt="" className="aspect-[268/140] w-full rounded-[3px] object-cover" />
                 <p className="mt-1 font-inter text-[14px] font-semibold tracking-[-0.01em] text-accent">
                   {label}
                 </p>
@@ -461,7 +461,7 @@ export default function Flyover() {
           </Reveal>
         </div>
         <Reveal className="mt-10" y={32}>
-          <img src="/cases/cs04/materials.png" alt="" className="h-auto w-full rounded-[3px]" />
+          <img src="/cases/cs04/materials.webp" alt="" className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Prototyping (4-col image-top cards + 2 model photos) ---------- */}
@@ -474,7 +474,7 @@ export default function Flyover() {
           {prototyping.map(([img, k, b]) => (
             <Reveal key={k} y={32}>
               <div className="flex flex-col gap-3">
-                <img src={`/cases/cs04/${img}.png`} alt="" className="aspect-[268/240] w-full rounded-[3px] object-cover" />
+                <img src={`/cases/cs04/${img}.webp`} alt="" className="aspect-[268/240] w-full rounded-[3px] object-cover" />
                 <p className="mt-1 font-inter text-[14px] font-semibold tracking-[-0.01em] text-accent">
                   {k}
                 </p>
@@ -487,23 +487,23 @@ export default function Flyover() {
         </div>
         <Reveal className="mt-8" y={32}>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <img src="/cases/cs04/model-1.png" alt="" className="aspect-[552/371] w-full rounded-[3px] object-cover" />
-            <img src="/cases/cs04/model-2.png" alt="" className="aspect-[552/371] w-full rounded-[3px] object-cover" />
+            <img src="/cases/cs04/model-1.webp" alt="" className="aspect-[552/371] w-full rounded-[3px] object-cover" />
+            <img src="/cases/cs04/model-2.webp" alt="" className="aspect-[552/371] w-full rounded-[3px] object-cover" />
           </div>
         </Reveal>
 
         {/* ---------- Final Prototype ---------- */}
         <CenteredHead className="mt-28" title="Final Prototype" />
         <Reveal className="mt-10" y={32}>
-          <img src="/cases/cs04/final-front.png" alt="" className="h-auto w-full rounded-[3px]" />
+          <img src="/cases/cs04/final-front.webp" alt="" className="h-auto w-full rounded-[3px]" />
         </Reveal>
         <Reveal className="mt-4" y={32}>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div className="flex flex-col gap-4">
-              <img src="/cases/cs04/final-3q-1.png" alt="" className="aspect-[552/414] w-full rounded-[3px] object-cover" />
-              <img src="/cases/cs04/final-wireframe.png" alt="" className="aspect-[552/414] w-full rounded-[3px] object-cover" />
+              <img src="/cases/cs04/final-3q-1.webp" alt="" className="aspect-[552/414] w-full rounded-[3px] object-cover" />
+              <img src="/cases/cs04/final-wireframe.webp" alt="" className="aspect-[552/414] w-full rounded-[3px] object-cover" />
             </div>
-            <img src="/cases/cs04/final-3q-2.png" alt="" className="h-full w-full rounded-[3px] object-cover" />
+            <img src="/cases/cs04/final-3q-2.webp" alt="" className="h-full w-full rounded-[3px] object-cover" />
           </div>
         </Reveal>
 

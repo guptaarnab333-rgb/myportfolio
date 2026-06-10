@@ -90,7 +90,7 @@ export default function SynapserNav({
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/arnab-creates-logo.png"
+              src="/arnab-creates-logo.webp"
               alt="Arnab Creates"
               className={`h-[38px] w-auto transition-opacity duration-500 ${
                 overDark ? "opacity-0" : "opacity-100"
@@ -98,7 +98,7 @@ export default function SynapserNav({
             />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/arnab-creates-logo-dark.png"
+              src="/arnab-creates-logo-dark.webp"
               alt=""
               aria-hidden
               className={`absolute left-0 top-0 h-[38px] w-auto transition-opacity duration-500 ${

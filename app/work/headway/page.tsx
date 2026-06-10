@@ -134,7 +134,7 @@ export default function Headway() {
 
         {/* ---------- Hero promo image ---------- */}
         <Reveal className="mt-16" y={36}>
-          <img src="/cases/cs03/hero.png" alt="" className="h-auto w-full rounded-[3px]" />
+          <img src="/cases/cs03/hero.webp" alt="" className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- The Why ---------- */}
@@ -156,7 +156,7 @@ export default function Headway() {
           </h2>
         </Reveal>
         <Reveal className="mt-10" y={32}>
-          <img src="/cases/cs03/process-map.png" alt="" className="h-auto w-full" />
+          <img src="/cases/cs03/process-map.webp" alt="" className="h-auto w-full" />
         </Reveal>
 
         {/* ---------- Discover: Competitor Analysis ---------- */}
@@ -167,12 +167,12 @@ export default function Headway() {
           </h2>
         </Reveal>
         <Reveal className="mt-10" y={32}>
-          <img src="/cases/cs03/competitor-table.png" alt="" className="mx-auto h-auto w-full max-w-[990px]" />
+          <img src="/cases/cs03/competitor-table.webp" alt="" className="mx-auto h-auto w-full max-w-[990px]" />
         </Reveal>
 
         {/* ---------- User Surveys (heading baked into image) ---------- */}
         <Reveal className="mt-28" y={32}>
-          <img src="/cases/cs03/survey.png" alt="User Surveys" className="mx-auto h-auto w-full max-w-[1120px] rounded-[3px]" />
+          <img src="/cases/cs03/survey.webp" alt="User Surveys" className="mx-auto h-auto w-full max-w-[1120px] rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Old / New comparison ---------- */}
@@ -214,13 +214,13 @@ export default function Headway() {
         {/* ---------- User Journey Map ---------- */}
         <CenteredHead className="mt-28" title="User Journey Map" />
         <Reveal className="mt-10" y={32}>
-          <img src="/cases/cs03/journey-map.png" alt="" className="h-auto w-full rounded-[3px]" />
+          <img src="/cases/cs03/journey-map.webp" alt="" className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- User Persona ---------- */}
         <CenteredHead className="mt-28" title="User Persona" />
         <Reveal className="mt-10" y={32}>
-          <img src="/cases/cs03/persona.png" alt="" className="h-auto w-full rounded-[3px]" />
+          <img src="/cases/cs03/persona.webp" alt="" className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Ideate: user flow ---------- */}
@@ -230,18 +230,18 @@ export default function Headway() {
           title="Restructured around how readers move"
         />
         <Reveal className="mt-10" y={32}>
-          <img src="/cases/cs03/user-flow.png" alt="" className="h-auto w-full rounded-[3px]" />
+          <img src="/cases/cs03/user-flow.webp" alt="" className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Prototype: wireframes ---------- */}
         <SectionHead className="mt-28" kicker="PROTOTYPE" title="Wireframes" />
         <Reveal className="mt-10" y={32}>
-          <img src="/cases/cs03/wireframes.png" alt="" className="h-auto w-full rounded-[3px]" />
+          <img src="/cases/cs03/wireframes.webp" alt="" className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Style guide (heading baked into image) ---------- */}
         <Reveal className="mt-28" y={32}>
-          <img src="/cases/cs03/style-guide.png" alt="Style Guide — the visual system for new pages." className="h-auto w-full rounded-[3px]" />
+          <img src="/cases/cs03/style-guide.webp" alt="Style Guide — the visual system for new pages." className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- The Screens: hi-fi (individual screens, 2-up on mobile) ---------- */}
@@ -257,7 +257,7 @@ export default function Headway() {
               return (
                 <img
                   key={n}
-                  src={`/cases/cs03/hifi-${n}.png`}
+                  src={`/cases/cs03/hifi-${n}.webp`}
                   alt=""
                   className="h-auto w-full rounded-[6px]"
                 />

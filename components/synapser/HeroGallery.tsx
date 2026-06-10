@@ -4,14 +4,14 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 const IMAGES = [
-  "/cases/cs01-ignored-user.png",
-  "/cases/cs05-uphaar-tea.png",
-  "/cases/cs03-headway.png",
-  "/cases/cs07-biroti-cafe.png",
-  "/cases/cs02-clutter-comfort.png",
-  "/cases/cs06-gargi.png",
-  "/cases/cs04-isbt-flyover.png",
-  "/cases/cs08-scout.png",
+  "/cases/cs01-ignored-user.webp",
+  "/cases/cs05-uphaar-tea.webp",
+  "/cases/cs03-headway.webp",
+  "/cases/cs07-biroti-cafe.webp",
+  "/cases/cs02-clutter-comfort.webp",
+  "/cases/cs06-gargi.webp",
+  "/cases/cs04-isbt-flyover.webp",
+  "/cases/cs08-scout.webp",
 ];
 
 const FAR = -26;
