@@ -239,9 +239,9 @@ export default function TheIgnoredUser() {
         {/* context images — three across */}
         <Reveal className="mt-12" y={32}>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/context-18.png?tr=orig-true" alt="Site context" className="aspect-[374/249] w-full rounded-[3px] object-cover" />
-            <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/context-19.png?tr=orig-true" alt="Workers accessing shared water" className="aspect-[374/249] w-full rounded-[3px] object-cover" />
-            <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/context-33.png?tr=orig-true" alt="Open drum water storage on site" className="aspect-[374/249] w-full rounded-[3px] object-cover" />
+            <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/context-18.png?tr=orig-true" alt="Site context" className="aspect-[374/249] w-full rounded-[3px] object-cover" />
+            <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/context-19.png?tr=orig-true" alt="Workers accessing shared water" className="aspect-[374/249] w-full rounded-[3px] object-cover" />
+            <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/context-33.png?tr=orig-true" alt="Open drum water storage on site" className="aspect-[374/249] w-full rounded-[3px] object-cover" />
           </div>
         </Reveal>
 
@@ -311,7 +311,7 @@ export default function TheIgnoredUser() {
                 <p className="font-sans text-[32px] font-normal leading-none tracking-[-0.03em] text-accent">
                   {n}
                 </p>
-                <img src={icon} alt="" aria-hidden className="h-[44px] w-[44px] object-contain" />
+                <img loading="lazy" decoding="async" src={icon} alt="" aria-hidden className="h-[44px] w-[44px] object-contain" />
               </div>
               <h3 className="font-sans text-[21px] font-medium tracking-[-0.03em] text-graphite">
                 {t}
@@ -331,7 +331,7 @@ export default function TheIgnoredUser() {
         />
         <FullBleed className="mt-10">
           <Reveal y={32}>
-            <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/ideation.png?tr=orig-true" alt="Brainstorming sketches" className="w-full" />
+            <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/ideation.png?tr=orig-true" alt="Brainstorming sketches" className="w-full" />
           </Reveal>
         </FullBleed>
 
@@ -363,7 +363,7 @@ export default function TheIgnoredUser() {
             </div>
           </Reveal>
           <Reveal delay={120} y={32}>
-            <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/sketch.png?tr=orig-true" alt="Sketch progression" className="w-full rounded-[3px]" />
+            <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/sketch.png?tr=orig-true" alt="Sketch progression" className="w-full rounded-[3px]" />
           </Reveal>
         </section>
 
@@ -375,7 +375,7 @@ export default function TheIgnoredUser() {
         />
         <section className="mt-10 grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">
           <Reveal y={32}>
-            <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/exploded.png?tr=orig-true" alt="Exploded view — components" className="w-full rounded-[3px]" />
+            <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/exploded.png?tr=orig-true" alt="Exploded view — components" className="w-full rounded-[3px]" />
           </Reveal>
           <Reveal delay={120}>
             <ul className="flex flex-col">
@@ -420,13 +420,13 @@ export default function TheIgnoredUser() {
             </div>
           </Reveal>
           <Reveal delay={120} y={32}>
-            <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/filtration.png?tr=orig-true" alt="Water treatment process render" className="h-full w-full rounded-[3px] object-cover" />
+            <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/filtration.png?tr=orig-true" alt="Water treatment process render" className="h-full w-full rounded-[3px] object-cover" />
           </Reveal>
         </section>
 
         {/* ---------- Specifications & Interaction (full-width infographic) ---------- */}
         <Reveal className="mt-28" y={32}>
-          <img
+          <img loading="lazy" decoding="async"
             src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/process-render.png?tr=orig-true"
             alt="Specifications and interaction — materials, dimensions, performance, and how the unit operates."
             className="w-full rounded-[3px]"
@@ -438,7 +438,7 @@ export default function TheIgnoredUser() {
           {/* image 1 */}
           <Reveal y={32}>
             <figure className="flex flex-col gap-5">
-              <img src={mechanisms[0][0]} alt={mechanisms[0][1]} className="aspect-[519/349] w-full rounded-[3px] object-cover" />
+              <img loading="lazy" decoding="async" src={mechanisms[0][0]} alt={mechanisms[0][1]} className="aspect-[519/349] w-full rounded-[3px] object-cover" />
               <figcaption className="font-sans text-[clamp(22px,2.6vw,30px)] font-medium leading-[1.1] tracking-[-0.03em] text-graphite">
                 {mechanisms[0][1]}
               </figcaption>
@@ -454,7 +454,7 @@ export default function TheIgnoredUser() {
           {/* image 2 */}
           <Reveal y={32}>
             <figure className="flex flex-col gap-5">
-              <img src={mechanisms[1][0]} alt={mechanisms[1][1]} className="aspect-[519/349] w-full rounded-[3px] object-cover" />
+              <img loading="lazy" decoding="async" src={mechanisms[1][0]} alt={mechanisms[1][1]} className="aspect-[519/349] w-full rounded-[3px] object-cover" />
               <figcaption className="font-sans text-[clamp(22px,2.6vw,30px)] font-medium leading-[1.1] tracking-[-0.03em] text-graphite">
                 {mechanisms[1][1]}
               </figcaption>
@@ -463,7 +463,7 @@ export default function TheIgnoredUser() {
           {/* image 3 */}
           <Reveal delay={80} y={32}>
             <figure className="flex flex-col gap-5">
-              <img src={mechanisms[2][0]} alt={mechanisms[2][1]} className="aspect-[518/416] w-full rounded-[3px] object-cover" />
+              <img loading="lazy" decoding="async" src={mechanisms[2][0]} alt={mechanisms[2][1]} className="aspect-[518/416] w-full rounded-[3px] object-cover" />
               <figcaption className="font-sans text-[clamp(22px,2.6vw,30px)] font-medium leading-[1.1] tracking-[-0.03em] text-graphite">
                 {mechanisms[2][1]}
               </figcaption>
@@ -481,7 +481,7 @@ export default function TheIgnoredUser() {
             gallery scales cleanly at every width. */}
         <div className="mt-10 flex flex-col gap-4">
           <Reveal y={32}>
-            <img
+            <img loading="lazy" decoding="async"
               src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/final-unit.png?tr=orig-true"
               alt="The full unit with its solar kite deployed"
               className="h-auto w-full rounded-[3px]"
@@ -503,8 +503,8 @@ export default function TheIgnoredUser() {
           ].map(([left, right], i) => (
             <Reveal key={left[0]} delay={(i + 1) * 60} y={32}>
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <img src={`https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/${left[0]}.png?tr=orig-true`} alt={left[1]} className="h-auto w-full rounded-[3px]" />
-                <img src={`https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/${right[0]}.png?tr=orig-true`} alt={right[1]} className="h-auto w-full rounded-[3px]" />
+                <img loading="lazy" decoding="async" src={`https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/${left[0]}.png?tr=orig-true`} alt={left[1]} className="h-auto w-full rounded-[3px]" />
+                <img loading="lazy" decoding="async" src={`https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01/${right[0]}.png?tr=orig-true`} alt={right[1]} className="h-auto w-full rounded-[3px]" />
               </div>
             </Reveal>
           ))}

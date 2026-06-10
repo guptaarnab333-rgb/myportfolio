@@ -132,7 +132,7 @@ export default function Biroti() {
         {/* ---------- Hero mockup (full-bleed) ---------- */}
         <FullBleed className="mt-16">
           <Reveal y={36}>
-            <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs07/hero.png?tr=orig-true" alt="" className="h-auto w-full" />
+            <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs07/hero.png?tr=q-95" alt="" className="h-auto w-full" />
           </Reveal>
         </FullBleed>
 
@@ -192,7 +192,7 @@ export default function Biroti() {
             <h2 className="mt-4 font-sans text-[clamp(34px,4.6vw,52px)] font-normal leading-[1.12] tracking-[-0.03em] text-graphite">
               Biroti, Bengali for pause
             </h2>
-            <img src="/cases/cs07/bengali.svg" alt="বিরতি" className="mt-6 h-[clamp(48px,7vw,76px)] w-auto" />
+            <img loading="lazy" decoding="async" src="/cases/cs07/bengali.svg" alt="বিরতি" className="mt-6 h-[clamp(48px,7vw,76px)] w-auto" />
             <p className="mt-3 font-inter text-[12px] font-semibold uppercase tracking-[0.06em] text-stone">
               BENGALI — pause
             </p>
@@ -213,13 +213,13 @@ export default function Biroti() {
 
         {/* ---------- Mood board (heading baked into image) ---------- */}
         <Reveal className="mt-28" y={32}>
-          <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs07/moodboard.png?tr=orig-true" alt="Mood Board — brand direction" className="mx-auto h-auto w-full max-w-[1271px] rounded-[3px]" />
+          <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs07/moodboard.png?tr=q-95" alt="Mood Board — brand direction" className="mx-auto h-auto w-full max-w-[1271px] rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Visual Vocabulary (palette image with swatch photos) ---------- */}
         <SectionHead className="mt-28" kicker="PALETTE" title="Visual Vocabulary" />
         <Reveal className="mt-10" y={32}>
-          <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs07/vocab.png?tr=orig-true" alt="Colour palette — Ink, Parchment, Cream, Terracotta, Muted Stone" className="h-auto w-full rounded-[3px]" />
+          <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs07/vocab.png?tr=orig-true" alt="Colour palette — Ink, Parchment, Cream, Terracotta, Muted Stone" className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Type ---------- */}
@@ -240,7 +240,7 @@ export default function Biroti() {
                   </p>
                 </div>
                 {i === 2 ? (
-                  <img src="/cases/cs07/bengali.svg" alt="বিরতি" className="h-[clamp(40px,6vw,64px)] w-auto self-start" />
+                  <img loading="lazy" decoding="async" src="/cases/cs07/bengali.svg" alt="বিরতি" className="h-[clamp(40px,6vw,64px)] w-auto self-start" />
                 ) : (
                   <p
                     className={`leading-[1.1] text-graphite ${
@@ -260,12 +260,12 @@ export default function Biroti() {
         {/* ---------- Logo system ---------- */}
         <SectionHead className="mt-28" kicker="LOGO SYSTEM" title="One word-mark, three backgrounds." />
         <Reveal className="mt-10" y={32}>
-          <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs07/logos.png?tr=orig-true" alt="The Biroti word-mark on cream, parchment, and dark backgrounds." className="h-auto w-full rounded-[3px]" />
+          <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs07/logos.png?tr=orig-true" alt="The Biroti word-mark on cream, parchment, and dark backgrounds." className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Touch points (heading baked into image) ---------- */}
         <Reveal className="mt-28" y={32}>
-          <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs07/touchpoints.png?tr=orig-true" alt="Touch points — the brand, in your hands." className="h-auto w-full rounded-[3px]" />
+          <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs07/touchpoints.png?tr=q-95" alt="Touch points — the brand, in your hands." className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Conversation prompts ---------- */}
@@ -287,12 +287,12 @@ export default function Biroti() {
 
         {/* ---------- Mockups (heading baked into image) ---------- */}
         <Reveal className="mt-28" y={32}>
-          <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs07/mockups.png?tr=orig-true" alt="Mockups — logo applications" className="h-auto w-full rounded-[3px]" />
+          <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs07/mockups.png?tr=q-95" alt="Mockups — logo applications" className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Website (heading baked into image) ---------- */}
         <Reveal className="mt-28" y={32}>
-          <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs07/website.png?tr=orig-true" alt="Website — digital design" className="h-auto w-full rounded-[3px]" />
+          <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs07/website.png?tr=orig-true" alt="Website — digital design" className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Reflection ---------- */}

@@ -73,8 +73,21 @@ export default function PageTransition() {
       }, 340);
     };
 
+    // Back/forward cache restores the page exactly as it left — with the
+    // curtain fully drawn from the exit above. Lift it so the page isn't
+    // permanently black after the browser's Back button.
+    const onPageShow = (e: PageTransitionEvent) => {
+      if (!e.persisted) return;
+      el.classList.remove("pt-leaving");
+      el.style.display = "none";
+    };
+
     document.addEventListener("click", onClick, true);
-    return () => document.removeEventListener("click", onClick, true);
+    window.addEventListener("pageshow", onPageShow);
+    return () => {
+      document.removeEventListener("click", onClick, true);
+      window.removeEventListener("pageshow", onPageShow);
+    };
   }, []);
 
   return <div ref={ref} aria-hidden className="page-transition" />;

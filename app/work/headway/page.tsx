@@ -156,7 +156,7 @@ export default function Headway() {
           </h2>
         </Reveal>
         <Reveal className="mt-10" y={32}>
-          <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs03/process-map.png?tr=orig-true" alt="" className="h-auto w-full" />
+          <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs03/process-map.png?tr=orig-true" alt="" className="h-auto w-full" />
         </Reveal>
 
         {/* ---------- Discover: Competitor Analysis ---------- */}
@@ -167,12 +167,12 @@ export default function Headway() {
           </h2>
         </Reveal>
         <Reveal className="mt-10" y={32}>
-          <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs03/competitor-table.png?tr=orig-true" alt="" className="mx-auto h-auto w-full max-w-[990px]" />
+          <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs03/competitor-table.png?tr=orig-true" alt="" className="mx-auto h-auto w-full max-w-[990px]" />
         </Reveal>
 
         {/* ---------- User Surveys (heading baked into image) ---------- */}
         <Reveal className="mt-28" y={32}>
-          <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs03/survey.png?tr=orig-true" alt="User Surveys" className="mx-auto h-auto w-full max-w-[1120px] rounded-[3px]" />
+          <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs03/survey.png?tr=orig-true" alt="User Surveys" className="mx-auto h-auto w-full max-w-[1120px] rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Old / New comparison ---------- */}
@@ -214,13 +214,13 @@ export default function Headway() {
         {/* ---------- User Journey Map ---------- */}
         <CenteredHead className="mt-28" title="User Journey Map" />
         <Reveal className="mt-10" y={32}>
-          <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs03/journey-map.png?tr=orig-true" alt="" className="h-auto w-full rounded-[3px]" />
+          <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs03/journey-map.png?tr=orig-true" alt="" className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- User Persona ---------- */}
         <CenteredHead className="mt-28" title="User Persona" />
         <Reveal className="mt-10" y={32}>
-          <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs03/persona.png?tr=orig-true" alt="" className="h-auto w-full rounded-[3px]" />
+          <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs03/persona.png?tr=orig-true" alt="" className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Ideate: user flow ---------- */}
@@ -230,18 +230,18 @@ export default function Headway() {
           title="Restructured around how readers move"
         />
         <Reveal className="mt-10" y={32}>
-          <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs03/user-flow.png?tr=orig-true" alt="" className="h-auto w-full rounded-[3px]" />
+          <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs03/user-flow.png?tr=orig-true" alt="" className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Prototype: wireframes ---------- */}
         <SectionHead className="mt-28" kicker="PROTOTYPE" title="Wireframes" />
         <Reveal className="mt-10" y={32}>
-          <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs03/wireframes.png?tr=orig-true" alt="" className="h-auto w-full rounded-[3px]" />
+          <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs03/wireframes.png?tr=orig-true" alt="" className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Style guide (heading baked into image) ---------- */}
         <Reveal className="mt-28" y={32}>
-          <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs03/style-guide.png?tr=orig-true" alt="Style Guide — the visual system for new pages." className="h-auto w-full rounded-[3px]" />
+          <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs03/style-guide.png?tr=orig-true" alt="Style Guide — the visual system for new pages." className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- The Screens: hi-fi (individual screens, 2-up on mobile) ---------- */}
@@ -255,7 +255,7 @@ export default function Headway() {
             {Array.from({ length: 12 }, (_, i) => {
               const n = String(i + 1).padStart(2, "0");
               return (
-                <img
+                <img loading="lazy" decoding="async"
                   key={n}
                   src={`https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs03/hifi-${n}.png?tr=orig-true`}
                   alt=""

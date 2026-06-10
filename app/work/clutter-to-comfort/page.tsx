@@ -169,9 +169,9 @@ export default function ClutterToComfort() {
         <section className="mt-28 grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1fr] lg:gap-20">
           <Reveal y={32}>
             <div className="grid grid-cols-2 gap-3">
-              <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs02/before-1.png?tr=orig-true" alt="Cluttered hostel desk" className="aspect-[280/181] w-full rounded-[3px] object-cover" />
-              <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs02/before-2.png?tr=orig-true" alt="Cluttered hostel desk" className="aspect-[280/181] mt-12 w-full rounded-[3px] object-cover" />
-              <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs02/before-3.png?tr=orig-true" alt="Cluttered hostel desk" className="aspect-[280/181] w-full rounded-[3px] object-cover" />
+              <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs02/before-1.png?tr=orig-true" alt="Cluttered hostel desk" className="aspect-[280/181] w-full rounded-[3px] object-cover" />
+              <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs02/before-2.png?tr=orig-true" alt="Cluttered hostel desk" className="aspect-[280/181] mt-12 w-full rounded-[3px] object-cover" />
+              <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs02/before-3.png?tr=orig-true" alt="Cluttered hostel desk" className="aspect-[280/181] w-full rounded-[3px] object-cover" />
             </div>
           </Reveal>
           <Reveal delay={120}>
@@ -275,7 +275,7 @@ export default function ClutterToComfort() {
           </ul>
         </Reveal>
         <Reveal className="mt-12" y={32}>
-          <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs02/fivewhys.png?tr=orig-true" alt="5 Whys workshop notes" className="h-auto w-full rounded-[3px]" />
+          <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs02/fivewhys.png?tr=orig-true" alt="5 Whys workshop notes" className="h-auto w-full rounded-[3px]" />
         </Reveal>
 
         {/* ---------- Design Brief band (full-bleed, dark) ---------- */}
@@ -320,17 +320,17 @@ export default function ClutterToComfort() {
           </Reveal>
           <Reveal delay={120} y={32}>
             <div className="grid grid-cols-2 gap-4">
-              <img
+              <img loading="lazy" decoding="async"
                 src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs02/concept-2.png?tr=orig-true"
                 alt="Concept render"
                 className="col-start-1 row-start-1 mt-12 h-auto w-full self-start rounded-[3px]"
               />
-              <img
+              <img loading="lazy" decoding="async"
                 src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs02/concept-1.png?tr=orig-true"
                 alt="Concept render"
                 className="col-start-2 row-start-1 h-auto w-full rounded-[3px]"
               />
-              <img
+              <img loading="lazy" decoding="async"
                 src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs02/concept-3.png?tr=orig-true"
                 alt="Concept render"
                 className="col-start-2 row-start-2 h-auto w-full rounded-[3px]"
@@ -349,7 +349,7 @@ export default function ClutterToComfort() {
           {prototypes.map(([img, caption], i) => (
             <Reveal key={img} delay={(i % 3) * 60} y={32}>
               <figure className="flex flex-col gap-4">
-                <img src={`https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs02/${img}.png?tr=orig-true`} alt={caption} className="aspect-[362/280] w-full rounded-[3px] object-cover" />
+                <img loading="lazy" decoding="async" src={`https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs02/${img}.png?tr=orig-true`} alt={caption} className="aspect-[362/280] w-full rounded-[3px] object-cover" />
                 <figcaption className="font-inter text-[14px] font-medium tracking-[-0.03em] text-graphite">
                   {caption}
                 </figcaption>
@@ -359,8 +359,8 @@ export default function ClutterToComfort() {
         </div>
         <Reveal className="mt-12" y={32}>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs02/midfi-1.png?tr=orig-true" alt="Mid-fidelity prototype — final form" className="aspect-[551/338] w-full rounded-[3px] object-cover" />
-            <img src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs02/midfi-2.png?tr=orig-true" alt="Mid-fidelity prototype — final form" className="aspect-[551/338] w-full rounded-[3px] object-cover" />
+            <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs02/midfi-1.png?tr=orig-true" alt="Mid-fidelity prototype — final form" className="aspect-[551/338] w-full rounded-[3px] object-cover" />
+            <img loading="lazy" decoding="async" src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs02/midfi-2.png?tr=orig-true" alt="Mid-fidelity prototype — final form" className="aspect-[551/338] w-full rounded-[3px] object-cover" />
           </div>
           <p className="mt-4 font-inter text-[14px] tracking-[-0.03em] text-stone">
             The mid-fidelity prototype: final form, real material, ready for the
@@ -381,7 +381,7 @@ export default function ClutterToComfort() {
           ].map(([img, caption]) => (
             <Reveal key={img} y={32}>
               <figure className="flex flex-col gap-4">
-                <img src={`https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs02/${img}.png?tr=orig-true`} alt={caption} className="aspect-[552/414] w-full rounded-[3px] object-cover" />
+                <img loading="lazy" decoding="async" src={`https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs02/${img}.png?tr=orig-true`} alt={caption} className="aspect-[552/414] w-full rounded-[3px] object-cover" />
                 <figcaption className="font-inter text-[14px] font-medium tracking-[-0.03em] text-graphite">
                   {caption}
                 </figcaption>

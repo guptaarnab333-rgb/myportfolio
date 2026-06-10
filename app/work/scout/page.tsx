@@ -458,7 +458,7 @@ export default function Scout() {
                     {caption}
                   </p>
                 </figcaption>
-                <img
+                <img loading="lazy" decoding="async"
                   src={src}
                   alt={`${title} — Scout`}
                   className="h-auto w-full rounded-[6px] border border-black/10 shadow-[0_18px_50px_-24px_rgba(17,24,39,0.35)]"
@@ -479,7 +479,7 @@ export default function Scout() {
         </Reveal>
         <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-[440px_1fr] lg:items-start lg:gap-16">
           <Reveal y={28}>
-            <img
+            <img loading="lazy" decoding="async"
               src="https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs08/agent-drill.png?tr=orig-true"
               alt="Agent detail modal"
               className="h-auto w-full rounded-[6px] border border-black/10 shadow-[0_18px_50px_-24px_rgba(17,24,39,0.35)]"
