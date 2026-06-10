@@ -174,7 +174,7 @@ export default function TheIgnoredUser() {
             </Reveal>
 
             <Reveal delay={120}>
-              <dl className="flex flex-col gap-6">
+              <dl className="grid grid-cols-2 gap-x-6 gap-y-5 md:flex md:flex-col md:gap-6">
                 {meta.map((m) => (
                   <div key={m.label}>
                     <dt className="font-inter text-[14px] tracking-[-0.03em] text-stone">
