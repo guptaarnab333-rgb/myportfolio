@@ -2,17 +2,23 @@
 
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
+import { photos, photoURL } from "@/components/media/data";
 
-const IMAGES = [
-  "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs01-ignored-user.png?tr=orig-true",
-  "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs05-uphaar-tea.png?tr=orig-true",
-  "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs03-headway.png?tr=orig-true",
-  "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs07-biroti-cafe.png?tr=orig-true",
-  "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs02-clutter-comfort.png?tr=orig-true",
-  "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs06-gargi.png?tr=orig-true",
-  "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs04-isbt-flyover.png?tr=orig-true",
-  "https://ik.imagekit.io/cnjxcztbn/portfolio/cases/cs08-scout.png?tr=orig-true",
-];
+/* Half project covers, half photographs from the media section, interleaved
+   so the drift alternates work and place. Everything sized down for GPU
+   textures — the photo masters are 8K; 1280px is plenty for drifting planes. */
+const COVERS = [
+  "cs01-ignored-user",
+  "cs07-biroti-cafe",
+  "cs05-uphaar-tea",
+  "cs04-isbt-flyover",
+].map(
+  (n) =>
+    `https://ik.imagekit.io/cnjxcztbn/portfolio/cases/${n}.png?tr=w-1280,q-80`
+);
+// himachal, owl, peace, green velvet
+const SHOTS = [0, 1, 4, 7].map((i) => photoURL(photos[i].src, 1280, 80));
+const IMAGES = COVERS.flatMap((c, i) => [c, SHOTS[i]]);
 
 const FAR = -26;
 const NEAR_FADE = 0.5;
@@ -90,8 +96,17 @@ export default function HeroGallery() {
 
     const loader = new THREE.TextureLoader();
     const planes: THREE.Mesh[] = [];
-    const SPREAD_X = 6.5;
-    const SPREAD_Y = 3.4;
+    // The cloud follows the screen's shape: on wide screens the planes spread
+    // into the horizontal space (matches the old 6.5 × 3.4 desktop tuning);
+    // on tall screens they stack into the vertical negative space instead.
+    let SPREAD_X = 6.5;
+    let SPREAD_Y = 3.4;
+    const computeSpread = () => {
+      const aspect = vw / vh;
+      SPREAD_X = 3.65 * Math.max(aspect, 0.6);
+      SPREAD_Y = aspect >= 1 ? 3.4 : 3.4 / Math.sqrt(aspect);
+    };
+    computeSpread();
 
     function place(p: THREE.Mesh, z: number) {
       p.position.z = z;
@@ -197,6 +212,8 @@ export default function HeroGallery() {
       camera.aspect = vw / vh;
       camera.updateProjectionMatrix();
       uRes.value.set(vw * dpr, vh * dpr);
+      // Planes pick the new spread up as they recycle through place().
+      computeSpread();
     };
     window.addEventListener("resize", onResize);
 
