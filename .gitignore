@@ -12,3 +12,6 @@ next-env.d.ts
 
 # local cover-image backups (kept out of the repo)
 public/cases/_backup_covers_*/
+
+# local staging for ImageKit uploads (never committed)
+/media-uploads/

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Reveal from "@/components/Reveal";
+import MediaSection from "@/components/media/MediaSection";
 import { ScrollTrigger } from "@/lib/gsap";
 import { cases } from "@/components/data";
 
@@ -90,6 +91,11 @@ export default function WorksArchive() {
           </button>
         </div>
       )}
+
+      {/* Photographs & films — the pile opens a full-screen media browser. */}
+      <Reveal y={28}>
+        <MediaSection />
+      </Reveal>
     </section>
   );
 }

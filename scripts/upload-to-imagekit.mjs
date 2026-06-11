@@ -2,8 +2,8 @@
 // Reads IMAGEKIT_PRIVATE_KEY from .env.local. Idempotent: re-running
 // overwrites files with the same name (useUniqueFileName=false).
 //
-//   node scripts/upload-to-imagekit.mjs [sourceDir]
-// sourceDir defaults to public/cases; pass another dir to upload from elsewhere.
+//   node scripts/upload-to-imagekit.mjs [sourceDir] [imagekitFolder]
+// sourceDir defaults to public/cases; imagekitFolder defaults to /portfolio/cases.
 
 import { readFile, readdir } from "node:fs/promises";
 import { openAsBlob } from "node:fs";
@@ -13,9 +13,9 @@ const ROOT = path.resolve(import.meta.dirname, "..");
 const SRC_DIR = process.argv[2]
   ? path.resolve(process.argv[2])
   : path.join(ROOT, "public", "cases");
-const IK_FOLDER = "/portfolio/cases";
+const IK_FOLDER = process.argv[3] || "/portfolio/cases";
 const UPLOAD_URL = "https://upload.imagekit.io/api/v1/files/upload";
-const CONCURRENCY = 6;
+const CONCURRENCY = Number(process.env.IK_CONCURRENCY) || 6;
 
 const env = Object.fromEntries(
   (await readFile(path.join(ROOT, ".env.local"), "utf8"))
@@ -50,11 +50,23 @@ async function uploadOne(filePath, attempt = 1) {
   form.append("folder", folder);
   form.append("useUniqueFileName", "false");
 
-  const res = await fetch(UPLOAD_URL, {
-    method: "POST",
-    headers: { Authorization: auth },
-    body: form,
-  });
+  let res;
+  try {
+    res = await fetch(UPLOAD_URL, {
+      method: "POST",
+      headers: { Authorization: auth },
+      body: form,
+    });
+  } catch (err) {
+    // Network-level failure (timeout, reset) — retry like an HTTP error.
+    if (attempt < 4) {
+      await new Promise((r) => setTimeout(r, 2000 * attempt));
+      return uploadOne(filePath, attempt + 1);
+    }
+    failures.push({ rel, status: "network", body: String(err) });
+    console.error(`FAIL ${rel}: ${err}`);
+    return;
+  }
 
   if (!res.ok) {
     const body = await res.text();
