@@ -37,13 +37,13 @@ const IK = "https://ik.imagekit.io/cnjxcztbn/portfolio";
 
 export const photos: MediaPhoto[] = [
   { src: `${IK}/media/photos/himachal-tibet-border.jpg`, title: "Himachal Tibet Border", place: "Himachal Pradesh" },
-  { src: `${IK}/media/photos/owl-at-rest.png`, title: "Owl at Rest" },
+  { src: `${IK}/media/photos/owl-at-rest.png`, title: "Owl at Rest", place: "Arunachal Pradesh" },
   { src: `${IK}/media/photos/fri-dehradun.png`, title: "FRI", place: "Dehradun" },
-  { src: `${IK}/media/photos/untouched-paradise.jpg`, title: "Untouched Paradise" },
-  { src: `${IK}/media/photos/peace.jpg`, title: "Peace" },
+  { src: `${IK}/media/photos/untouched-paradise.jpg`, title: "Untouched Paradise", place: "Nagaland" },
+  { src: `${IK}/media/photos/peace.jpg`, title: "Peace", place: "Devprayag, Uttarakhand" },
   { src: `${IK}/media/photos/jhanda-mela.png`, title: "Jhanda Mela", place: "Dehradun" },
-  { src: `${IK}/media/photos/whispering-woods.jpg`, title: "Whispering Woods" },
-  { src: `${IK}/media/photos/green-velvet.jpg`, title: "Green Velvet" },
+  { src: `${IK}/media/photos/whispering-woods.jpg`, title: "Whispering Woods", place: "Nagaland" },
+  { src: `${IK}/media/photos/green-velvet.jpg`, title: "Green Velvet", place: "Nagaland" },
 ];
 
 export const films: MediaFilm[] = [
