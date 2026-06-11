@@ -103,8 +103,16 @@ export default function HeroGallery() {
     let SPREAD_Y = 3.4;
     const computeSpread = () => {
       const aspect = vw / vh;
-      SPREAD_X = 3.65 * Math.max(aspect, 0.6);
-      SPREAD_Y = aspect >= 1 ? 3.4 : 3.4 / Math.sqrt(aspect);
+      if (aspect >= 1) {
+        // Wide screens: planes range the full visible width but stay inside
+        // a tight vertical band, so the drift reads left-to-right.
+        SPREAD_X = 3.65 * aspect;
+        SPREAD_Y = 2.1;
+      } else {
+        // Tall screens: the inverse — a narrow column that uses the height.
+        SPREAD_X = 2.0 * aspect;
+        SPREAD_Y = 3.4 / Math.sqrt(aspect);
+      }
     };
     computeSpread();
 
