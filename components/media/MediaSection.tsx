@@ -10,7 +10,7 @@ import { photos as photoData, photoURL, films, type MediaFilm } from "./data";
  * A pile of prints sits under the case grid. Clicking it takes over the
  * screen: the prints scatter outward (blurred, greyed) behind two choices —
  * PHOTOS and VIDEOS. Photos is a full-screen viewer (scroll / swipe / arrows,
- * dot rail on the left, captions that fade after a beat, newest first).
+ * dot rail on the left, captions that fade after a beat, in data.ts order).
  * Videos is a cinema: poster + synopsis, then a chrome-less player.
  */
 
@@ -96,7 +96,7 @@ export default function MediaSection() {
           <p className="font-sans text-[11px] font-medium uppercase tracking-[0.18em] text-[#9aa0ff]">
             Media
           </p>
-          <p className="mt-3 font-oswald text-[clamp(26px,4.5vw,40px)] leading-none tracking-[-0.02em] text-[#f3f3f3]">
+          <p className="mt-3 font-inter text-[clamp(24px,4vw,36px)] font-semibold leading-[1.05] tracking-[-0.02em] text-[#f3f3f3]">
             Photographs &amp; films
           </p>
           <p className="mt-4 font-inter text-[12px] font-medium text-[#9a9a9a] transition-colors duration-300 group-hover:text-[#f3f3f3]">
@@ -274,7 +274,7 @@ function MediaOverlay({
                   : `opacity 0.5s ease ${0.3 + i * 0.08}s, transform 0.6s ${EASE} ${0.3 + i * 0.08}s, background-color 0.3s, border-color 0.3s`,
               }}
             >
-              <span className="block font-oswald text-[clamp(30px,5vw,44px)] leading-none tracking-[-0.02em] text-[#f3f3f3] transition-colors duration-300 group-hover:text-[#0a0a0a]">
+              <span className="block font-inter text-[clamp(26px,4.5vw,38px)] font-semibold leading-[1.05] tracking-[-0.02em] text-[#f3f3f3] transition-colors duration-300 group-hover:text-[#0a0a0a]">
                 {label}
               </span>
               <span className="mt-2 block font-sans text-[11px] font-medium uppercase tracking-[0.18em] text-[#9a9a9a] transition-colors duration-300 group-hover:text-[#606060]">
@@ -541,7 +541,7 @@ function VideoViewer({
             <p className="font-sans text-[11px] font-medium uppercase tracking-[0.18em] text-[#9a9a9a]">
               Documentary · {film.year} · {film.runtime}
             </p>
-            <h3 className="mt-3 font-oswald text-[clamp(40px,7vw,72px)] leading-[1.02] tracking-[-0.02em] text-[#f3f3f3]">
+            <h3 className="mt-3 font-inter text-[clamp(36px,6vw,64px)] font-semibold leading-[1.0] tracking-[-0.03em] text-[#f3f3f3]">
               {film.title}
             </h3>
             <p className="mt-4 max-w-[560px] font-inter text-[15px] leading-[1.55] tracking-[-0.01em] text-[#f3f3f3]/75 md:text-[16px]">
@@ -817,7 +817,7 @@ function Player({
         <p className="font-sans text-[10px] font-medium uppercase tracking-[0.18em] text-[#9a9a9a]">
           Documentary · {film.year} · {film.runtime}
         </p>
-        <p className="mt-2 font-oswald text-[24px] leading-none tracking-[-0.01em] text-[#f3f3f3]">
+        <p className="mt-2 font-inter text-[21px] font-semibold leading-[1.1] tracking-[-0.02em] text-[#f3f3f3]">
           {film.title}
         </p>
         <p className="mt-2.5 font-inter text-[13px] leading-[1.5] tracking-[-0.01em] text-[#f3f3f3]/75">
@@ -891,7 +891,7 @@ function Player({
       {/* ---- desktop bottom line: title · clock, sound icon at the right.
           Play/pause is a click anywhere on the film itself. ---- */}
       <div className="absolute inset-x-0 bottom-0 hidden items-center gap-x-6 px-14 pb-6 md:flex md:px-20 md:pb-7">
-        <p className="font-oswald text-[16px] tracking-[-0.01em] text-[#f3f3f3]">
+        <p className="font-inter text-[15px] font-semibold tracking-[-0.01em] text-[#f3f3f3]">
           {film.title}
         </p>
         <p className="font-sans text-[11px] font-medium tracking-[0.18em] text-[#9a9a9a]">

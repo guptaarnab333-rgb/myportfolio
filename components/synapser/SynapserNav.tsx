@@ -234,7 +234,7 @@ export default function SynapserNav({
                 key={href}
                 href={fixed && href !== "#contact" ? `/${href}` : href}
                 onClick={onClick(href)}
-                className="py-3 font-oswald text-[clamp(44px,13vw,64px)] font-normal leading-[1.08] tracking-[-0.02em] text-[#f1f0ed]"
+                className="py-3 font-inter text-[clamp(38px,11vw,56px)] font-semibold leading-[1.05] tracking-[-0.03em] text-[#f1f0ed]"
                 style={{
                   opacity: menuOpen ? 1 : 0,
                   transform: menuOpen ? "translateY(0)" : "translateY(28px)",
