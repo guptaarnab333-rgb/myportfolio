@@ -482,18 +482,41 @@ function VideoViewer({
   useEffect(() => {
     const el = rootRef.current;
     if (!el) return;
+    const go = (dir: 1 | -1) =>
+      setIndex((i) => Math.min(films.length - 1, Math.max(0, i + dir)));
     const onWheel = (e: WheelEvent) => {
       e.preventDefault();
       if (playing || films.length < 2) return;
       const now = Date.now();
       if (now - cooldown.current < 650 || Math.abs(e.deltaY) < 12) return;
       cooldown.current = now;
-      setIndex((i) =>
-        Math.min(films.length - 1, Math.max(0, i + (e.deltaY > 0 ? 1 : -1)))
+      go(e.deltaY > 0 ? 1 : -1);
+    };
+    // Phones: a flick on the poster moves between films, like shorts.
+    // Vertical or horizontal — whichever axis dominates the gesture.
+    let tx = 0;
+    let ty = 0;
+    const onTouchStart = (e: TouchEvent) => {
+      tx = e.touches[0].clientX;
+      ty = e.touches[0].clientY;
+    };
+    const onTouchEnd = (e: TouchEvent) => {
+      if (playing || films.length < 2) return;
+      const dx = tx - e.changedTouches[0].clientX;
+      const dy = ty - e.changedTouches[0].clientY;
+      if (Math.max(Math.abs(dx), Math.abs(dy)) < 48) return;
+      go(
+        Math.abs(dy) >= Math.abs(dx) ? (dy > 0 ? 1 : -1) : dx > 0 ? 1 : -1
       );
     };
     el.addEventListener("wheel", onWheel, { passive: false });
-    return () => el.removeEventListener("wheel", onWheel);
+    el.addEventListener("touchstart", onTouchStart, { passive: true });
+    el.addEventListener("touchend", onTouchEnd, { passive: true });
+    return () => {
+      el.removeEventListener("wheel", onWheel);
+      el.removeEventListener("touchstart", onTouchStart);
+      el.removeEventListener("touchend", onTouchEnd);
+    };
   }, [playing]);
 
   return (
@@ -746,13 +769,11 @@ function Player({
     const t = e.changedTouches[0];
     const dx = t.clientX - touch.current.x;
     const dy = t.clientY - touch.current.y;
-    if (
-      onSwipe &&
-      !touch.current.onControls &&
-      Math.abs(dx) > 60 &&
-      Math.abs(dx) > Math.abs(dy) * 1.5
-    )
-      onSwipe(dx < 0 ? 1 : -1);
+    if (!onSwipe || touch.current.onControls) return;
+    if (Math.max(Math.abs(dx), Math.abs(dy)) < 60) return;
+    // Whichever axis dominates: swipe left or up = next film, like shorts.
+    if (Math.abs(dy) > Math.abs(dx)) onSwipe(dy < 0 ? 1 : -1);
+    else onSwipe(dx < 0 ? 1 : -1);
   };
   const videoClick = () => {
     if (touch.current.moved) {
