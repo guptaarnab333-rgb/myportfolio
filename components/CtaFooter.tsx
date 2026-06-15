@@ -24,10 +24,10 @@ export default function CtaFooter() {
         <Reveal delay={200}>
           <div className="mt-14 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
             <a
-              href="mailto:arnab.peoplelab@doonuniversity.ac.in"
+              href="mailto:arnabgupta000@gmail.com"
               className="font-oswald text-[clamp(22px,3vw,34px)] font-light tracking-[-0.02em] text-off underline decoration-line decoration-1 underline-offset-[6px] transition-colors hover:text-accent hover:decoration-accent"
             >
-              arnab.peoplelab@doonuniversity.ac.in
+              arnabgupta000@gmail.com
             </a>
             <a
               href="#"

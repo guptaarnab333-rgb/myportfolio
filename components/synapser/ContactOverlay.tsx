@@ -94,10 +94,10 @@ export default function ContactOverlay({
             something real.
           </h2>
           <a
-            href="mailto:arnab.peoplelab@doonuniversity.ac.in"
+            href="mailto:arnabgupta000@gmail.com"
             className="mt-12 inline-block font-inter text-[clamp(20px,3.4vw,36px)] font-medium tracking-[-0.02em] text-[#f1f0ed] underline decoration-white/25 decoration-1 underline-offset-[8px] transition-colors hover:text-white hover:decoration-[#9aa0ff]"
           >
-            arnab.peoplelab@doonuniversity.ac.in
+            arnabgupta000@gmail.com
           </a>
         </div>
 
